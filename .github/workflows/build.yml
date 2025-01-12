@@ -62,7 +62,7 @@ jobs:
       - name: Build Payload
         run: |
           export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk
-          haxe release.hxml --cmd mv out/AirPSX out/airpsx.elf
+          haxe release.hxml --cmd "mv out/AirPSX out/airpsx.elf"
       - uses: actions/upload-artifact@v4
         with:
           name: airpsx.elf
