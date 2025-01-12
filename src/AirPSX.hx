@@ -27,7 +27,7 @@ class AirPSX {
 
 	static public function main() {
 		// Server shutdown
-		#if (!final)
+		#if (!release)
 		Thread.create(() -> {
 			Sys.sleep(1000);
 
