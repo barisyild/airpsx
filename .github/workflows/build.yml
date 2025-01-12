@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Build and Deploy
+name: Build
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -62,8 +62,8 @@ jobs:
       - name: Build Payload
         run: |
           export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk
-          haxe release.hxml
+          haxe release.hxml --cmd mv out/AirPSX out/airpsx.elf
       - uses: actions/upload-artifact@v4
         with:
           name: airpsx.elf
-          path: out/AirPSX
+          path: out/airpsx.elf
