@@ -1,0 +1,1 @@
+extern "C" long syscall(long sysno, ...);

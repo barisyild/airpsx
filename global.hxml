@@ -1,0 +1,31 @@
+-D HXCPP_VERBOSE
+-D HXCPP_STACK_LINE
+-D HXCPP_STACK_TRACE
+-D HXCPP_CHECK_POINTER
+-D HXCPP_CPP11
+-D HXCPP_GC_MOVING
+-D hscriptPos
+
+#-D windows
+
+--macro include('lib')
+--macro addGlobalMetadata('lib', '@:keep')
+--macro include("protocols.http.services.http")
+--macro addGlobalMetadata('Date', '@:keep')
+--macro addGlobalMetadata('Math', '@:keep')
+--macro addGlobalMetadata('hscript.HScriptDataGenerated', '@:keep')
+
+#--macro addGlobalMetadata('hscript', '@:build(macro.DebugTraceMacro.build())')
+-dce std
+-lib haxe-concurrent
+-lib hscript
+-lib rulescript
+#-dce no
+#-lib hxcpp-debug-server
+-cp src
+-D analyzer-optimize
+-main AirPSX
+#-D no-compilation
+-cpp out
+#-debug
+--macro macro.HScriptVariableMacro.run()

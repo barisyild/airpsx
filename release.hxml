@@ -1,0 +1,4 @@
+global.hxml
+-D orbis
+-D toolchain=prospero
+-D release
