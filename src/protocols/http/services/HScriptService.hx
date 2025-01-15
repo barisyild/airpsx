@@ -16,8 +16,4 @@ class HScriptService extends AbstractHttpService {
 
         return null;
     }
-
-    public static function getProcAddress<T, ABI:cpp.abi.Abi>(inModule:String, inFunction:String):Function<T, ABI> {
-        return cast cpp.Function.nativeGetProcAddress(inModule, inFunction);
-    }
 }
