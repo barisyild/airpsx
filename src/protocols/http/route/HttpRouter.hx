@@ -35,13 +35,29 @@ class HttpRouter {
     private static var routes:Array<HttpRouterElement> = [];
 
     public static function init() {
-        #if orbis
         createRouteElement()
             .setMethod(HttpMethod.Get)
             .setPath("/api/upload")
             .setHandler(new UploadService())
             .setStream(true);
 
+        createRouteElement()
+            .setMethod(HttpMethod.Post)
+            .setPath("/api/fs/list")
+            .setHandler(new FileSystemListService());
+
+        createRouteElement()
+            .setMethod(HttpMethod.Get)
+            .setPath("/api/fs/download/*")
+            .setHandler(new FileSystemDownloadService());
+
+        createRouteElement()
+            .setMethod(HttpMethod.Post)
+            .setPath("/api/fs/upload/*")
+            .setHandler(new FileSystemUploadService())
+            .setStream(true);
+
+        #if orbis
         createRouteElement()
             .setMethod(HttpMethod.Get)
             .setPath("/api/system/status")
@@ -61,22 +77,6 @@ class HttpRouter {
             .setMethod(HttpMethod.Get)
             .setPath("/api/profile/image/*")
             .setHandler(new ProfileImageService());
-
-        createRouteElement()
-            .setMethod(HttpMethod.Post)
-            .setPath("/api/fs/list")
-            .setHandler(new FileSystemListService());
-
-        createRouteElement()
-            .setMethod(HttpMethod.Get)
-            .setPath("/api/fs/download/*")
-            .setHandler(new FileSystemDownloadService());
-
-        createRouteElement()
-            .setMethod(HttpMethod.Post)
-            .setPath("/api/fs/upload/*")
-            .setHandler(new FileSystemUploadService())
-            .setStream(true);
 
         createRouteElement()
             .setMethod(HttpMethod.Get)
@@ -113,7 +113,7 @@ class HttpRouter {
             .setMethod(HttpMethod.Get)
             .setPath("/api/save/backup/*")
             .setHandler(new SaveBackupService());
-
+        #end
 
         // Task
         createRouteElement()
@@ -151,8 +151,6 @@ class HttpRouter {
             .setPath("/api/task/log")
             .setHandler(new TaskLogService());
 
-        #end
-
         createRouteElement()
             .setMethod(HttpMethod.Post)
             .setPath("/api/server/kill")
@@ -168,7 +166,6 @@ class HttpRouter {
             .setPath("/api/hscript")
             .setHandler(new HScriptService());
 
-        #if orbis
         createRouteElement()
             .setMethod(HttpMethod.Get)
             .setPath("/api/*")
@@ -179,7 +176,6 @@ class HttpRouter {
             .setPath("/*")
             .setHandler(new PublicService())
             .setStream(true);
-        #end
 
         log();
     }

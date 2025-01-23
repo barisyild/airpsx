@@ -12,7 +12,6 @@ class SetupPublicCommand extends Command {
     }
 
     public function execute():Void {
-        #if orbis
         if(!FileSystem.exists(Config.DATA_PATH))
             FileSystem.createDirectory(Config.DATA_PATH);
 
@@ -27,7 +26,6 @@ class SetupPublicCommand extends Command {
         }else{
             trace("No update available");
         }
-        #end
         ZipPublicResource.free();
         cpp.vm.Gc.compact();
     }

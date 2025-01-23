@@ -1,9 +1,10 @@
 package ;
+using StringTools;
 class Config {
     public static inline var APP_NAME:String = "AirPSX";
-    public static inline var DATA_PATH:String = "/data/airpsx";
-    public static inline var DB_PATH:String = '${DATA_PATH}/app.db';
-    public static inline var TASK_DB_PATH:String = '${DATA_PATH}/task.db';
+    public static #if orbis inline #end var DATA_PATH:String = #if !orbis Sys.programPath().substring(0, Sys.programPath().replace("\\", "/").lastIndexOf("/")) + #end "/data/airpsx";
+    public static #if orbis inline #end var DB_PATH:String = '${DATA_PATH}/app.db';
+    public static #if orbis inline #end var TASK_DB_PATH:String = '${DATA_PATH}/task.db';
     public static inline var HTTP_PORT:Int = 1214;
     public static inline var SYSTEM_APP_DB_PATH = "/system_data/priv/mms/app.db";
     public static inline var USER_HOME_PATH:String = "/user/home";

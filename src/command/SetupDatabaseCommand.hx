@@ -9,7 +9,6 @@ class SetupDatabaseCommand extends Command {
     }
 
     public function execute():Void {
-        #if orbis
         var db = sys.db.Sqlite.open(Config.DB_PATH);
 
         // Create stats table if not exists
@@ -36,7 +35,5 @@ class SetupDatabaseCommand extends Command {
         }
         db.request('UPDATE tasks SET enabled = 0, status = ${TaskStatus.IDLE} WHERE status = ${TaskStatus.RUNNING}');
         db.close();
-
-        #end
     }
 }
