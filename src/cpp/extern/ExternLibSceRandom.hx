@@ -1,4 +1,4 @@
-package externs;
+package cpp.extern;
 
 #if orbis
 import cpp.AbstractPointer;
@@ -17,8 +17,8 @@ import cpp.AbstractArrayPointer;
 
 @:keep
 @:include('libSceRandom.h')
-@:build(linc.Linc.touch())
-@:build(linc.Linc.xml('libSceRandom'))
+@:build(Linc.touch())
+@:build(Linc.xml('libSceRandom'))
 extern class ExternLibSceRandom {
     @:native('sceRandomGetRandomNumber')
     public static function sceRandomGetRandomNumber(buf:AbstractArrayPointer<cpp.UInt8>, size:SizeT):Int32;

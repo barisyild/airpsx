@@ -10,7 +10,7 @@ import haxe.Json;
 import Type.ValueType;
 import haxe.CallStack;
 import lib.LibSceSystemService;
-import externs.ExternLibSceSystemService;
+import cpp.extern.ExternLibSceSystemService;
 import protocols.http.HTTPRequest;
 import protocols.http.HttpResponse;
 using tools.ExecutorTools;

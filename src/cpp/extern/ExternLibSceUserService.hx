@@ -1,4 +1,4 @@
-package externs;
+package cpp.extern;
 
 #if orbis
 import cpp.Pointer;
@@ -11,8 +11,8 @@ import cpp.AbstractPointer;
 
 @:keep
 @:include('libSceUserService.h')
-@:build(linc.Linc.touch())
-@:build(linc.Linc.xml('libSceUserService'))
+@:build(Linc.touch())
+@:build(Linc.xml('libSceUserService'))
 extern class ExternLibSceUserService {
     @:native('sceUserServiceGetLoginUserIdList')
     public static function sceUserServiceGetLoginUserIdList(struct:AbstractPointer<SceUserServiceLoginStruct>):Int32;

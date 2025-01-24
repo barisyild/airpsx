@@ -1,8 +1,8 @@
 package lib.sys;
 
 #if orbis
-import externs.sys.ExternStatvfs.StatVfsStruct;
-import externs.sys.ExternStatvfs;
+import cpp.extern.sys.ExternStatvfs.StatVfsStruct;
+import cpp.extern.sys.ExternStatvfs;
 import haxe.Int64;
 
 class LibStatVfs {

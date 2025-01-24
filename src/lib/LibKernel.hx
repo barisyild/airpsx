@@ -1,13 +1,13 @@
 package lib;
 
 #if orbis
-import externs.ExternLibKernelSys;
-import externs.ExternLibKernel;
-import externs.ExternLibKernel.NotifyRequestStruct;
+import cpp.extern.ExternLibKernelSys;
+import cpp.extern.ExternLibKernel;
+import cpp.extern.ExternLibKernel.NotifyRequestStruct;
 import utils.StringUtils;
 import cpp.Int32;
 import cpp.PidT;
-import externs.ApplicationCategoryType;
+import cpp.extern.ApplicationCategoryType;
 using StringTools;
 using tools.StringTools;
 using tools.IntegerTools;

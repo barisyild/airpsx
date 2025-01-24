@@ -1,8 +1,8 @@
 package lib.sys;
 
 #if orbis
-import externs.sys.ExternMount.StatFsStruct;
-import externs.sys.ExternMount;
+import cpp.extern.sys.ExternMount.StatFsStruct;
+import cpp.extern.sys.ExternMount;
 
 class LibMount {
 

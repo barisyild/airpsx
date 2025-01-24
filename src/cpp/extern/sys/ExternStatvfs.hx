@@ -1,4 +1,4 @@
-package externs.sys;
+package cpp.extern.sys;
 
 #if orbis
 import cpp.Int64;

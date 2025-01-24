@@ -1,11 +1,11 @@
-package externs;
+package cpp.extern;
 
 #if orbis
 import cpp.CastCharStar;
 import cpp.Pointer;
 import cpp.Int32;
 import cpp.UInt32;
-//import externs.sys.ExternSocket;
+//import cpp.extern.sys.ExternSocket;
 import cpp.SizeT;
 
 @:cppFileCode('extern int getifaddrs(struct ifaddrs **);')

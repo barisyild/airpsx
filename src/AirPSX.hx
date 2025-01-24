@@ -16,7 +16,7 @@ using StringTools;
 using tools.IntegerTools;
 using tools.Integer64Tools;
 import hscript.HScriptData;
-import externs.sys.ExternMount;
+import cpp.extern.sys.ExternMount;
 import utils.FileUtils;
 
 class AirPSX {

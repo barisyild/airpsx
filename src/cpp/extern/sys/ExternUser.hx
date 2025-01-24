@@ -1,10 +1,10 @@
-package externs.sys;
+package cpp.extern.sys;
 import cpp.PidT;
 import cpp.ConstCharStar;
 import cpp.Int32;
 import cpp.SegszT;
 import cpp.SizeT;
-import externs.sys.ExternTime;
+import cpp.extern.sys.ExternTime;
 import cpp.UInt32;
 
 @:keep

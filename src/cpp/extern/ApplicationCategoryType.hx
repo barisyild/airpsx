@@ -1,4 +1,4 @@
-package externs;
+package cpp.extern;
 import cpp.Int32;
 
 enum abstract ApplicationCategoryType(Int32) from Int32 to Int32 {

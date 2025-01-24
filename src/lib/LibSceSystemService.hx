@@ -1,8 +1,8 @@
 package lib;
 
 #if orbis
-import externs.ExternLibSceSystemService;
-import externs.ExternLibSceSystemService.LncAppParamStruct;
+import cpp.extern.ExternLibSceSystemService;
+import cpp.extern.ExternLibSceSystemService.LncAppParamStruct;
 import cpp.Pointer;
 class LibSceSystemService {
     @:hscriptVariable("sceLncUtilLaunchApp")

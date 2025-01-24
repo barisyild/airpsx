@@ -1,4 +1,4 @@
-package externs;
+package cpp.extern;
 
 #if orbis
 import cpp.Pointer;

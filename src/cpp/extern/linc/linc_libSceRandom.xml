@@ -6,13 +6,13 @@
 
         <!-- add files and flags to the haxe c++ build -->
 
-        <compilerflag value='-I../src/linc/'/>
+        <compilerflag value='-I../src/cpp/extern/linc/'/>
     </files>
 
     <target id="haxe">
 
         <!-- add linker flags to the haxe build output -->
-        <flag value="-lkernel_sys" />
+        <flag value="-lSceRandom" />
 
     </target>
 

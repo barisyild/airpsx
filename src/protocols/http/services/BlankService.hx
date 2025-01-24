@@ -1,7 +1,7 @@
 package protocols.http.services;
 
 import sys.net.Socket;
-import externs.ExternLibSceSystemService;
+import cpp.extern.ExternLibSceSystemService;
 import protocols.http.HTTPRequest;
 using tools.StringTools;
 using StringTools;

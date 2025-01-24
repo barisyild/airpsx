@@ -1,4 +1,4 @@
-package externs;
+package cpp.extern;
 
 #if orbis
 import cpp.Int32;
@@ -9,8 +9,8 @@ import cpp.SizeT;
 
 @:keep
 @:include('libSceNet.h')
-@:build(linc.Linc.touch())
-@:build(linc.Linc.xml('libSceNet'))
+@:build(Linc.touch())
+@:build(Linc.xml('libSceNet'))
 extern class ExternLibSceNet {
     @:native("sceNetInit")
     public static function sceNetInit():Int32;

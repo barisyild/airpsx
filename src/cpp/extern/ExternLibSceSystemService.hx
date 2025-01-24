@@ -1,4 +1,4 @@
-package externs;
+package cpp.extern;
 
 #if orbis
 import cpp.ConstCharStar;
@@ -14,8 +14,8 @@ import cpp.Pointer;
 
 @:keep
 @:include('libSceSystemService.h')
-@:build(linc.Linc.touch())
-@:build(linc.Linc.xml('libSceSystemService'))
+@:build(Linc.touch())
+@:build(Linc.xml('libSceSystemService'))
 extern class ExternLibSceSystemService {
     // extern "C" int sceLncUtilLaunchApp(const char* tid, const char* argv[], LncAppParam* param);
     @:native('sceLncUtilLaunchApp')

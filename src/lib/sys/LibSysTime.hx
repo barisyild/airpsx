@@ -1,8 +1,8 @@
 package lib.sys;
 
 #if orbis
-import externs.sys.ExternTime.TimeValStruct;
-import externs.sys.ExternTime;
+import cpp.extern.sys.ExternTime.TimeValStruct;
+import cpp.extern.sys.ExternTime;
 
 class LibSysTime {
     public static function getTime():{seconds:Float, microseconds:Float}

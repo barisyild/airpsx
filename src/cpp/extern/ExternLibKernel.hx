@@ -1,4 +1,4 @@
-package externs;
+package cpp.extern;
 
 #if orbis
 import cpp.Pointer;
@@ -15,8 +15,8 @@ import cpp.AbstractPointer;
 
 @:keep
 @:include('libkernel.h')
-@:build(linc.Linc.touch())
-@:build(linc.Linc.xml('libkernel'))
+@:build(Linc.touch())
+@:build(Linc.xml('libkernel'))
 extern class ExternLibKernel {
     @:native('sceKernelGetCpuFrequency')
     public static function sceKernelGetCpuFrequency():Float;

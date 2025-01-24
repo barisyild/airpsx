@@ -3,7 +3,7 @@ package lib;
 #if orbis
 import utils.StringUtils;
 import cpp.SizeT;
-import externs.sys.ExternSysctl.ExternSysCtl;
+import cpp.extern.sys.ExternSysctl.ExternSysCtl;
 import haxe.io.Bytes;
 class LibSysCtl {
     @:hscriptVariable("sysctlbyname")

@@ -1,4 +1,4 @@
-package externs.sys;
+package cpp.extern.sys;
 import cpp.Int32;
 import cpp.Int64;
 

@@ -1,4 +1,4 @@
-package linc;
+package ;
 
 import haxe.io.Path;
 import haxe.macro.Expr;
@@ -47,11 +47,11 @@ class Linc {
         _source_path = Path.normalize(_source_path);
 
         var _linc_lib_path = Path.normalize(Path.join([_source_path, _relative_root]));
-        var _linc_include_path = Path.normalize(Path.join([ _linc_lib_path, './linc/linc_${_lib}.xml' ]));
+        var _linc_include_path = Path.normalize(Path.join([ _linc_lib_path, './extern/linc/linc_${_lib}.xml' ]));
         var _linc_lib_var = 'LINC_${_lib.toUpperCase()}_PATH';
 
         var _define = '<set name="$_linc_lib_var" value="$_linc_lib_path/"/>';
-        var _import_path = '$${$_linc_lib_var}linc/linc_${_lib}.xml';
+        var _import_path = '$${$_linc_lib_var}/extern/linc/linc_${_lib}.xml';
         var _import = '<include name="$_import_path" />';
 
         _class.get().meta.add(":buildXml", [{ expr:EConst( CString( '$_define\n$_import' ) ), pos:_pos }], _pos );

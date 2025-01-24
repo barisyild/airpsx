@@ -1,7 +1,7 @@
 package lib;
 
 #if orbis
-import externs.ExternLibSceRandom;
+import cpp.extern.ExternLibSceRandom;
 
 class LibSceRandom {
     @:hscriptVariable("sceRandomGetRandomNumber")

@@ -2,21 +2,21 @@ package lib;
 
 #if orbis
 import cpp.Pointer;
-import externs.ExternLibKernel;
-import externs.ExternLibKernel.AppInfoStruct;
-import externs.sys.ExternUser.KInfoProcStruct;
-import externs.sys.ExternSysctl.ExternSysCtl;
+import cpp.extern.ExternLibKernel;
+import cpp.extern.ExternLibKernel.AppInfoStruct;
+import cpp.extern.sys.ExternUser.KInfoProcStruct;
+import cpp.extern.sys.ExternSysctl.ExternSysCtl;
 import haxe.io.Bytes;
 import cpp.Int32;
 import cpp.PidT;
 import cpp.UInt64;
 import cpp.UInt32;
-import externs.ExternUnistd;
+import cpp.extern.ExternUnistd;
 using tools.BytesTools;
 using StringTools;
 import cpp.SizeT;
-import externs.ApplicationCategoryType;
-import externs.sys.ExternUser.KInfoProcTypedef;
+import cpp.extern.ApplicationCategoryType;
+import cpp.extern.sys.ExternUser.KInfoProcTypedef;
 
 @:hscriptVariable("Process")
 class Process {

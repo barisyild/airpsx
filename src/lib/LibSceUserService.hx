@@ -1,7 +1,7 @@
 package lib;
 
 #if orbis
-import externs.ExternLibSceUserService;
+import cpp.extern.ExternLibSceUserService;
 import cpp.Pointer;
 import cpp.Int32;
 class LibSceUserService {
