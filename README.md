@@ -7,7 +7,7 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 - [LightningMods](https://github.com/LightningMods)
     - Contributions to the [PS4-daemon-writeup](https://github.com/LightningMods/PS4-daemon-writeup).
 - [Hugh Sanderson](https://github.com/hughsando)
-    - Haxe's [hxcpp](https://github.com/hughsando) target would not have been possible without him!
+    - Haxe's [hxcpp](https://github.com/HaxeFoundation/hxcpp) target would not have been possible without him!
 - [m0rkeulv](https://github.com/m0rkeulv)
     - If it wasn't for [intellij-haxe](https://github.com/HaxeFoundation/intellij-haxe), maybe I would never have write any haxe project :(
 
