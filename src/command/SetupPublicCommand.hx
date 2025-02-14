@@ -5,7 +5,7 @@ import sys.FileSystem;
 import sys.io.File;
 import utils.FileSystemUtils;
 import utils.ExtractZipUtils;
-import haxe.crypto.Base64;
+import airpsx.Config;
 class SetupPublicCommand extends Command {
     public function new() {
         super();
@@ -27,7 +27,9 @@ class SetupPublicCommand extends Command {
             trace("No update available");
         }
         ZipPublicResource.free();
+        #if cpp
         cpp.vm.Gc.compact();
+        #end
     }
 
     private function checkUpdateAvailable():Bool

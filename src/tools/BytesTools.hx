@@ -1,4 +1,6 @@
 package tools;
+
+#if cpp
 import cpp.Pointer;
 import haxe.io.Bytes;
 import cpp.RawPointer;
@@ -11,3 +13,4 @@ class BytesTools {
         return toPointer(bytes).raw;
     }
 }
+#end

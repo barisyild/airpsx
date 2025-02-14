@@ -6,8 +6,10 @@
 -D HXCPP_GC_MOVING
 -D hscriptPos
 
-#-D windows
+-cp src
 
+#-D windows
+--macro addGlobalMetadata('Boot', '@:keep')
 --macro include('lib')
 --macro addGlobalMetadata('lib', '@:keep')
 --macro include("protocols.http.services.http")
@@ -16,16 +18,16 @@
 --macro addGlobalMetadata('hscript.HScriptDataGenerated', '@:keep')
 
 #--macro addGlobalMetadata('hscript', '@:build(macro.DebugTraceMacro.build())')
--dce std
--lib haxe-concurrent
 -lib hscript
 -lib rulescript
+-lib hxwell
+--macro macro.HScriptVariableMacro.run()
 #-dce no
 #-lib hxcpp-debug-server
--cp src
+
+-main hx.well.HxWell
+-D boot=Boot
 -D analyzer-optimize
--main AirPSX
+-dce std
 #-D no-compilation
--cpp out
 #-debug
---macro macro.HScriptVariableMacro.run()

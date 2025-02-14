@@ -1,7 +1,9 @@
 package tools;
+#if cpp
 import cpp.CastCharStar;
 import haxe.io.Bytes;
 import cpp.ConstCharStar;
+#end
 
 class StringTools {
     public static function truncateAtNull(value:String):String {
@@ -14,7 +16,9 @@ class StringTools {
         return result;
     }
 
+    #if cpp
     public static inline function copyFrom(destination:CastCharStar, target:String):Void {
         untyped __cpp__("strcpy({0}, {1})", destination, target);
     }
+    #end
 }

@@ -52,18 +52,21 @@ class ZipResourceMacro {
 
         zip.write(zipEntries);
 
+        var hash = getHashOfDirectory(zipEntries);
         var fields:Array<Field> = Context.getBuildFields();
+        #if orbis
         var bytesField:Field = fields.getFieldOrFail(fieldData.bytesField);
-
         var bytes:Bytes = out.getBytes();
 
         var bytesBase64:String = Base64.encode(bytes);
-
-
         bytesField.kind = FieldType.FVar(macro:String, macro $v{bytesBase64});
 
         var hashField = fields.getFieldOrFail(fieldData.hashField);
-        hashField.kind = FieldType.FVar(macro:String, macro $v{getHashOfDirectory(zipEntries)});
+        hashField.kind = FieldType.FVar(macro:String, macro $v{hash});
+        #else
+        Context.addResource("resource.data", out.getBytes());
+        Context.addResource("resource.hash", Bytes.ofString(hash));
+        #end
 
         return fields;
     }

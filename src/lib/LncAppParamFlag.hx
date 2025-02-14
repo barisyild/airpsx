@@ -1,5 +1,6 @@
 package lib;
 
+#if cpp
 enum abstract LncAppParamFlag(cpp.Int32)
 {
     var Flag_None = 0;
@@ -10,3 +11,4 @@ enum abstract LncAppParamFlag(cpp.Int32)
     var VRMode = 8;
     var NonVRMode = 16;
 }
+#end

@@ -1,7 +1,8 @@
 package command;
-import sys.FileSystem;
+
 import lib.LibKernel;
 import type.TaskStatus;
+import airpsx.Config;
 
 class SetupDatabaseCommand extends Command {
     public function new() {
