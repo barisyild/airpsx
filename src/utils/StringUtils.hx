@@ -5,30 +5,26 @@ class StringUtils {
         return Bytes.alloc(size).toString();
     }
 
-    public static function findCommonPrefix(paths:Array<String>) {
+    public static function findCommonPrefix(paths:Array<String>):String {
         if (paths == null || paths.length == 0) {
             return "";
         }
 
-        // Start comparison based on first path
-        var firstPath:String = paths[0];
-        var firstParts:Array<String> = firstPath.split("/");
+        var firstPath = paths[0];
+        var firstParts = firstPath.split("/");
 
-        // Loop to find common part
-        var commonPrefix:StringBuf = new StringBuf();
+        var commonParts = [];
         for (i in 0...firstParts.length) {
-            var part:String = firstParts[i];
+            var part = firstParts[i];
             for (path in paths) {
-                var pathParts:Array<String> = path.split("/");
+                var pathParts = path.split("/");
                 if (i >= pathParts.length || pathParts[i] != part) {
-                    return commonPrefix.toString();
+                    return commonParts.join("/");
                 }
             }
-            // Add common part
-            commonPrefix.add("/");
-            commonPrefix.add(part);
+            commonParts.push(part);
         }
 
-        return commonPrefix.toString();
+        return commonParts.join("/");
     }
 }
