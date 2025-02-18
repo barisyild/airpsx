@@ -37,7 +37,7 @@ class TaskLogService extends AbstractService {
 
             return input;
         } catch (e: Dynamic) {
-            trace("Bir hata oluştu: " + e);
+            trace("An error occurred: " + e);
         }
 
         return null;
