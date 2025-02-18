@@ -75,7 +75,7 @@ class Systemctl {
         if(str == null)
             return null;
 
-        // İlk olarak, veriyi uygun formatta bir stringe dönüştürelim
+        // First, let's convert the data to a string in the appropriate format
         var integerPart = (str >> 24) & 0xff;
         var fractionalPart = (str >> 12) & 0xfff;
 

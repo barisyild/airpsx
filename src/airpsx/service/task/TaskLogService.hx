@@ -23,15 +23,15 @@ class TaskLogService extends AbstractService {
         if(!FileSystem.exists(logPath))
             return "";
 
-        // Kaç bayt okunacağını belirt
+        // Specify how many bytes to read
         var bytesToRead:Int = 100000;
 
         try {
             var fileSize = FileSystem.stat(logPath).size;
-            // Okumaya başlanacak konumu hesapla
+            // Calculate location to start reading
             var startPosition = cast Math.max(0, fileSize - bytesToRead);
 
-            // FileInput ile dosyayı aç
+            // read file with FileInput
             var input: FileInput = File.read(logPath);
             input.seek(startPosition, FileSeek.SeekBegin);
 

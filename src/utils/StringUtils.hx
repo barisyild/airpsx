@@ -10,11 +10,11 @@ class StringUtils {
             return "";
         }
 
-        // İlk path'ı temel alarak karşılaştırma başlat
+        // Start comparison based on first path
         var firstPath:String = paths[0];
         var firstParts:Array<String> = firstPath.split("/");
 
-        // Ortak kısmı bulmak için döngü
+        // Loop to find common part
         var commonPrefix:StringBuf = new StringBuf();
         for (i in 0...firstParts.length) {
             var part:String = firstParts[i];
@@ -24,7 +24,7 @@ class StringUtils {
                     return commonPrefix.toString();
                 }
             }
-            // Ortak kısmı ekle
+            // Add common part
             commonPrefix.add("/");
             commonPrefix.add(part);
         }

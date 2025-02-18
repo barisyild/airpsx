@@ -59,20 +59,20 @@ class ZipUtils {
         var table:Vector<Int> = new Vector<Int>(0xFF);
         var polynomial:Int = 0xedb88320;  // CRC-32 polynomial
 
-        // Her bir byte için tablonun hesaplanması
+        // Calculating the table for each byte
         for (i in 0...256) {
             var crc:Int = i;
             var j:Int = 8;
             while (j > 0) {
-                // En düşük bit kontrolü ve bit kaydırma
+                // Lowest bit control and bit shifting
                 if ((crc & 1) != 0) {
-                    crc = (crc >>> 1) ^ polynomial;  // XOR ile polinom
+                    crc = (crc >>> 1) ^ polynomial;  // Polynomial with XOR
                 } else {
-                    crc = crc >>> 1;  // Sadece bit kaydırma
+                    crc = crc >>> 1;  // Bit shift only
                 }
                 j--;
             }
-            table.set(i, crc);  // Tablomuza ekliyoruz
+            table.set(i, crc);  // We add it to our table
         }
 
         return table;

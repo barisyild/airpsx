@@ -6,7 +6,7 @@ import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.http.RequestStatic.socket;
 
-// This service returns non-variable system resources.
+// This service kill service process
 class KillServerService extends AbstractService {
     public function new()
     {

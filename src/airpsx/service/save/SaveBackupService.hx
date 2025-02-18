@@ -17,7 +17,7 @@ import hx.well.http.AbstractResponse;
 using StringTools;
 import hx.well.http.RequestStatic.socket;
 
-// This service returns non-variable system resources.
+// This service serves save backups
 class SaveBackupService extends AbstractService {
     public function new()
     {
