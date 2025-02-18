@@ -4,19 +4,20 @@ import sys.FileSystem;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
-
+import hx.well.http.RequestStatic.request;
+import hx.well.validator.ValidatorRule;
 using StringTools;
 
 // WIP
 class FileSystemListService extends AbstractService {
+    public function validator():Bool {
+        return request().validate([
+            "path" => [ValidatorRule.Required, ValidatorRule.String]
+        ]);
+    }
+
     public function execute(request:Request):AbstractResponse {
-        /*var jsonData = parseJson(request, [
-            "path" => String
-        ]);*/
-
-        var jsonData = haxe.Json.parse(request.bodyBytes.toString());
-
-        var path = jsonData.path;
+        var path = request.input("path");
         if(path == "")
             path = "/";
 

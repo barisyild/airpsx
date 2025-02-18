@@ -19,21 +19,19 @@ using StringTools;
 // WIP
 class FileSystemDownloadService extends AbstractHttpFileStreamService {
     public function filePath(request:Request):String {
-        var pathRaw = Base64.decode(request.path.replace("/api/fs/download/", "")).toString();
+        var pathRaw = Base64.decode(request.route("encodedPath")).toString();
         var paths:Array<String> = pathRaw.split(",");
         return paths[0];
     }
 
     public override function execute(request:Request):AbstractResponse {
-        var pathRaw = Base64.decode(request.path.replace("/api/fs/download/", "")).toString();
+        var pathRaw = Base64.decode(request.route("encodedPath")).toString();
         var paths:Array<String> = pathRaw.split(",");
         if(paths.length == 0)
             return "File Not Found";
 
         if(paths.length > 100)
             return "Maximum 100 path supported at same time";
-
-        trace(haxe.Json.stringify(paths));
 
         var isArchive:Bool = paths.length > 1 || FileSystem.isDirectory(paths[0]);
         if(isArchive)

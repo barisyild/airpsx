@@ -9,7 +9,7 @@ import hx.well.http.RequestStatic.socket;
 
 class HScriptService extends AbstractService {
     public function execute(request:Request):AbstractResponse {
-        var code = request.bodyBytes.toString();
+        var code = request.input("script");
 
         var socket:Socket = socket();
         socket.output.writeString("HTTP/1.1 200 OK\r\n");

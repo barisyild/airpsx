@@ -26,12 +26,10 @@ class SaveBackupService extends AbstractService {
 
     public function execute(request:Request):AbstractResponse {
         var path:String = Config.USER_HOME_PATH;
-        var profileId:String = request.path.replace("/api/save/backup", "");
-        if(profileId.startsWith("/"))
-            profileId = profileId.substring(1);
+        var profileId:String = request.route("profileId");
 
         var profileIds:Array<String>;
-        if(profileId == "")
+        if(profileId == null)
         {
             profileIds = FileSystem.readDirectory(path);
         }else{

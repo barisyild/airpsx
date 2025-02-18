@@ -50,7 +50,7 @@ class RuleScriptUtils {
             var parserData = parse(code);
             var script = new RuleScript(interp, parserData.parser);
             var result = script.execute(parserData.expr);
-            //trace(result);
+            trace(result);
             output.writeString('${result}\n');
             return result;
         } catch (e:Error) {

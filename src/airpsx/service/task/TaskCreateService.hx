@@ -1,25 +1,32 @@
 package airpsx.service.task;
-import sys.net.Socket;
-import sys.db.Sqlite;
+
 import haxe.io.Bytes;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.facades.DBStatic;
 import type.DatabaseType;
+import hx.well.http.RequestStatic.request;
+import hx.well.validator.ValidatorRule;
 
 class TaskCreateService extends AbstractService {
+    public function validator():Bool {
+        return request().validate([
+            "name" => [ValidatorRule.Required, ValidatorRule.String]
+        ]);
+    }
+
     public function execute(request:Request):AbstractResponse {
-        var jsonData:Dynamic = haxe.Json.parse(request.bodyBytes.toString());
-        var name:String = jsonData.name;
+        var name:String = request.input("name", "New Task");
         // TODO: Check String
 
         var connection = DBStatic.connection(DatabaseType.TASK);
         var id:Int = connection.insert('INSERT INTO tasks (name) VALUES (?)', name);
 
-        // Little hack
-        trace('id => ${id}');
-        request.bodyBytes = Bytes.ofString(haxe.Json.stringify({id: id}));
-        return TaskDetailService.instance.execute(request);
+        var resultSet = DBStatic.connection(DatabaseType.TASK).query('SELECT * FROM tasks WHERE id = ?', id);
+        if(!resultSet.hasNext())
+            return {"message": "Task not found"};
+
+        return resultSet.next();
     }
 }

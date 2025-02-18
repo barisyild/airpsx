@@ -9,7 +9,7 @@ using StringTools;
 // WIP
 class TitleImageService extends AbstractHttpFileStreamService {
     public function filePath(request:Request):String {
-        var titleId:String = request.path.replace("/api/title/image/", "");
+        var titleId:String = request.route("titleId");
         var iconPath = defaultIconPath();
         var regex = new EReg("^[A-Z]{4}[0-9]{5}$", "");
         if(!regex.match(titleId))

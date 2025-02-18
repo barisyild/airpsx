@@ -9,28 +9,35 @@ import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.facades.DBStatic;
 import type.DatabaseType;
-
+import hx.well.http.RequestStatic.request;
+import hx.well.validator.ValidatorRule;
 
 class TaskUpdateService extends AbstractService {
-    private static var types:Map<String, Dynamic> = [
-        "id" => Int,
-        "name" => String,
-        "script" => String,
-        "status" => Int,
-        "frequency" => Int,
-        "logs" => Bool,
-        "enabled" => Bool
+    private static var types:Array<String> = [
+        "id",
+        "name",
+        "script",
+        "status",
+        "logs",
+        "enabled"
     ];
+
+    public function validator():Bool {
+        return request().validate([
+            "id" => [ValidatorRule.Required, ValidatorRule.Int],
+            "name" => [ValidatorRule.String],
+            "script" => [ValidatorRule.String],
+            "status" => [ValidatorRule.Int],
+            "logs" => [ValidatorRule.Bool],
+            "enabled" => [ValidatorRule.Bool]
+        ]);
+    }
 
     public function execute(request:Request):AbstractResponse {
         /*var jsonData:{id:Int, name:String, script:String, status:Int, frequency:Int, logs:Bool, enabled:Bool} = parseJson(request, types);*/
 
-        var jsonData:{id:Int, name:String, script:String, status:Int, frequency:Int, logs:Bool, enabled:Bool} = haxe.Json.parse(request.bodyBytes.toString());
-
-        trace(jsonData);
-
         var db = DBStatic.connection(DatabaseType.TASK);
-        var id:Int = jsonData.id;
+        var id:Int = request.input("id");
         var resultSet = db.query('SELECT id FROM tasks WHERE id = ?', id);
         if(!resultSet.hasNext())
         {
@@ -38,7 +45,7 @@ class TaskUpdateService extends AbstractService {
         }
 
         // Check Script
-        var script:String = jsonData.script;
+        var script:String = request.input("script");
         if(script != null && script != "")
         {
             try
@@ -52,7 +59,7 @@ class TaskUpdateService extends AbstractService {
             }
         }
 
-        var name:String = jsonData.name;
+        var name:String = request.input("name");
         if(name == "")
         {
             return {error: 'name cannot be empty.'};
@@ -61,9 +68,9 @@ class TaskUpdateService extends AbstractService {
         var i:Int = 0;
         var updateQuery:String = "";
         var selectQuery:String = "";
-        for(key in types.keys())
+        for(key in types)
         {
-            var value:Dynamic = Reflect.field(jsonData, key);
+            var value:Dynamic = request.input(key);
             if(value == null)
                 continue;
 

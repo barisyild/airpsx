@@ -4,8 +4,17 @@ import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.facades.DBStatic;
 import type.DatabaseType;
+import hx.well.validator.ValidatorRule;
+import hx.well.http.RequestStatic.request;
+
 class TaskDetailService extends AbstractService {
     public static var instance:TaskDetailService;
+
+    public function validator():Bool {
+        return request().validate([
+            "id" => [ValidatorRule.Required, ValidatorRule.Int]
+        ]);
+    }
 
     public function new() {
         super();
@@ -13,8 +22,7 @@ class TaskDetailService extends AbstractService {
     }
 
     public function execute(request:Request):AbstractResponse {
-        var jsonData:Dynamic = haxe.Json.parse(request.bodyBytes.toString());
-        var id:Int = Std.parseInt(jsonData.id);
+        var id:Int = request.input("id");
 
         var resultSet = DBStatic.connection(DatabaseType.TASK).query('SELECT * FROM tasks WHERE id = ?', id);
         if(!resultSet.hasNext())

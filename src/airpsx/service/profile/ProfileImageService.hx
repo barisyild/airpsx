@@ -8,7 +8,7 @@ using StringTools;
 // WIP
 class ProfileImageService extends AbstractHttpFileStreamService {
     public function filePath(request:Request):String {
-        var profileId:String = request.path.replace("/api/profile/image/", "");
+        var profileId:String = request.route("profileId");
         var profileImagePath:String = '${basePath()}/0x${profileId.toUpperCase()}/avatar.png';
         if(!FileSystem.exists(profileImagePath))
             return defaultIconPath();

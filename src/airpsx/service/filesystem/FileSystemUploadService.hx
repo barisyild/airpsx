@@ -14,7 +14,7 @@ import hx.well.http.RequestStatic.socket;
 
 class FileSystemUploadService extends AbstractService {
     public function execute(request:Request):AbstractResponse {
-        var path = request.path.replace("/api/fs/upload/", "");
+        var path = request.input("path");
         if(FileSystem.exists(path))
             return {success: false, message: "file exists"};
 

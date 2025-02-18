@@ -7,12 +7,18 @@ import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 using tools.ResultSetTools;
-import hx.well.http.RequestStatic.socket;
+import hx.well.http.RequestStatic.request;
+import hx.well.validator.ValidatorRule;
 
 class TaskLogService extends AbstractService {
+    public function validator():Bool {
+        return request().validate([
+            "id" => [ValidatorRule.Required, ValidatorRule.Int]
+        ]);
+    }
+
     public function execute(request:Request):AbstractResponse {
-        var jsonData:Dynamic = haxe.Json.parse(request.bodyBytes.toString());
-        var id:Int = Std.parseInt(jsonData.id);
+        var id:Int = request.input("id");
         var logPath:String = '${Config.DATA_PATH}/task/${id}.log';
         if(!FileSystem.exists(logPath))
             return "";

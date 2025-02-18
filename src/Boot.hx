@@ -107,25 +107,27 @@ class Boot extends BaseBoot {
     private function initializeRoute():Void
     {
         // api group
-        Route.group("/api", () -> {
+        Route.path("/api").group(() -> {
             Route.get("/upload")
                 .handler(new UploadService())
                 .setStream(true);
 
-            Route.group("/fs", () -> {
+            Route.path("/fs").group(() -> {
                 Route.post("/list")
                     .handler(new FileSystemListService());
 
-                Route.get("/download/*")
-                    .handler(new FileSystemDownloadService());
+                Route.get("/download/{encodedPath}")
+                    .handler(new FileSystemDownloadService())
+                    .where("encodedPath", "(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"); //Validate Base64 Regex
 
-                Route.post("/upload/*")
+                Route.post("/upload/{path}")
                     .handler(new FileSystemUploadService())
-                    .setStream(true);
+                    .setStream(true)
+                    .where("path", ".*");
             });
 
             #if orbis
-            Route.group("/system", () -> {
+            Route.path("/system").group(() -> {
                 Route.get("/status")
                     .handler(new SystemStatusService());
 
@@ -136,17 +138,20 @@ class Boot extends BaseBoot {
                     .handler(new CPUStatisticsService());
             });
 
-            Route.group("/profile", () -> {
+            Route.path("/profile").group(() -> {
                 Route.get("/list")
                     .handler(new ProfileListService());
 
-                Route.get("/image/*")
-                    .handler(new ProfileImageService());
+                // TODO: Add regex to profileId
+                Route.get("/image/{profileId}")
+                    .handler(new ProfileImageService())
+                    .where("profileId", "[0-9a-f]{8}");
             });
 
-            Route.group("/title", () -> {
-                Route.get("/image/*")
-                    .handler(new TitleImageService());
+            Route.path("/title").group(() -> {
+                Route.get("/image/{titleId}")
+                    .handler(new TitleImageService())
+                    .where("titleId", "[A-Z]{4}[0-9]{5}");
             });
 
             Route.get("/storage/info")
@@ -155,19 +160,21 @@ class Boot extends BaseBoot {
             Route.get("/process/list")
                 .handler(new ProcessListService());
 
-            Route.group("/app", () -> {
+            Route.path("/app").group(() -> {
                 Route.get("/list")
                     .handler(new ApplicationListService());
 
-                Route.get("/run/*")
-                    .handler(new ApplicationRunService());
+                Route.get("/run/{titleId}")
+                    .handler(new ApplicationRunService())
+                    .where("titleId", "[A-Z]{4}[0-9]{5}");
             });
 
-            Route.get("/save/backup/*")
-                .handler(new SaveBackupService());
+            Route.get("/save/backup/{profileId?}")
+                .handler(new SaveBackupService())
+                .where("profileId", "[0-9a-f]{8}");
             #end
 
-            Route.group("/task", () -> {
+            Route.path("/task").group(() -> {
                 Route.post("/create")
                     .handler(new TaskCreateService());
 
