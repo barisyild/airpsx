@@ -5,7 +5,7 @@ import sys.io.File;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
-using tools.StringTools;
+using airpsx.tools.StringTools;
 
 // This service returns non-variable system resources.
 class ProfileListService extends AbstractService {

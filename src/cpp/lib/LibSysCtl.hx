@@ -1,7 +1,7 @@
 package cpp.lib;
 
 #if orbis
-import utils.StringUtils;
+import airpsx.utils.StringUtils;
 import cpp.SizeT;
 import cpp.extern.sys.ExternSysctl.ExternSysCtl;
 import haxe.io.Bytes;

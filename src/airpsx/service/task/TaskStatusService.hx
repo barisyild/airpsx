@@ -3,10 +3,10 @@ import sys.net.Socket;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
-using tools.ResultSetTools;
+using airpsx.tools.ResultSetTools;
 import hx.well.http.RequestStatic.socket;
 import hx.well.facades.DBStatic;
-import type.DatabaseType;
+import airpsx.type.DatabaseType;
 
 class TaskStatusService extends AbstractService {
     public function execute(request:Request):AbstractResponse {

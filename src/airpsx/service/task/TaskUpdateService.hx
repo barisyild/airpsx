@@ -2,13 +2,13 @@ package airpsx.service.task;
 
 import sys.db.Sqlite;
 import sys.net.Socket;
-import utils.RuleScriptUtils;
+import airpsx.utils.RuleScriptUtils;
 import haxe.Exception;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.facades.DBStatic;
-import type.DatabaseType;
+import airpsx.type.DatabaseType;
 import hx.well.http.RequestStatic.request;
 import hx.well.validator.ValidatorRule;
 

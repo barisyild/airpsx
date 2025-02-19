@@ -12,7 +12,7 @@ import cpp.PidT;
 import cpp.UInt64;
 import cpp.UInt32;
 import cpp.extern.ExternUnistd;
-using tools.BytesTools;
+using airpsx.tools.BytesTools;
 using StringTools;
 import cpp.SizeT;
 import cpp.extern.ApplicationCategoryType;

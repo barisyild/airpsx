@@ -4,7 +4,7 @@ package cpp.lib;
 import haxe.io.Bytes;
 import cpp.lib.LibKernelSys;
 using StringTools;
-using tools.StringTools;
+using airpsx.tools.StringTools;
 
 class Systemctl {
     public static var hardwareMachine(get, never):String;

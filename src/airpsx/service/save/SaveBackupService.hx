@@ -3,7 +3,7 @@ package airpsx.service.save;
 #if orbis
 import sys.net.Socket;
 import haxe.tar.StreamTarFile;
-import utils.FileUtils;
+import airpsx.utils.FileUtils;
 import haxe.tar.TarCompress;
 import haxe.Int64;
 import sys.io.FileInput;

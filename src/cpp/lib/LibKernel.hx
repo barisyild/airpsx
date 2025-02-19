@@ -4,13 +4,13 @@ package cpp.lib;
 import cpp.extern.ExternLibKernelSys;
 import cpp.extern.ExternLibKernel;
 import cpp.extern.ExternLibKernel.NotifyRequestStruct;
-import utils.StringUtils;
+import airpsx.utils.StringUtils;
 import cpp.Int32;
 import cpp.PidT;
 import cpp.extern.ApplicationCategoryType;
 using StringTools;
-using tools.StringTools;
-using tools.IntegerTools;
+using airpsx.tools.StringTools;
+using airpsx.tools.IntegerTools;
 
 class LibKernel {
     public static var cpuTemperature(get, never):Int;

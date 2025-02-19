@@ -1,6 +1,6 @@
 package haxe.tar;
 import sys.net.Socket;
-import utils.ZipUtils.ZipStreamEntity;
+import airpsx.utils.ZipUtils.ZipStreamEntity;
 import sys.io.FileInput;
 import haxe.io.Bytes;
 import haxe.Int64;
@@ -8,8 +8,8 @@ import haxe.io.Input;
 import haxe.io.Output;
 import sys.FileStat;
 import sys.FileSystem;
-using tools.IntegerTools;
-using tools.Integer64Tools;
+using airpsx.tools.IntegerTools;
+using airpsx.tools.Integer64Tools;
 using StringTools;
 
 class TarCompress {

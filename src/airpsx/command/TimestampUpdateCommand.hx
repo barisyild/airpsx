@@ -1,6 +1,6 @@
 package airpsx.command;
 import hx.well.console.AbstractCommand;
-import utils.NTPUtils;
+import airpsx.utils.NTPUtils;
 import cpp.lib.LibKernel;
 import cpp.lib.sys.LibSysTime;
 import hx.well.facades.Schedule;

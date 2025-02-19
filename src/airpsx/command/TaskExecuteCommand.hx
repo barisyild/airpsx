@@ -3,13 +3,13 @@ import hx.well.console.AbstractCommand;
 import sys.thread.Mutex;
 import haxe.io.NullOutput;
 import sys.io.File;
-import utils.RuleScriptUtils;
-import utils.TypeUtils;
+import airpsx.utils.RuleScriptUtils;
+import airpsx.utils.TypeUtils;
 import sys.FileSystem;
-import type.TaskStatus;
+import airpsx.type.TaskStatus;
 import hx.well.facades.DBStatic;
 import haxe.io.Output;
-import type.DatabaseType;
+import airpsx.type.DatabaseType;
 class TaskExecuteCommand extends AbstractCommand {
     public static var taskMutex:Mutex = new Mutex();
 

@@ -3,7 +3,7 @@ package airpsx.service;
 import airpsx.service.filesystem.AbstractHttpFileStreamService;
 import hx.well.http.Request;
 import hx.well.facades.DBStatic;
-import type.DatabaseType;
+import airpsx.type.DatabaseType;
 using StringTools;
 
 // WIP

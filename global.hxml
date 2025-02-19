@@ -17,13 +17,13 @@
 --macro include("protocols.http.services.http")
 --macro addGlobalMetadata('Date', '@:keep')
 --macro addGlobalMetadata('Math', '@:keep')
---macro addGlobalMetadata('hscript.HScriptDataGenerated', '@:keep')
+--macro addGlobalMetadata('airpsx.hscript.HScriptDataGenerated', '@:keep')
 
-#--macro addGlobalMetadata('hscript', '@:build(macro.DebugTraceMacro.build())')
+#--macro addGlobalMetadata('airpsx.hscript', '@:build(airpsx.macro.DebugTraceMacro.build())')
 -lib hscript
 -lib rulescript
 -lib hxwell
---macro macro.HScriptVariableMacro.run()
+--macro airpsx.macro.HScriptVariableMacro.run()
 #-dce no
 #-lib hxcpp-debug-server
 

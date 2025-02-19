@@ -2,12 +2,12 @@ import sys.thread.Thread;
 
 import sys.net.Socket;
 import cpp.lib.LibKernel;
-using tools.ArrayFilterTools;
-using tools.BytesTools;
+using airpsx.tools.ArrayFilterTools;
+using airpsx.tools.BytesTools;
 import hx.concurrent.executor.Executor;
 using StringTools;
-using tools.IntegerTools;
-using tools.Integer64Tools;
+using airpsx.tools.IntegerTools;
+using airpsx.tools.Integer64Tools;
 
 class AirPSX {
 	public static var isExiting:Bool = false;

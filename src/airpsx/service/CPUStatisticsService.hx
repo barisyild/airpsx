@@ -4,11 +4,11 @@ import sys.db.ResultSet;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
-using tools.ResultSetTools;
+using airpsx.tools.ResultSetTools;
 import hx.well.http.ResponseStatic.response;
 import hx.well.database.Connection;
 import hx.well.facades.DBStatic;
-import type.DatabaseType;
+import airpsx.type.DatabaseType;
 
 // WIP
 class CPUStatisticsService extends AbstractService {
