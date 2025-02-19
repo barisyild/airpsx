@@ -1,8 +1,8 @@
 package command;
-import lib.LibKernel;
-import lib.LibSceUserService;
-import lib.Systemctl;
-import lib.LibSceSystemService;
+import cpp.lib.LibKernel;
+import cpp.lib.LibSceUserService;
+import cpp.lib.Systemctl;
+import cpp.lib.LibSceSystemService;
 import hx.well.console.AbstractCommand;
 
 class InitializeCommand extends AbstractCommand {

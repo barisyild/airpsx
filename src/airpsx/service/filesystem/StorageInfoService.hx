@@ -2,7 +2,7 @@ package airpsx.service.filesystem;
 
 #if orbis
 import sys.net.Socket;
-import lib.sys.LibStatVfs;
+import cpp.lib.sys.LibStatVfs;
 import sys.FileSystem;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;

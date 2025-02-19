@@ -2,7 +2,7 @@ package utils;
 import sys.FileSystem;
 import haxe.Int64;
 import sys.FileStat;
-import lib.sys.LibMount;
+import cpp.lib.sys.LibMount;
 using StringTools;
 
 class FileUtils {

@@ -1,4 +1,4 @@
-package lib;
+package cpp.lib;
 
 #if orbis
 import cpp.extern.ExternLibSceSystemService;

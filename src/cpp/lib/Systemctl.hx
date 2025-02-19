@@ -1,8 +1,8 @@
-package lib;
+package cpp.lib;
 
 #if orbis
 import haxe.io.Bytes;
-import lib.LibKernelSys;
+import cpp.lib.LibKernelSys;
 using StringTools;
 using tools.StringTools;
 

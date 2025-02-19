@@ -7,7 +7,7 @@ import cpp.Int32;
 import cpp.SizeT;
 import cpp.UInt32;
 import cpp.UInt64;
-import lib.LncAppParamFlag;
+import cpp.lib.LncAppParamFlag;
 import cpp.AbstractPointer;
 import cpp.AbstractArrayPointer;
 import cpp.Pointer;

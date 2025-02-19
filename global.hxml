@@ -12,8 +12,8 @@
 
 #-D windows
 --macro addGlobalMetadata('Boot', '@:keep')
---macro include('lib')
---macro addGlobalMetadata('lib', '@:keep')
+--macro include('cpp.lib')
+--macro addGlobalMetadata('cpp.lib', '@:keep')
 --macro include("protocols.http.services.http")
 --macro addGlobalMetadata('Date', '@:keep')
 --macro addGlobalMetadata('Math', '@:keep')

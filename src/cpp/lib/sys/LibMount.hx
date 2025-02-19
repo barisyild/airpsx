@@ -1,4 +1,4 @@
-package lib.sys;
+package cpp.lib.sys;
 
 #if orbis
 import cpp.extern.sys.ExternMount.StatFsStruct;

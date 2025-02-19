@@ -1,7 +1,7 @@
 package airpsx.service.application;
 
 #if orbis
-import lib.LibSceSystemService;
+import cpp.lib.LibSceSystemService;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;

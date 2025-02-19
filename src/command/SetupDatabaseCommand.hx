@@ -1,6 +1,6 @@
 package command;
 
-import lib.LibKernel;
+import cpp.lib.LibKernel;
 import type.TaskStatus;
 import airpsx.Config;
 import hx.well.console.AbstractCommand;

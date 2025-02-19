@@ -1,10 +1,10 @@
 package airpsx.service.system;
 
 #if orbis
-import lib.LibKernel;
+import cpp.lib.LibKernel;
 import sys.net.Socket;
-import lib.Systemctl;
-import lib.Process;
+import cpp.lib.Systemctl;
+import cpp.lib.Process;
 import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;

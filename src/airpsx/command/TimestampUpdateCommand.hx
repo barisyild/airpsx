@@ -1,8 +1,8 @@
 package airpsx.command;
 import hx.well.console.AbstractCommand;
 import utils.NTPUtils;
-import lib.LibKernel;
-import lib.sys.LibSysTime;
+import cpp.lib.LibKernel;
+import cpp.lib.sys.LibSysTime;
 import hx.well.facades.Schedule;
 class TimestampUpdateCommand extends AbstractCommand {
     public override function group():String {

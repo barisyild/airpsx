@@ -2,8 +2,8 @@ package airpsx.command;
 import hx.well.console.AbstractCommand;
 import hx.well.facades.DBStatic;
 #if orbis
-import lib.LibKernel;
-import lib.Process;
+import cpp.lib.LibKernel;
+import cpp.lib.Process;
 #end
 
 class TemperatureLogCommand extends AbstractCommand {

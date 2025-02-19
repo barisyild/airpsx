@@ -1,4 +1,4 @@
-package lib;
+package cpp.lib;
 
 #if cpp
 enum abstract LncAppParamFlag(cpp.Int32)
