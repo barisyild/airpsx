@@ -74,7 +74,7 @@ class TaskUpdateService extends AbstractService {
             if(value == null)
                 continue;
 
-            value = Std.isOfType(value, String) ? db.quote(value) : value;
+            value = value is String ? db.quote(value) : value;
             updateQuery += '${i != 0 ? ", " : ""} ${key} = ${value}';
             selectQuery += '${i != 0 ? ", " : ""} ${key}';
 
