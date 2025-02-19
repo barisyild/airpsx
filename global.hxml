@@ -5,6 +5,8 @@
 -D HXCPP_CPP11
 -D HXCPP_GC_MOVING
 -D hscriptPos
+-D disable_cli
+-D analyzer-optimize
 
 -cp src
 
@@ -26,8 +28,6 @@
 #-lib hxcpp-debug-server
 
 -main hx.well.HxWell
--D boot=Boot
--D analyzer-optimize
 -dce std
 #-D no-compilation
 #-debug
