@@ -43,6 +43,7 @@ import hx.well.console.CommandExecutor;
 import airpsx.command.TaskExecuteCommand;
 import airpsx.command.TemperatureLogCommand;
 import airpsx.command.TimestampUpdateCommand;
+import cpp.lib.LibKernel;
 using hx.well.tools.RouteElementTools;
 
 class Boot extends BaseBoot {
@@ -222,6 +223,8 @@ class Boot extends BaseBoot {
         // Always use framework instead of 404 page.
         Route.status(404)
             .file('${Config.DATA_PATH}/public/index.html', 200);
+
+        LibKernel.sendNotificationRequest('AirPSX listening at ${Config.HTTP_PORT}');
     }
 
     public function servers():Array<AbstractServer> {
