@@ -20,5 +20,8 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 - [m0rkeulv](https://github.com/m0rkeulv)
     - If it wasn't for [intellij-haxe](https://github.com/HaxeFoundation/intellij-haxe), maybe I would never have write any haxe project :(
 
+## Testers
+- [terex777](https://x.com/TeRex777_)
+
 ## How it works
 This web project is built using my web framework, [hxwell](https://github.com/barisyild/hxwell). Leveraging the power of Haxe, all source code is transpiled to C++ and compiled using the PS5 Payload SDK.
