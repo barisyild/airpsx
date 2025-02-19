@@ -1,6 +1,5 @@
 package ;
 import hscript.HScriptData;
-import command.CommandExecutor;
 import command.SetupPublicCommand;
 import command.SetupDatabaseCommand;
 import command.InitializeCommand;
@@ -38,6 +37,12 @@ import hx.well.facades.Config as HxWellConfig;
 import airpsx.server.Server;
 import hx.well.database.Connection;
 import type.DatabaseType;
+import hx.well.facades.Schedule;
+import hx.well.console.BatchCommandExecutor;
+import hx.well.console.CommandExecutor;
+import airpsx.command.TaskExecuteCommand;
+import airpsx.command.TemperatureLogCommand;
+import airpsx.command.TimestampUpdateCommand;
 using hx.well.tools.RouteElementTools;
 
 class Boot extends BaseBoot {
@@ -49,6 +54,11 @@ class Boot extends BaseBoot {
             AirPSX.exit(0);
         });
         #end
+
+        // register commands
+        CommandExecutor.register(TaskExecuteCommand);
+        CommandExecutor.register(TemperatureLogCommand);
+        CommandExecutor.register(TimestampUpdateCommand);
 
         // set config
         HxWellConfig.set("cache.path", '${Config.DATA_PATH}/cache');
@@ -89,12 +99,12 @@ class Boot extends BaseBoot {
         #end
 
         // Initialize Server
-        var commandExecutor = new CommandExecutor();
-        commandExecutor.addComamnd(new SetupPublicCommand());
-        commandExecutor.addComamnd(new SetupDatabaseCommand());
-        commandExecutor.addComamnd(new InitializeCommand());
+        var commandExecutor = new BatchCommandExecutor();
+        commandExecutor.addCommand(SetupPublicCommand);
+        commandExecutor.addCommand(SetupDatabaseCommand);
+        commandExecutor.addCommand(InitializeCommand);
         // TODO: implement schedulers in hxwell
-        //commandExecutor.addComamnd(new SchedulerCommand());
+        //commandExecutor.addCommand(new SchedulerCommand());
         commandExecutor.execute();
 
         Connection.create(DatabaseType.DEFAULT, {path: Config.DB_PATH});
@@ -102,6 +112,8 @@ class Boot extends BaseBoot {
         Connection.create(DatabaseType.APP, {path: Config.SYSTEM_APP_DB_PATH});
 
         initializeRoute();
+
+        Schedule.get().fixedRate("timestamp:update", 60000);
     }
 
     private function initializeRoute():Void

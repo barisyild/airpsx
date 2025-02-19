@@ -6,6 +6,10 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 >
 > I do not accept any responsible for misuse of the file manager, execution of malicious scripts, or any damage that may occur to the console in any case.
 
+## Dependencies
+- [hxcpp fork](https://github.com/barisyild/hxcpp)
+- [hxwell](https://github.com/barisyild/hxwell)
+
 ## Special Thanks
 - [John Törnblom](https://github.com/john-tornblom)
     - Contributions to the [PS5 SDK](https://github.com/ps5-payload-dev/sdk) and [ELF Loader](https://github.com/ps5-payload-dev/elfldr).

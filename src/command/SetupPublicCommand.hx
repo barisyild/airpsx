@@ -6,12 +6,21 @@ import sys.io.File;
 import utils.FileSystemUtils;
 import utils.ExtractZipUtils;
 import airpsx.Config;
-class SetupPublicCommand extends Command {
+import hx.well.console.AbstractCommand;
+class SetupPublicCommand extends AbstractCommand {
     public function new() {
         super();
     }
 
-    public function execute():Void {
+    public function signature():String {
+        return null;
+    }
+
+    public function description():String {
+        return null;
+    }
+
+    public function handle<T>():T {
         if(!FileSystem.exists(Config.DATA_PATH))
             FileSystem.createDirectory(Config.DATA_PATH);
 
@@ -30,6 +39,7 @@ class SetupPublicCommand extends Command {
         #if cpp
         cpp.vm.Gc.compact();
         #end
+        return cast true;
     }
 
     private function checkUpdateAvailable():Bool

@@ -3,13 +3,22 @@ package command;
 import lib.LibKernel;
 import type.TaskStatus;
 import airpsx.Config;
+import hx.well.console.AbstractCommand;
 
-class SetupDatabaseCommand extends Command {
+class SetupDatabaseCommand extends AbstractCommand {
     public function new() {
         super();
     }
 
-    public function execute():Void {
+    public function signature():String {
+        return null;
+    }
+
+    public function description():String {
+        return null;
+    }
+
+    public function handle<T>():T {
         var db = sys.db.Sqlite.open(Config.DB_PATH);
 
         // Create stats table if not exists
@@ -36,5 +45,6 @@ class SetupDatabaseCommand extends Command {
         }
         db.request('UPDATE tasks SET enabled = 0, status = ${TaskStatus.IDLE} WHERE status = ${TaskStatus.RUNNING}');
         db.close();
+        return cast true;
     }
 }
