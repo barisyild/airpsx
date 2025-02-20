@@ -9,6 +9,7 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 ## Dependencies
 - [hxcpp fork](https://github.com/barisyild/hxcpp)
 - [hxwell](https://github.com/barisyild/hxwell)
+- [rulescript](https://github.com/Kriptel/RuleScript)
 
 ## Special Thanks
 - [John Törnblom](https://github.com/john-tornblom)
