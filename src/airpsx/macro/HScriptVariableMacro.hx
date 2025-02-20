@@ -5,8 +5,12 @@ import haxe.macro.Expr;
 import haxe.macro.Type.ModuleType;
 import haxe.macro.Type.ClassField;
 import haxe.macro.Type.ClassType;
+import haxe.macro.TypeTools;
+using StringTools;
 
 class HScriptVariableMacro {
+    private static var hscriptVariablesMetadata:String = "";
+
     public static function run():Void {
         Context.onAfterTyping(types -> {
             if(hasTypeFromClassName(types, "HScriptDataGenerated"))
@@ -49,6 +53,8 @@ class HScriptVariableMacro {
                 pos: Context.currentPos()
             }
             Context.defineType(HScriptDataGeneratedType);
+
+            trace('Available Functions: ${hscriptVariablesMetadata}');
         });
     }
 
@@ -59,10 +65,20 @@ class HScriptVariableMacro {
         if(hscriptVariableMetadata.length > 0)
         {
             var variableString:String = getConstString(hscriptVariableMetadata[0].params[0]);
+
+
             if(field == null)
+            {
                 exprs.push(macro $v{variableString} => $p{classType.module.split(".")});
+            }
             else
+            {
+                var metadata = '${variableString}${TypeTools.toString(field.type)};';
+                metadata = metadata.replace(" -> ", ":");
+                metadata = metadata.replace(" : ", ":");
+                hscriptVariablesMetadata += '${metadata}\n';
                 exprs.push(macro $v{variableString} => $p{classType.module.split(".").concat([field.name])});
+            }
         }
     }
 
