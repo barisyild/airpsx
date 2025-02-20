@@ -6,6 +6,14 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 >
 > I do not accept any responsible for misuse of the file manager, execution of malicious scripts, or any damage that may occur to the console in any case.
 
+## Build
+
+- Run install.sh
+- Locate the project folder and execute the following command:
+```sh
+export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk && haxe release.hxml --cmd "mv out/HxWell out/airpsx.elf"
+```
+
 ## Dependencies
 - [hxcpp fork](https://github.com/barisyild/hxcpp)
 - [hxwell](https://github.com/barisyild/hxwell)
