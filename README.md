@@ -28,4 +28,4 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 This web project is built using my web framework, [hxwell](https://github.com/barisyild/hxwell). Leveraging the power of Haxe, all source code is transpiled to C++ and compiled using the PS5 Payload SDK.
 
 ## Video overview
-A video overview by [MODDED WARFARE](https://x.com/MODDED_WARFARE) is available here: https://www.youtube.com/feed/subscriptions
+A video overview by [MODDED WARFARE](https://x.com/MODDED_WARFARE) is available here: https://www.youtube.com/watch?v=cH7Jx-7Mn4k
