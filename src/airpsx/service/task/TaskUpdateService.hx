@@ -82,7 +82,6 @@ class TaskUpdateService extends AbstractService {
             i++;
         }
 
-        trace(selectQuery);
         db.query('UPDATE tasks SET ${updateQuery} WHERE id = ?', id);
 
         var resultSet = db.query('SELECT ${selectQuery} FROM tasks WHERE id = ?', id);
