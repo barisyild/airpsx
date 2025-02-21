@@ -76,8 +76,7 @@ class TaskUpdateService extends AbstractService {
             if(value == null)
                 continue;
 
-            value = value is String ? db.quote(value) : value;
-            updateQuery += '${i != 0 ? ", " : ""} ${key} = ${value}';
+            updateQuery += '${i != 0 ? ", " : ""} ${key} = ${db.quote(value)}';
             selectQuery += '${i != 0 ? ", " : ""} ${key}';
 
             i++;
