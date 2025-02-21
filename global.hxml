@@ -29,5 +29,6 @@
 
 -main hx.well.HxWell
 -dce std
+--cmd "haxe -cp src -main AfterBuild --interp"
 #-D no-compilation
 #-debug
