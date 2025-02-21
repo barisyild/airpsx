@@ -80,7 +80,7 @@ class TaskExecuteCommand extends AbstractCommand {
                     var increaseKey:String = isSuccess ? "success" : "failed";
 
                     // Update task state to idle
-                    db.query('UPDATE tasks SET status = ?, lastRun = datetime(\'now\',\'localtime\'), ? = ? + 1 WHERE id = ?', TaskStatus.IDLE, increaseKey, increaseKey, id);
+                    db.query('UPDATE tasks SET status = ?, lastRun = datetime(\'now\',\'localtime\'), ${increaseKey} = ${increaseKey} + 1 WHERE id = ?', TaskStatus.IDLE, id);
 
                     output.writeString('[${Date.now()}] execution ${increaseKey}, took ${haxe.Timer.stamp() - executionMilliseconds}ms\n');
                 }
