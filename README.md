@@ -6,6 +6,24 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 >
 > I do not accept any responsible for misuse of the file manager, execution of malicious scripts, or any damage that may occur to the console in any case.
 
+## Run
+
+### elfldr
+- Run elfldr payload
+- Linux
+  - socat -t 99999999 - TCP:PS5_HOST:9021 < "airpsx.elf"
+
+### etaHEN
+- Run etaHEN payload.
+- Connect FTP (Common Ports: 1337, 2121)
+- Locate airpsx.plugin to "**/data/etaHEN/plugins**"
+- Open Debug Settings -> etaHEN Toolbox -> Plugins
+- Enable airpsx.plugin
+- Optionally you can enable "airpsx.plugin" as startup item 
+
+### websrv
+- I do not recommend this method, because AirPSX closes after the browser is closed.
+
 ## Build
 
 - Run install.sh
