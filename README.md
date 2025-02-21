@@ -33,7 +33,7 @@ export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk && haxe release.hxml --cmd "mv out/H
 ```
 
 ## Dependencies
-- [hxcpp fork](https://github.com/barisyild/hxcpp)
+- [hxcpp fork](https://github.com/barisyild/hxcpp/tree/ps5-payload)
 - [hxwell](https://github.com/barisyild/hxwell)
 - [rulescript](https://github.com/Kriptel/RuleScript)
 
