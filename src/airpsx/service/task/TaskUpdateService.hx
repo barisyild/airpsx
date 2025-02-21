@@ -18,6 +18,7 @@ class TaskUpdateService extends AbstractService {
         "name",
         "script",
         "status",
+        "frequency",
         "logs",
         "enabled"
     ];
@@ -28,6 +29,7 @@ class TaskUpdateService extends AbstractService {
             "name" => [ValidatorRule.String],
             "script" => [ValidatorRule.String],
             "status" => [ValidatorRule.Int],
+            "frequency" => [ValidatorRule.Int],
             "logs" => [ValidatorRule.Bool],
             "enabled" => [ValidatorRule.Bool]
         ]);
@@ -81,6 +83,7 @@ class TaskUpdateService extends AbstractService {
             i++;
         }
 
+        trace(selectQuery);
         db.query('UPDATE tasks SET ${updateQuery} WHERE id = ?', id);
 
         var resultSet = db.query('SELECT ${selectQuery} FROM tasks WHERE id = ?', id);
