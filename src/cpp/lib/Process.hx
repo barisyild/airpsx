@@ -81,14 +81,14 @@ class Process {
     {
         var processList = Process.getProcessList();
         processList = processList.filter(function(proc){
-            return proc.categoryType == ApplicationCategoryType.NATIVE_GAME || proc.categoryType == ApplicationCategoryType.SYSTEM_BUILTIN_APP || proc.categoryType == ApplicationCategoryType.WEB_BASED_MEDIA_APP || proc.categoryType == ApplicationCategoryType.RNPS_MEDIA_APP;
+            return proc.categoryType == ApplicationCategoryType.NATIVE_GAME || proc.categoryType == ApplicationCategoryType.ORBIS_GAME || proc.categoryType == ApplicationCategoryType.SYSTEM_BUILTIN_APP || proc.categoryType == ApplicationCategoryType.WEB_BASED_MEDIA_APP || proc.categoryType == ApplicationCategoryType.RNPS_MEDIA_APP;
         });
 
         // First order is native games, then system apps
         processList.sort(function(a, b){
             if(a.categoryType == b.categoryType)
                 return 0;
-            else if(a.categoryType == ApplicationCategoryType.NATIVE_GAME)
+            else if(a.categoryType == ApplicationCategoryType.NATIVE_GAME || a.categoryType == ApplicationCategoryType.ORBIS_GAME)
                 return -1;
             else
                 return 1;
