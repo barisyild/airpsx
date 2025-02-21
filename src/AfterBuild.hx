@@ -60,7 +60,7 @@ class AfterBuild {
 
         var elfFilename = "airpsx.elf";
         var tid = "AIRX00000";
-        var version = "0.03";
+        var version = "0.04";
 
         if (isValidVersion(version) && isValidTid(tid)) {
             addHeaderToElf(elfFilename, tid, version);
