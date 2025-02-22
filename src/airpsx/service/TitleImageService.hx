@@ -19,18 +19,18 @@ class TitleImageService extends AbstractHttpFileStreamService {
         if(!resultSet.hasNext())
             return iconPath;
 
-        var iconUrl:String = "";
-
         try
         {
             resultSet.next();
-            iconUrl = resultSet.getResult(0);
+            iconPath = resultSet.getResult(0);
         } catch (e)
         {
             return iconPath;
         }
 
-        iconPath = iconUrl.substring(0, iconUrl.indexOf("?"));
+        var questionMarkIndex = iconPath.indexOf("?");
+        if(questionMarkIndex != -1)
+            iconPath = iconPath.substring(0, questionMarkIndex);
         return iconPath;
     }
 
