@@ -9,6 +9,7 @@ import hx.well.services.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.facades.DBStatic;
+import airpsx.type.DatabaseType;
 
 // This service returns variable system resources.
 class SystemStatusService extends AbstractService {
@@ -26,7 +27,7 @@ class SystemStatusService extends AbstractService {
         if(runningApp != null)
         {
             var titleName:String = "";
-            var db = DBStatic.connection(Config.SYSTEM_APP_DB_PATH);
+            var db = DBStatic.connection(DatabaseType.APP);
             try
             {
                 var resultSet = db.query('SELECT titleName FROM tbl_contentinfo WHERE titleId = ?', runningApp.titleID);
