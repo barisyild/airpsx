@@ -23,6 +23,17 @@ class RuleScriptUtils {
         interp.variables.set("Sys", Sys);
         interp.variables.set("FileSystem", sys.FileSystem);
         interp.variables.set("File", sys.io.File);
+        interp.variables.set("GCCompact", () -> cpp.vm.Gc.compact());
+        interp.variables.set("GCMemUsage", () -> cpp.vm.Gc.memUsage());
+        interp.variables.set("GCRun", (major) -> cpp.vm.Gc.run(major));
+        interp.variables.set("GCMemAll", () -> {
+            return {
+                MEM_INFO_RESERVED: cpp.vm.Gc.memInfo(cpp.vm.Gc.MEM_INFO_RESERVED),
+                MEM_INFO_CURRENT: cpp.vm.Gc.memInfo(cpp.vm.Gc.MEM_INFO_CURRENT),
+                MEM_INFO_LARGE: cpp.vm.Gc.memInfo(cpp.vm.Gc.MEM_INFO_LARGE),
+                MEM_INFO_USAGE: cpp.vm.Gc.memInfo(cpp.vm.Gc.MEM_INFO_USAGE),
+            }
+        });
         var hScriptDataKeys:Array<String> = [];
         for(key in HScriptData.variables.keys())
         {
