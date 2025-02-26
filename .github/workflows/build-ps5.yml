@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
   release:
     types: [ published ]
+  push:
 
 env:
   HAXE_VERSION: 4.3.6
@@ -79,3 +80,19 @@ jobs:
         with:
           name: airpsx.plugin
           path: airpsx.plugin
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: airpsx.elf
+          asset_name: airpsx.elf
+          asset_content_type: application/x-binary
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: airpsx.plugin
+          asset_name: airpsx.plugin
+          asset_content_type: application/x-binary
