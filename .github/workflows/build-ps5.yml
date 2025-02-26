@@ -7,6 +7,7 @@ on:
   release:
     types: [ published ]
   push:
+    branches:
 
 env:
   HAXE_VERSION: 4.3.6
