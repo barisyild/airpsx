@@ -34,10 +34,10 @@ jobs:
         with:
           repository: barisyild/hxwell
           token: ${{ secrets.GITHUB_TOKEN }}  # veya ${{ secrets.ACTIONS_PAT }}
-          path: ${{ env.HAXELIB_PATH }}/hxwell/dev
+          path: hxwell
       - name: Install Haxe Dependencies
         run: |
-          echo dev > ${{ env.HAXELIB_PATH }}/hxwell/.current
+          echo "${{ github.workspace }}/hxwell" > ${{ env.HAXELIB_PATH }}/hxwell/.dev
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
           haxelib install rulescript 0.2.0
