@@ -111,6 +111,7 @@ class Boot extends BaseBoot {
         Connection.create(DatabaseType.DEFAULT, {path: Config.DB_PATH});
         Connection.create(DatabaseType.TASK, {path: Config.TASK_DB_PATH});
         Connection.create(DatabaseType.APP, {path: Config.SYSTEM_APP_DB_PATH});
+        Connection.create(DatabaseType.APP_INFO, {path: Config.SYSTEM_APP_INFO_DB_PATH});
 
         initializeRoute();
 

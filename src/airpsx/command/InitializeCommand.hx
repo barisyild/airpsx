@@ -4,6 +4,7 @@ import cpp.lib.LibSceUserService;
 import cpp.lib.Systemctl;
 import cpp.lib.LibSceSystemService;
 import hx.well.console.AbstractCommand;
+import cpp.lib.LibSceAppInstUtil;
 
 class InitializeCommand extends AbstractCommand {
     public function new() {
@@ -24,6 +25,11 @@ class InitializeCommand extends AbstractCommand {
         {
             LibKernel.sendNotificationRequest('sceUserServiceInitialize failed');
             return cast false;
+        }
+
+        if(!LibSceAppInstUtil.initialize())
+        {
+            LibKernel.sendNotificationRequest('sceLibSceAppInstUtil failed');
         }
         #end
         return cast true;
