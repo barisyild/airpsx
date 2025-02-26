@@ -1,9 +1,11 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Build
+name: Build PS5
 
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  release:
+    types: [ published ]
 
 env:
   HAXE_VERSION: 4.3.6
@@ -25,6 +27,9 @@ jobs:
       - name: Set env variables
         run: |
           echo "HAXELIB_PATH=/opt/hostedtoolcache/haxe/${{ env.HAXE_VERSION }}/x64/lib" >> $GITHUB_ENV
+          if [ "${{ github.event_name }}" == "release" ]; then
+            echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          fi
       - name: Setup Haxe environment
         uses: krdlab/setup-haxe@v1.5.1
         with:
@@ -58,8 +63,6 @@ jobs:
           fi
           cd tools/hxcpp
           haxe compile.hxml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install PS5 SDK
         run: |
           wget https://github.com/ps5-payload-dev/sdk/releases/download/v0.24.1/ps5-payload-sdk.zip
