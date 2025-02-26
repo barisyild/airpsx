@@ -37,7 +37,7 @@ jobs:
           path: hxwell
       - name: Install Haxe Dependencies
         run: |
-          mkdir -p ${{ github.workspace }}/hxwell
+          mkdir -p ${{ env.HAXELIB_PATH }}/hxwell
           echo "${{ github.workspace }}/hxwell" > ${{ env.HAXELIB_PATH }}/hxwell/.dev
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
