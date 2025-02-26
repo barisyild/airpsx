@@ -9,6 +9,9 @@ env:
   HAXE_VERSION: 4.3.6
   SDK_VERSION: v0.24.1
 
+permissions:
+  contents: read
+
 jobs:
   # Single deploy job since we're just deploying
   deploy:
