@@ -33,10 +33,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: barisyild/hxwell
-          token: ${{ secrets.HXWELL_TOKEN }}  # veya ${{ secrets.ACTIONS_PAT }}
+          token: ${{ secrets.HXWELL_TOKEN }}
           path: hxwell
       - name: Install Haxe Dependencies
         run: |
+          mkdir -p ${{ github.workspace }}/hxwell
           echo "${{ github.workspace }}/hxwell" > ${{ env.HAXELIB_PATH }}/hxwell/.dev
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
