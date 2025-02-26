@@ -14,7 +14,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 8
-    #runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,12 +22,7 @@ jobs:
           packages: bash clang-15 lld-15 socat cmake meson pkg-config
           version: 1.0
           execute_install_scripts: true
-      - name: Set env variables (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          echo "HAXELIB_PATH=C:/hostedtoolcache/windows/haxe/${{ env.HAXE_VERSION }}/x64/lib" | Out-File -FilePath $env:GITHUB_ENV -Append # no need for -Encoding utf8
-      - name: Set env variables (Linux)
-        if: runner.os == 'Linux'
+      - name: Set env variables
         run: |
           echo "HAXELIB_PATH=/opt/hostedtoolcache/haxe/${{ env.HAXE_VERSION }}/x64/lib" >> $GITHUB_ENV
       - name: Setup Haxe environment
@@ -37,6 +31,7 @@ jobs:
           haxe-version: ${{ env.HAXE_VERSION }}
       - name: Install Haxe Dependencies
         run: |
+          haxelib git https://github.com/barisyild/hxwell
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
           haxelib install rulescript 0.2.0
@@ -62,8 +57,12 @@ jobs:
       - name: Build Payload
         run: |
           export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk
-          haxe release.hxml --cmd "mv out/AirPSX out/airpsx.elf"
+          haxe release.hxml
       - uses: actions/upload-artifact@v4
         with:
           name: airpsx.elf
-          path: out/airpsx.elf
+          path: airpsx.elf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: airpsx.plugin
+          path: airpsx.plugin
