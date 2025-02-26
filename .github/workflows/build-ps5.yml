@@ -50,6 +50,8 @@ jobs:
           fi
           cd tools/hxcpp
           haxe compile.hxml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install PS5 SDK
         run: |
           wget https://github.com/ps5-payload-dev/sdk/releases/download/v0.24.1/ps5-payload-sdk.zip
