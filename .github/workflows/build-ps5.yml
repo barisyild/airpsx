@@ -31,7 +31,7 @@ jobs:
           haxe-version: ${{ env.HAXE_VERSION }}
       - name: Install Haxe Dependencies
         run: |
-          haxelib git https://github.com/barisyild/hxwell
+          haxelib git hxwell https://github.com/barisyild/hxwell
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
           haxelib install rulescript 0.2.0
