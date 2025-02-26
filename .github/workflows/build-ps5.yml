@@ -42,6 +42,7 @@ jobs:
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
           haxelib install rulescript 0.2.0
+          haxelib install uuid
           
           # Install HXCPP
           cd ${{ env.HAXELIB_PATH }}
