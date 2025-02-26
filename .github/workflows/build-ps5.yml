@@ -29,9 +29,15 @@ jobs:
         uses: krdlab/setup-haxe@v1.5.1
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
+      - name: Checkout HxWell
+        uses: actions/checkout@v4
+        with:
+          repository: barisyild/hxwell
+          token: ${{ secrets.GITHUB_TOKEN }}  # veya ${{ secrets.ACTIONS_PAT }}
+          path: ${{ env.HAXELIB_PATH }}/hxwell/dev
       - name: Install Haxe Dependencies
         run: |
-          git clone https://github.com/barisyild/hxwell.git
+          echo dev > ${{ env.HAXELIB_PATH }}/hxwell/.current
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
           haxelib install rulescript 0.2.0
