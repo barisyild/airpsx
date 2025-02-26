@@ -2,7 +2,7 @@
 AirPSX is a payload similar to AirDroid; It allows you to manage many operations related to your console via the web-based desktop environment.
 
 > [!WARNING]
-> I DO NOT RESPOSIBLE FOR ANY DAMAGE TO YOUR CONSOLE IF SOMETHING WILL GO WRONG!
+> I AM NOT RESPOSIBLE FOR ANY DAMAGE TO YOUR CONSOLE IF SOMETHING WILL GO WRONG!
 >
 > I do not accept any responsible for misuse of the file manager, execution of malicious scripts, or any damage that may occur to the console in any case.
 
