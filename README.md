@@ -53,5 +53,6 @@ export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk && haxe release.hxml --cmd "mv out/H
 ## How it works
 This web project is built using my web framework, [hxwell](https://github.com/barisyild/hxwell). Leveraging the power of Haxe, all source code is transpiled to C++ and compiled using the PS5 Payload SDK.
 
-## Video overview
-A video overview by [MODDED WARFARE](https://x.com/MODDED_WARFARE) is available here: https://www.youtube.com/watch?v=cH7Jx-7Mn4k
+## Video Overview
+- **[MODDED WARFARE](https://x.com/MODDED_WARFARE):** [Watch here](https://www.youtube.com/watch?v=cH7Jx-7Mn4k)  
+- **[TheWizWiki](https://x.com/TheWizWiki):** [Watch here](https://www.youtube.com/watch?v=ZxOezdneSHg)  
