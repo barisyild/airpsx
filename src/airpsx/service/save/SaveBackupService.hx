@@ -11,7 +11,7 @@ import sys.FileStat;
 import sys.io.File;
 import sys.FileSystem;
 import haxe.tar.TarEntry;
-import hx.well.services.AbstractService;
+import hx.well.service.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 using StringTools;

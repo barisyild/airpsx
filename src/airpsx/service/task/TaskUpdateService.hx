@@ -4,7 +4,7 @@ import sys.db.Sqlite;
 import sys.net.Socket;
 import airpsx.utils.RuleScriptUtils;
 import haxe.Exception;
-import hx.well.services.AbstractService;
+import hx.well.service.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.facades.DBStatic;

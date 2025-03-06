@@ -1,7 +1,7 @@
 package airpsx.service.task;
 
 import haxe.io.Bytes;
-import hx.well.services.AbstractService;
+import hx.well.service.AbstractService;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.facades.DBStatic;
