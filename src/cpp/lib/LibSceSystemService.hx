@@ -6,7 +6,7 @@ import cpp.extern.ExternLibSceSystemService.LncAppParamStruct;
 import cpp.Pointer;
 class LibSceSystemService {
     @:hscriptVariable("sceLncUtilLaunchApp")
-    public static function lncUtilLaunchApp(titleId:String, ?userId:Int, appOpt:Int = 0, crashReport:Int = 0, checkFlag:LncAppParamFlag = LncAppParamFlag.Flag_None):Int {
+    public static function lncUtilLaunchApp(titleId:String, ?userId:Int, appOpt:Int = 0, crashReport:Int = 0, checkFlag:LncAppParamFlag = LncAppParamFlag.Flag_None) {
         if(userId == null)
         {
             var userIdList:Array<Int> = LibSceUserService.getLoginUserIdList();

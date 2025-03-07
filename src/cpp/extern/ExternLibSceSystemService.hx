@@ -11,6 +11,7 @@ import cpp.lib.LncAppParamFlag;
 import cpp.AbstractPointer;
 import cpp.AbstractArrayPointer;
 import cpp.Pointer;
+import cpp.lib.LncAppErrorType;
 
 @:keep
 @:include('libSceSystemService.h')
@@ -19,7 +20,7 @@ import cpp.Pointer;
 extern class ExternLibSceSystemService {
     // extern "C" int sceLncUtilLaunchApp(const char* tid, const char* argv[], LncAppParam* param);
     @:native('sceLncUtilLaunchApp')
-    public static function sceLncUtilLaunchApp(tid:CastCharStar, argv:ConstCharStar, param:AbstractPointer<LncAppParamStruct>):Int32;
+    public static function sceLncUtilLaunchApp(tid:CastCharStar, argv:ConstCharStar, param:AbstractPointer<LncAppParamStruct>):LncAppErrorType;
 
     // int sceSystemServiceLaunchWebApp(const char* url, const char* param, unsigned int flags);
     @:native('sceSystemServiceLaunchWebApp')
