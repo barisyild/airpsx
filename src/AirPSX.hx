@@ -13,6 +13,7 @@ class AirPSX {
 	public static var isExiting:Bool = false;
 	public static var socket:Socket;
 	public static var executor:Executor;
+	public static var isEtahenProcess:Bool = cpp.lib.Process.currentProcess().comm == "AIRX00000";
 
 	public static function exit(code:Int):Void
 	{

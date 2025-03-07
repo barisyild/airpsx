@@ -105,5 +105,15 @@ class Process {
         });
         return processList.length > 0 ? processList[0] : null;
     }
+
+    public static function currentProcess():KInfoProcTypedef {
+        var currentPid:PidT = cpp.NativeSys.sys_get_pid();
+
+        var processList = Process.getProcessList();
+        processList = processList.filter(function(proc){
+            return proc.pid == currentPid;
+        });
+        return processList[0];
+    }
 }
 #end
