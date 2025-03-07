@@ -56,6 +56,13 @@ class Boot extends BaseBoot {
         });
         #end
 
+        Validator.extend("fileExists", (attribute:String, value:Dynamic, params:Array<Dynamic>) -> {
+            if(!(value is String))
+                return false;
+
+            return FileSystem.exists(value) && !FileSystem.isDirectory(value);
+        });
+
         // register commands
         CommandExecutor.register(TaskExecuteCommand);
         CommandExecutor.register(TemperatureLogCommand);
@@ -129,6 +136,9 @@ class Boot extends BaseBoot {
             Route.path("/fs").group(() -> {
                 Route.post("/list")
                     .handler(new FileSystemListService());
+
+                Route.post("/payload")
+                    .handler(new FileSystemExecutePayloadService());
 
                 Route.get("/download/{encodedPath}")
                     .handler(new FileSystemDownloadService())
