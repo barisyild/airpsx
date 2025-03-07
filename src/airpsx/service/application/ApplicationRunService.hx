@@ -23,7 +23,7 @@ class ApplicationRunService extends AbstractService {
             case SCE_LNC_ERROR_APP_NOT_FOUND:
                 {success: false, message: "The application was not found"};
             case SCE_LNC_UTIL_ERROR_ALREADY_RUNNING:
-                {success: false, message: "The application is already running"};
+                {success: true, message: "The application is already running"};
             case SCE_LNC_UTIL_ERROR_APPHOME_EBOOTBIN_NOT_FOUND:
                 {success: false, message: "eboot.bin not found"};
             case SCE_LNC_UTIL_ERROR_APPHOME_PARAMSFO_NOT_FOUND:
