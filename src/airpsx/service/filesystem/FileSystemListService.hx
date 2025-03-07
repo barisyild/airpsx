@@ -10,7 +10,7 @@ using StringTools;
 
 // WIP
 class FileSystemListService extends AbstractService {
-    public function validator():Bool {
+    public override function validate():Bool {
         return request().validate([
             "path" => [ValidatorRule.Required, ValidatorRule.String]
         ]);

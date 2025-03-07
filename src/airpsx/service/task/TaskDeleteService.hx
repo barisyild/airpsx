@@ -8,7 +8,7 @@ import hx.well.http.RequestStatic.request;
 import hx.well.validator.ValidatorRule;
 
 class TaskDeleteService extends AbstractService {
-    public function validator():Bool {
+    public override function validate():Bool {
         return request().validate([
             "id" => [ValidatorRule.Required, ValidatorRule.Int]
         ]);

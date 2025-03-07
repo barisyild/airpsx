@@ -10,7 +10,7 @@ import hx.well.http.RequestStatic.request;
 class TaskDetailService extends AbstractService {
     public static var instance:TaskDetailService;
 
-    public function validator():Bool {
+    public override function validate():Bool {
         return request().validate([
             "id" => [ValidatorRule.Required, ValidatorRule.Int]
         ]);

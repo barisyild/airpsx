@@ -23,7 +23,7 @@ class TaskUpdateService extends AbstractService {
         "enabled"
     ];
 
-    public function validator():Bool {
+    public override function validate():Bool {
         return request().validate([
             "id" => [ValidatorRule.Required, ValidatorRule.Int],
             "name" => [ValidatorRule.String],

@@ -10,7 +10,7 @@ import hx.well.http.RequestStatic.request;
 import hx.well.validator.ValidatorRule;
 
 class TaskCreateService extends AbstractService {
-    public function validator():Bool {
+    public override function validate():Bool {
         return request().validate([
             "name" => [ValidatorRule.Required, ValidatorRule.String]
         ]);
