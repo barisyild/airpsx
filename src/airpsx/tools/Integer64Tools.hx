@@ -11,4 +11,9 @@ class Integer64Tools {
         }
         return octal;
     }
+
+    public static function ofUInt(n:Int):Int64 {
+        var uintValue: UInt = cast (n & 0xFFFFFFFF);
+        return Int64.make(0, uintValue);
+    }
 }
