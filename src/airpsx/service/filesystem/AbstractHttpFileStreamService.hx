@@ -10,10 +10,15 @@ import hx.well.http.AbstractResponse;
 using StringTools;
 import hx.well.http.ResponseStatic.*;
 import hx.well.http.Response;
+using airpsx.tools.InputTools;
 
 abstract class AbstractHttpFileStreamService extends AbstractService {
     public function new() {
         super();
+    }
+
+    public function fileName(request:Request):String {
+        return null;
     }
 
     public abstract function filePath(request:Request):String;
@@ -42,8 +47,33 @@ abstract class AbstractHttpFileStreamService extends AbstractService {
             return "File not found";
         }
 
-        var fileName:String = filePath.substr(filePath.lastIndexOf("/") + 1);
+        var fileName:String = this.fileName(request) ?? filePath.substr(filePath.lastIndexOf("/") + 1);
         var fileInput:FileInput = File.read(filePath, true);
+
+        var range:String = request.header("Range");
+        if(range != null)
+        {
+            var fileSize:Int = FileSystem.stat(filePath).size;
+
+            var rangeSplit:Array<String> = range.split('=')[1].split('-');
+            var rangeStart:Int = Std.parseInt(rangeSplit[0]);
+            var rangeEnd:Null<Int> = rangeSplit[1] == "" ? null : Std.parseInt(rangeSplit[1]);
+            if(rangeEnd == null)
+                rangeEnd = rangeStart + (1024 * 1024 * 5);
+            if(rangeEnd >= fileSize) {
+                rangeEnd = fileSize;
+            }
+
+            if(rangeStart > rangeEnd) {
+                return "Invalid range";
+            }
+
+            var partialSize:Int = rangeEnd - rangeStart;
+            return response()
+                .asInput(fileInput.range(rangeStart, rangeEnd), partialSize)
+                .status(206)
+                .header("Content-Range", 'bytes ${rangeStart}-${rangeEnd-1}/${fileSize}');
+        }
 
         var response:Response = response()
             .asFileInput(fileInput)

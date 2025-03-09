@@ -187,6 +187,19 @@ class Boot extends BaseBoot {
             Route.get("/process/list")
                 .handler(new ProcessListService());
 
+            Route.path("/media").group(() -> {
+               Route.get("/list")
+                   .handler(new MediaListService());
+
+                Route.get("/thumbnails/{path}")
+                    .handler(new MediaThumbnailService())
+                    .where("path", ".*");
+
+                Route.get("/{path}")
+                    .handler(new MediaStreamService())
+                    .where("path", ".*");
+            });
+
             Route.path("/app").group(() -> {
                 Route.get("/list")
                     .handler(new ApplicationListService());
