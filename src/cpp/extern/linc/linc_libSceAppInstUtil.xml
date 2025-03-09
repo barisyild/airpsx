@@ -12,7 +12,7 @@
     <target id="haxe">
 
         <!-- add linker flags to the haxe build output -->
-        <flag value="-lSceAppInstUtil" />
+        <!-- <flag value="-lSceAppInstUtil" /> -->
 
     </target>
 

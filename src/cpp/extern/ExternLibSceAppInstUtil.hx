@@ -1,6 +1,6 @@
 package cpp.extern;
 
-@:keep
+/*@:keep
 @:include('libSceAppInstUtil.h')
 @:build(Linc.touch())
 @:build(Linc.xml('libSceAppInstUtil'))
@@ -10,4 +10,4 @@ extern class ExternLibSceAppInstUtil {
 
     @:native('sceAppInstUtilAppUnInstall')
     public static function sceAppInstUtilAppUnInstall(titleId:ConstCharStar):Int32;
-}
+}*/
