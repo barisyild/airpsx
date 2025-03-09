@@ -68,7 +68,7 @@ jobs:
           haxe compile.hxml
       - name: Install PS5 SDK
         run: |
-          wget https://github.com/ps5-payload-dev/sdk/releases/download/v0.26.2/ps5-payload-sdk.zip
+          wget https://github.com/ps5-payload-dev/sdk/releases/download/v0.24.1/ps5-payload-sdk.zip
           sudo unzip -d /opt ps5-payload-sdk.zip
       - name: Build Payload
         run: |
