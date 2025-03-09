@@ -47,7 +47,7 @@ abstract class AbstractHttpFileStreamService extends AbstractService {
 
         var response:Response = response()
             .asFileInput(fileInput)
-            .header("Content-Disposition", 'filename=\"${fileName}\"');
+            .header("Content-Disposition", '${isDownloadRequest(request) ? 'attachment; ' : ''}filename=\"${fileName}\"');
 
         var contentType:String = contentType(request);
         if(contentType != null)
