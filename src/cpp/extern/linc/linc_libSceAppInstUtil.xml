@@ -13,6 +13,7 @@
 
         <!-- add linker flags to the haxe build output -->
         <flag value="-lSceAppInstUtil" />
+        <flag value="-lSceIpmi" /> <!-- Required because including SceAppInstUtil Library without SceIpmi Library will break the sdk. -->
 
     </target>
 
