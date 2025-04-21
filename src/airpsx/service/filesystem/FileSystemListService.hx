@@ -31,6 +31,21 @@ class FileSystemListService extends AbstractService {
         if(files == null) {
             return [];
         }
+
+        files.sort((a:String, b:String) -> {
+            a = a.toUpperCase();
+            b = b.toUpperCase();
+
+            if (a < b) {
+                return -1;
+            }
+            else if (a > b) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
         return files.map(function(file) {
             var stat = sys.FileSystem.stat(path + file);
 
