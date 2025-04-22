@@ -8,7 +8,7 @@ class PartialFileInput extends Input {
         this.input = input;
         input.seek(start, sys.io.FileSeek.SeekBegin);
 
-        this.len = end - start;
+        this.len = end - start + 1;
     }
 
     public override function readByte():Int {
