@@ -50,6 +50,13 @@ import airpsx.command.TaskExecuteCommand;
 import airpsx.command.TemperatureLogCommand;
 import airpsx.command.TimestampUpdateCommand;
 import cpp.lib.LibKernel;
+import airpsx.service.pkg.UploadPackageService;
+import airpsx.service.pkg.ReceivePackageService;
+import hx.well.http.ResponseStatic;
+import airpsx.service.pkg.InstallPackageService;
+import airpsx.command.ServePackageCommand;
+import airpsx.command.KillServePackageCommand;
+import uuid.Uuid;
 using hx.well.tools.RouteElementTools;
 
 class Boot extends BaseBoot {
@@ -73,6 +80,13 @@ class Boot extends BaseBoot {
         CommandExecutor.register(TaskExecuteCommand);
         CommandExecutor.register(TemperatureLogCommand);
         CommandExecutor.register(TimestampUpdateCommand);
+        CommandExecutor.register(ServePackageCommand);
+        CommandExecutor.register(KillServePackageCommand);
+
+        #if orbis
+        Schedule.get().fixedRate("package:serve", 100);
+        Schedule.get().fixedRate("package:kill-serve", 1000);
+        #end
 
         // set config
         HxWellConfig.set("cache.path", '${Config.DATA_PATH}/cache');
@@ -138,6 +152,26 @@ class Boot extends BaseBoot {
             Route.get("/upload")
                 .handler(new UploadService())
                 .setStream(true);
+
+            Route.path("/package").group(() -> {
+                Route.get("/{file}.crc")
+                    .func((a) -> {
+                        trace("error");
+                        return ResponseStatic.response().asString("", 404);
+                    }).where("file", "[A-Z]{2}[0-9]{4}-[A-Z]{4}[0-9]{5}_[0-9]{2}-[A-Z0-9]{16}");
+
+                Route.post("/upload")
+                    .handler(new UploadPackageService())
+                    .setStream(true);
+
+                // Console only API, do not call from web!
+                Route.get("/{sessionKey}.pkg")
+                    .handler(new ReceivePackageService())
+                    .where("sessionKey", "[\\-_0-9a-zA-Z]{32}");
+
+                Route.post("/install")
+                    .handler(new InstallPackageService());
+            });
 
             Route.path("/fs").group(() -> {
                 Route.post("/list")

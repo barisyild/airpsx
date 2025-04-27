@@ -32,6 +32,8 @@ class InitializeCommand extends AbstractCommand {
         {
             LibKernel.sendNotificationRequest('sceLibSceAppInstUtil failed');
         }
+
+        // LibSceAppInstUtil.appInstUtilInstallByPackage("http://192.168.1.6:8081/app.pkg");
         #end
         return cast true;
     }

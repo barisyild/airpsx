@@ -1,10 +1,13 @@
 package airpsx;
+import sys.FileSystem;
+import airpsx.utils.FileSystemUtils;
 
 using StringTools;
 
 class Config {
     public static inline var APP_NAME:String = "AirPSX";
     public static #if orbis inline #end var DATA_PATH:String = #if !orbis Sys.programPath().substring(0, Sys.programPath().replace("\\", "/").lastIndexOf("/")) + #end "/data/airpsx";
+    public static #if orbis inline #end var TEMP_PACKAGE_PATH:String = '${DATA_PATH}/tmp-pkg';
     public static #if orbis inline #end var DB_PATH:String = '${DATA_PATH}/app.db';
     public static #if orbis inline #end var TASK_DB_PATH:String = '${DATA_PATH}/task.db';
     public static inline var HTTP_PORT:Int = 1214;
@@ -21,5 +24,11 @@ class Config {
         storageDirectories.set("/mnt/ext0", "External Storage");
         storageDirectories.set("/user", "User Storage", );
         storageDirectories.set("/mnt/disc", "Disc Storage");
+
+        // Cleanup temp package directory
+        FileSystemUtils.deleteDirectoryRecursively(Config.TEMP_PACKAGE_PATH);
+
+        // Create temp package directory
+        FileSystem.createDirectory(Config.TEMP_PACKAGE_PATH);
     }
 }
