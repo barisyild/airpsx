@@ -57,6 +57,7 @@ import airpsx.service.pkg.InstallPackageService;
 import airpsx.command.ServePackageCommand;
 import airpsx.command.KillServePackageCommand;
 import uuid.Uuid;
+import airpsx.service.filesystem.FileSystemStreamService;
 using hx.well.tools.RouteElementTools;
 
 class Boot extends BaseBoot {
@@ -187,6 +188,10 @@ class Boot extends BaseBoot {
                 Route.post("/upload/{path}")
                     .handler(new FileSystemUploadService())
                     .setStream(true)
+                    .where("path", ".*");
+
+                Route.get("/stream/{path}")
+                    .handler(new FileSystemStreamService())
                     .where("path", ".*");
             });
 
