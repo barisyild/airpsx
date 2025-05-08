@@ -2,6 +2,7 @@ package airpsx.service.media;
 import airpsx.service.filesystem.AbstractHttpFileStreamService;
 import hx.well.http.Request;
 import hx.well.http.ResponseStatic.abort;
+import airpsx.utils.FileExtensionUtils;
 
 class MediaThumbnailService extends AbstractHttpFileStreamService {
     public function new() {
@@ -34,16 +35,7 @@ class MediaThumbnailService extends AbstractHttpFileStreamService {
         var path = filePath(request);
         var ext = path.substring(path.lastIndexOf('.') + 1);
 
-        switch (ext) {
-            case "jxr":
-                return "image/vnd.ms-photo";
-            case "png":
-                return "image/png";
-            case "jpg" | "jpeg":
-                return "image/jpeg";
-            default:
-                return 'undefined ${ext}';
-        }
+        return FileExtensionUtils.resolveContentType(ext);
     }
 
     public function isDownloadRequest(request:Request):Bool {

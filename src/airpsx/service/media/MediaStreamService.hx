@@ -4,6 +4,7 @@ import hx.well.http.Request;
 import sys.io.FileInput;
 import sys.io.File;
 import sys.io.FileSeek;
+import airpsx.utils.FileExtensionUtils;
 class MediaStreamService extends AbstractHttpFileStreamService {
     public function new() {
         super();
@@ -52,19 +53,8 @@ class MediaStreamService extends AbstractHttpFileStreamService {
     }
 
     public function contentType(request:Request):Null<String> {
-        var extension = request.path.substring(request.path.lastIndexOf("."));
-        switch (extension) {
-            case ".mp4":
-                return "video/mp4";
-            case ".png":
-                return "image/png";
-            case ".jpg":
-                return "image/jpeg";
-            case ".jxr":
-                return "image/vnd.ms-photo";
-            default:
-                return '${extension} undefined';
-        }
+        var extension = request.path.substring(request.path.lastIndexOf(".") + 1);
+        return FileExtensionUtils.resolveContentType(extension);
     }
 
     public function isDownloadRequest(request:Request):Bool {

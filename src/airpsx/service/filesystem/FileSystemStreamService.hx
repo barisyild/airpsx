@@ -1,5 +1,6 @@
 package airpsx.service.filesystem;
 import hx.well.http.Request;
+import airpsx.utils.FileExtensionUtils;
 class FileSystemStreamService extends AbstractHttpFileStreamService {
     public function filePath(request:Request):String {
         return request.route("path");
@@ -10,15 +11,8 @@ class FileSystemStreamService extends AbstractHttpFileStreamService {
     }
 
     public function contentType(request:Request):String {
-        var extension = request.path.substring(request.path.lastIndexOf("."));
-        switch (extension) {
-            case ".mp4":
-                return "video/mp4";
-            case ".webm":
-                return "video/webm";
-            default:
-                return '${extension} undefined';
-        }
+        var extension = request.path.substring(request.path.lastIndexOf(".") + 1);
+        return FileExtensionUtils.resolveContentType(extension);
     }
 
     public function isDownloadRequest(request:Request):Bool {
