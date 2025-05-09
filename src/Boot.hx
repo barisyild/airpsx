@@ -70,6 +70,11 @@ class Boot extends BaseBoot {
         });
         #end
 
+        #if orbis
+        // Enable SSL certificate verification
+        Socket.DEFAULT_CA = Certificate.loadFile("/system/common/cert/CA_LIST.cer");
+        #end
+
         Validator.extend("fileExists", (attribute:String, value:Dynamic, params:Array<Dynamic>) -> {
             if(!(value is String))
                 return false;
