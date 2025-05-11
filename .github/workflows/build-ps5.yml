@@ -47,7 +47,7 @@ jobs:
         run: |
           mkdir -p ${{ env.HAXELIB_PATH }}/hxwell
           echo "${{ github.workspace }}/hxwell" > ${{ env.HAXELIB_PATH }}/hxwell/.dev
-          haxelib install haxe-crypto
+          haxelib git haxe-crypto https://github.com/barisyild/haxe-crypto
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
           haxelib install rulescript 0.2.0
