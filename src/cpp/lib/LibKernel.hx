@@ -31,6 +31,9 @@ class LibKernel {
 
     @:hscriptVariable("sceKernelSendNotificationRequest")
     public static inline function sendNotificationRequest(message:String):Void {
+        if(message == null)
+            throw "Message is null!";
+
         if(message.length > 3075)
             throw "Message is too long!";
 
