@@ -4,4 +4,5 @@ enum abstract DatabaseType(String) from String to String {
     var TASK = "task";
     var APP = "app";
     var APP_INFO = "appinfo";
+    var SCRIPT_DB = "scriptdb";
 }

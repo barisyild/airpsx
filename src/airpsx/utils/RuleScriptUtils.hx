@@ -16,7 +16,7 @@ class RuleScriptUtils {
         return {parser: parser, expr: expr};
     }
 
-    public static function execute(code:String, output:Output):Dynamic {
+    public static function execute(code:String, output:Output, ?extra:Map<String, Any>):Dynamic {
         var interp = new RuleScriptInterp();
         interp.variables.set("Math", Math);
         interp.variables.set("Date", Date);
@@ -40,6 +40,16 @@ class RuleScriptUtils {
             interp.variables.set(key, HScriptData.variables.get(key));
             hScriptDataKeys.push(key);
         }
+
+        if(extra != null)
+        {
+            for(key in extra.keys())
+            {
+                interp.variables.set(key, extra.get(key));
+                hScriptDataKeys.push(key);
+            }
+        }
+
         interp.variables.set("help", () -> hScriptDataKeys.join("\n"));
         interp.variables.set("write", Reflect.makeVarArgs((args:Array<Dynamic>) -> output.writeString(args.join(" "))));
         interp.variables.set("writeln", Reflect.makeVarArgs((args:Array<Dynamic>) -> output.writeString(args.join(" ") + "\n")));

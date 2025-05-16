@@ -1,5 +1,4 @@
-package airpsx.service;
-
+package airpsx.service.script;
 import sys.net.Socket;
 import airpsx.utils.RuleScriptUtils;
 import hx.well.service.AbstractService;
@@ -7,7 +6,7 @@ import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 import hx.well.http.RequestStatic.socket;
 
-class HScriptService extends AbstractService {
+class ScriptExecutorService extends AbstractService {
     public function execute(request:Request):AbstractResponse {
         var code = request.input("script");
 

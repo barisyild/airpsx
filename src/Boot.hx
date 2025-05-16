@@ -30,7 +30,6 @@ import airpsx.service.task.TaskStatusService;
 import airpsx.service.task.TaskLogService;
 import airpsx.service.KillServerService;
 import airpsx.service.BlankService;
-import airpsx.service.HScriptService;
 import airpsx.service.media.MediaListService;
 import airpsx.service.media.MediaStreamService;
 import airpsx.service.media.MediaThumbnailService;
@@ -58,8 +57,13 @@ import airpsx.command.ServePackageCommand;
 import airpsx.command.KillServePackageCommand;
 import uuid.Uuid;
 import airpsx.service.filesystem.FileSystemStreamService;
+import airpsx.service.script.remote.RemoteScriptListService;
 import sys.ssl.Certificate;
 import sys.ssl.Socket;
+import airpsx.service.script.remote.RemoteScriptExecuteService;
+import airpsx.service.script.ScriptExecutorService;
+import airpsx.service.script.remote.RemoteScriptImageService;
+import airpsx.service.script.remote.RemoteScriptHeartbeatService;
 using hx.well.tools.RouteElementTools;
 
 class Boot extends BaseBoot {
@@ -73,8 +77,7 @@ class Boot extends BaseBoot {
         #end
 
         #if orbis
-        // Enable SSL certificate verification
-        Socket.DEFAULT_CA = Certificate.loadFile("/system/common/cert/CA_LIST.cer");
+        Socket.DEFAULT_VERIFY_CERT = false;
         #end
 
         Validator.extend("fileExists", (attribute:String, value:Dynamic, params:Array<Dynamic>) -> {
@@ -147,6 +150,7 @@ class Boot extends BaseBoot {
         Connection.create(DatabaseType.TASK, {path: Config.TASK_DB_PATH});
         Connection.create(DatabaseType.APP, {path: Config.SYSTEM_APP_DB_PATH});
         Connection.create(DatabaseType.APP_INFO, {path: Config.SYSTEM_APP_INFO_DB_PATH});
+        Connection.create(DatabaseType.SCRIPT_DB, {path: Config.SCRIPT_DB_PATH});
 
         initializeRoute();
 
@@ -292,8 +296,24 @@ class Boot extends BaseBoot {
             Route.get("/blank")
                 .handler(new BlankService());
 
-            Route.post("/hscript")
-                .handler(new HScriptService());
+            Route.path("/script").group(() -> {
+                Route.path("/remote").group(() -> {
+                    Route.get("/list")
+                        .handler(new RemoteScriptListService());
+
+                    Route.get("/image/{key}")
+                        .handler(new RemoteScriptImageService());
+
+                    Route.post("/execute")
+                        .handler(new RemoteScriptExecuteService());
+
+                    Route.post("/heartbeat")
+                        .handler(new RemoteScriptHeartbeatService());
+                });
+
+                Route.post("execute")
+                    .handler(new ScriptExecutorService());
+            });
         });
 
         // Always use framework instead of 404 page.

@@ -3,4 +3,5 @@ global.hxml
 -D orbis
 -D toolchain=prospero
 -D release
+-lib haxe-crypto
 --cmd haxe -cp src -main AfterBuild --interp
