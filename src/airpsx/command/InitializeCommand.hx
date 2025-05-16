@@ -5,6 +5,7 @@ import cpp.lib.Systemctl;
 import cpp.lib.LibSceSystemService;
 import hx.well.console.AbstractCommand;
 import cpp.lib.LibSceAppInstUtil;
+import cpp.lib.LibSceRemoteplay;
 
 class InitializeCommand extends AbstractCommand {
     public function new() {
@@ -33,7 +34,11 @@ class InitializeCommand extends AbstractCommand {
             LibKernel.sendNotificationRequest('sceLibSceAppInstUtil failed');
         }
 
-        // LibSceAppInstUtil.appInstUtilInstallByPackage("http://192.168.1.6:8081/app.pkg");
+        if(!LibSceRemoteplay.initialize())
+        {
+            LibKernel.sendNotificationRequest('sceLibSceRemoteplay failed');
+        }
+
         #end
         return cast true;
     }
