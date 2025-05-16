@@ -1,5 +1,5 @@
 global.hxml
---cpp out
+--cpp prospero
 -D orbis
 -D toolchain=prospero
 -D release
