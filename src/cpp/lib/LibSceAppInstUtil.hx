@@ -1,4 +1,6 @@
 package cpp.lib;
+
+#if orbis
 import cpp.extern.ExternLibSceAppInstUtil;
 class LibSceAppInstUtil {
     public static function initialize() {
@@ -27,3 +29,4 @@ class LibSceAppInstUtil {
         return ExternLibSceAppInstUtil.sceAppInstUtilAppUnInstall(titleId);
     }
 }
+#end

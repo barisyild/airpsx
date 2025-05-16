@@ -26,10 +26,14 @@ class PackageVo {
 
     public var lastAccessTime:Float = Sys.time();
 
-    public var predataFilePath(get, never):String;
+    public var preDataDirectoryPath(get, never):String;
+    private function get_preDataDirectoryPath():String {
+        return '${Config.TEMP_PATH}/pkg';
+    }
 
+    public var predataFilePath(get, never):String;
     private function get_predataFilePath():String {
-        return '${Config.TEMP_PACKAGE_PATH}/${this.sessionKey}';
+        return '${preDataDirectoryPath}/${this.sessionKey}';
     }
 
     public function new() {

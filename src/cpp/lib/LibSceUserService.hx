@@ -35,5 +35,13 @@ class LibSceUserService {
     {
         return ExternLibSceUserService.sceUserServiceInitialize() == 0;
     }
+
+    @:hscriptVariable("sceUserServiceGetForegroundUser")
+    public static function userServiceGetForegroundUser():Int
+    {
+        var user_id:Int32 = -1;
+        ExternLibSceUserService.sceUserServiceGetForegroundUser(user_id);
+        return user_id;
+    }
 }
 #end
