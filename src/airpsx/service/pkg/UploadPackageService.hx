@@ -14,6 +14,7 @@ import airpsx.pkg.PackageVo;
 import airpsx.command.ServePackageCommand;
 import sys.io.File;
 import sys.io.FileInput;
+import sys.FileSystem;
 using airpsx.tools.OutputTools;
 
 // TODO: Handle sockets with better way
@@ -88,6 +89,9 @@ class UploadPackageService extends AbstractService {
         // Predata available
         if(predataOffset != 0) {
             var preDataSize:Int = cast fileSize - predataOffset;
+
+            if(!FileSystem.exists(packageVo.preDataDirectoryPath))
+                FileSystem.createDirectory(packageVo.preDataDirectoryPath);
 
             var file = File.write(packageVo.predataFilePath, true);
             file.writeInputSize(request.socket.input, preDataSize);
