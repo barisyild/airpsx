@@ -14,7 +14,7 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
   - socat -t 99999999 - TCP:PS5_HOST:9021 < "airpsx.elf"
 
 ### websrv
-- I do not recommend this method, because AirPSX closes after the browser is closed.
+- Coming Soon
 
 ## Build
 
