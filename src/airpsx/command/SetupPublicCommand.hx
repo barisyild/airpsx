@@ -24,6 +24,15 @@ class SetupPublicCommand extends AbstractCommand {
         if(!FileSystem.exists(Config.DATA_PATH))
             FileSystem.createDirectory(Config.DATA_PATH);
 
+        if(!FileSystem.exists(Config.SCRIPT_PATH))
+            FileSystem.createDirectory(Config.SCRIPT_PATH);
+
+        // Cleanup temp directory
+        FileSystemUtils.deleteDirectoryRecursively(Config.TEMP_PATH);
+
+        if(!FileSystem.exists(Config.TEMP_PATH))
+            FileSystem.createDirectory(Config.TEMP_PATH);
+
         if(checkUpdateAvailable())
         {
             FileSystemUtils.deleteDirectoryRecursively('${Config.DATA_PATH}/public');
