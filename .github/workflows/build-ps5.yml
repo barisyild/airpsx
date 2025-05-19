@@ -79,6 +79,9 @@ jobs:
         with:
           name: airpsx.elf
           path: airpsx.elf
+      - name: Create websrv zip
+        run: |
+          zip -r airpsx.zip websrv_template
       - uses: actions/upload-release-asset@v1
         if: ${{ github.event_name == 'release' }}
         env:
@@ -88,3 +91,12 @@ jobs:
           asset_path: airpsx.elf
           asset_name: airpsx.elf
           asset_content_type: application/x-binary
+      - uses: actions/upload-release-asset@v1
+        if: ${{ github.event_name == 'release' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: airpsx.zip
+          asset_name: airpsx.zip
+          asset_content_type: application/zip
