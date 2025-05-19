@@ -59,8 +59,10 @@ class LibSceRegMgr {
     }
 
     @:hscriptVariable("sceRegMgrSetStr")
-    public static function setStr(key:RegMgrKey, val:String):Int32 {
-        return ExternLibSceRegMgr.sceRegMgrSetStr(key, val, val.length);
+    public static function setStr(key:RegMgrKey, val:String, ?length:Null<Int>):Int32 {
+        if(length == null)
+            length = val.length;
+        return ExternLibSceRegMgr.sceRegMgrSetStr(key, val, length);
     }
 
     @:hscriptVariable("customRegMgrGenerateNum")
