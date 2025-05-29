@@ -15,7 +15,11 @@ class ProfileListService extends AbstractService {
         var profileIds:Array<String> = FileSystem.readDirectory(Config.USER_HOME_PATH);
         for(profileId in profileIds)
         {
-            var username:Null<String> = File.getContent('${Config.USER_HOME_PATH}/${profileId}/username.dat');
+            var usernameDatPath:String = '${Config.USER_HOME_PATH}/${profileId}/username.dat';
+            if(!FileSystem.exists(usernameDatPath))
+                continue;
+
+            var username:Null<String> = File.getContent(usernameDatPath);
             if(username == null)
                 continue;
 
