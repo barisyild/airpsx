@@ -38,6 +38,9 @@ class SetupDatabaseCommand extends AbstractCommand {
         // Create schedules table if not exists
         db.request('CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, script TEXT DEFAULT "", logs BOOL DEFAULT TRUE, frequency INT DEFAULT 3600, status INTEGER DEFAULT 0, lastRun DATE, enabled BOOL DEFAULT TRUE, success INTEGER DEFAULT 0, failed INTEGER DEFAULT 0, createdAt DATE DEFAULT (datetime(\'now\',\'localtime\')));');
 
+        // Create type column
+        db.request('ALTER TABLE tasks ADD COLUMN type TEXT DEFAULT "rulescript";');
+
         var runningSchedules = db.request('SELECT name FROM tasks WHERE status = ${TaskStatus.RUNNING} and enabled = 1');
         for(result in runningSchedules.results())
         {

@@ -9,6 +9,10 @@ class ResolveScript {
         return switch (type) {
             case ScriptType.RULESCRIPT:
                 '${key}.hx';
+            case ScriptType.LUA:
+                '${key}.lua';
+            default:
+                throw 'Unknown script type: ${type}';
         }
     }
 }

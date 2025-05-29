@@ -1,7 +1,7 @@
 package cpp.lib.type;
 
 // https://github.com/ps5-payload-dev/linkdev/blob/master/regmgr.h
-enum abstract RegMgrKey(cpp.Int64) from cpp.Int64 to cpp.Int64 {
+enum abstract RegMgrKey(Int32) from Int32 to Int32 {
     var REGISTRY_version = cast 17825792;
     var REGISTRY_version_ps4 = cast 16842752;
     var REGISTRY_install = cast 16908288;

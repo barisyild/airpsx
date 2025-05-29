@@ -10,6 +10,8 @@ import airpsx.type.TaskStatus;
 import hx.well.facades.DBStatic;
 import haxe.io.Output;
 import airpsx.type.DatabaseType;
+import airpsx.type.ScriptType;
+import airpsx.utils.ScriptUtils;
 class TaskExecuteCommand extends AbstractCommand {
     public static var taskMutex:Mutex = new Mutex();
 
@@ -34,7 +36,7 @@ class TaskExecuteCommand extends AbstractCommand {
         try {
             trace("execute");
             var db = DBStatic.connection(DatabaseType.TASK);
-            var resultSet = db.query('SELECT id, script, frequency, logs, lastRun FROM tasks WHERE enabled = 1 and script <> ""');
+            var resultSet = db.query('SELECT id, type, script, frequency, logs, lastRun FROM tasks WHERE enabled = 1 and script <> ""');
             var results = resultSet.results();
             while (results.length > 0)
             {
@@ -53,6 +55,7 @@ class TaskExecuteCommand extends AbstractCommand {
                     db.query('UPDATE tasks SET status = ? WHERE id = ?', TaskStatus.RUNNING, id);
 
                     var script:String = result.script;
+                    var type:ScriptType = result.type;
 
                     var filePath:String = '${Config.DATA_PATH}/task/';
                     if(!FileSystem.exists(filePath))
@@ -72,7 +75,7 @@ class TaskExecuteCommand extends AbstractCommand {
                     var executionMilliseconds:Float = haxe.Timer.stamp();
                     output.writeString('[${Date.now()}] execute start\n');
                     try {
-                        result = RuleScriptUtils.execute(script, output);
+                        result = ScriptUtils.execute(script, type, output);
                     } catch (e) {
 
                     }

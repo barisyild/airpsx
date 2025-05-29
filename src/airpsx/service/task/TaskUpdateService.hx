@@ -11,6 +11,7 @@ import hx.well.facades.DBStatic;
 import airpsx.type.DatabaseType;
 import hx.well.http.RequestStatic.request;
 import hx.well.validator.ValidatorRule;
+import airpsx.type.ScriptType;
 
 class TaskUpdateService extends AbstractService {
     private static var types:Array<String> = [
@@ -20,7 +21,8 @@ class TaskUpdateService extends AbstractService {
         "status",
         "frequency",
         "logs",
-        "enabled"
+        "type",
+        "enabled",
     ];
 
     public override function validate():Bool {
@@ -31,6 +33,7 @@ class TaskUpdateService extends AbstractService {
             "status" => [ValidatorRule.Int],
             "frequency" => [ValidatorRule.Int],
             "logs" => [ValidatorRule.Bool],
+            "type" => [ValidatorRule.String],
             "enabled" => [ValidatorRule.Bool]
         ]);
     }
@@ -48,7 +51,8 @@ class TaskUpdateService extends AbstractService {
 
         // Check Script
         var script:String = request.input("script");
-        if(script != null && script != "")
+        var type:ScriptType = request.input("type", resultSet.next().type);
+        if(type == ScriptType.RULESCRIPT && script != null && script != "")
         {
             try
             {

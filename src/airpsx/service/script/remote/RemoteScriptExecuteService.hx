@@ -14,6 +14,7 @@ import sys.net.Socket;
 import haxe.Exception;
 import haxe.crypto.Md5;
 import sys.io.File;
+import airpsx.utils.ScriptUtils;
 
 class RemoteScriptExecuteService extends AbstractService {
     public static var lastUpdateAt:Int = 0;
@@ -34,6 +35,7 @@ class RemoteScriptExecuteService extends AbstractService {
         var first:Dynamic = data[0];
         trace("Executing script: " + first.key);
 
+        var scriptType:ScriptType = cast first.type;
         var scriptHash:String = first.scriptHash;
         var scriptFile:String = '${Config.SCRIPT_PATH}/${scriptHash}';
 
@@ -44,7 +46,7 @@ class RemoteScriptExecuteService extends AbstractService {
             var scriptContent:String = sys.io.File.getContent(scriptFile);
             socket.output.writeString("HTTP/1.1 200 OK\r\n");
             socket.output.writeString("\r\n");
-            RuleScriptUtils.execute(scriptContent, request.socket.output, extra);
+            ScriptUtils.execute(scriptContent, scriptType, request.socket.output, extra);
             return null;
         }
 
@@ -59,7 +61,7 @@ class RemoteScriptExecuteService extends AbstractService {
 
         socket.output.writeString("HTTP/1.1 200 OK\r\n");
         socket.output.writeString("\r\n");
-        RuleScriptUtils.execute(scriptContent, request.socket.output, extra);
+        ScriptUtils.execute(scriptContent, scriptType, request.socket.output, extra);
         return null;
     }
 
