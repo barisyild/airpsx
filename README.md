@@ -14,7 +14,9 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
   - socat -t 99999999 - TCP:PS5_HOST:9021 < "airpsx.elf"
 
 ### websrv
-- Coming Soon
+- Download airpsx.zip from the [releases](https://github.com/barisyild/airpsx/releases)
+- Unzip the file to /data/homebrew/ in the airpsx folder (final path should be /data/homebrew/airpsx/)
+- Start websrv from PlayStation 5 and select the airpsx application
 
 ## Build
 
