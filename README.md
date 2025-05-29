@@ -15,7 +15,7 @@ AirPSX is a payload similar to AirDroid; It allows you to manage many operations
 
 ### websrv
 - Download airpsx.zip from the latest [release](https://github.com/barisyild/airpsx/releases)
-- Unzip the file to /data/homebrew/ in the airpsx folder (final path should be /data/homebrew/airpsx/)
+- Unzip the contents to the /data/homebrew/ directory in a folder named airpsx (final path should be: /data/homebrew/airpsx/).
 - Start websrv from PlayStation 5 and select the airpsx application
 
 ## Build
