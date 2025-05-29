@@ -24,6 +24,8 @@
 -lib hscript
 -lib rulescript
 -lib hxwell
+-lib linc_lua
+-lib hxvm-lua
 --macro airpsx.macro.HScriptVariableMacro.run()
 #-dce no
 #-lib hxcpp-debug-server
