@@ -48,6 +48,8 @@ jobs:
           mkdir -p ${{ env.HAXELIB_PATH }}/hxwell
           echo "${{ github.workspace }}/hxwell" > ${{ env.HAXELIB_PATH }}/hxwell/.dev
           haxelib git haxe-crypto https://github.com/barisyild/haxe-crypto
+          haxelib git hxvm-lua https://github.com/kevinresol/hxvm-lua
+          haxelib git linc_lua https://github.com/kevinresol/linc_lua
           haxelib install haxe-concurrent 5.1.4
           haxelib install hscript 2.6.0
           haxelib install rulescript 0.2.0
@@ -77,7 +79,8 @@ jobs:
           haxe release.hxml
       - name: Create websrv zip
         run: |
-          zip -r airpsx.zip websrv_template
+          mv websrv_template websrv
+          zip -r airpsx.zip websrv
       - uses: actions/upload-artifact@v4
         with:
           name: airpsx.elf
