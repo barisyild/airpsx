@@ -54,8 +54,8 @@ haxe release.hxml --cmd "mv out/HxWell out/airpsx.elf"
 
 * [John Törnblom](https://github.com/john-tornblom) — [PS5 SDK](https://github.com/ps5-payload-dev/sdk) & [ELF Loader](https://github.com/ps5-payload-dev/elfldr)
 * [LightningMods](https://github.com/LightningMods) — [PS4-daemon-writeup](https://github.com/LightningMods/PS4-daemon-writeup)
-* [Hugh Sanderson](https://github.com/hughsando) — for [hxcpp](https://github.com/HaxeFoundation/hxcpp)
-* [m0rkeulv](https://github.com/m0rkeulv) — for [intellij-haxe](https://github.com/HaxeFoundation/intellij-haxe)
+* [Hugh Sanderson](https://github.com/hughsando) — [hxcpp](https://github.com/HaxeFoundation/hxcpp)
+* [m0rkeulv](https://github.com/m0rkeulv) — [intellij-haxe](https://github.com/HaxeFoundation/intellij-haxe)
 
 ---
 
