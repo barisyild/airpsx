@@ -43,9 +43,13 @@ if [[ "$installSDK" == "true" ]]; then
 fi
 
 # Install Haxe Libraries
+haxelib git haxe-crypto https://github.com/barisyild/haxe-crypto
+haxelib git hxvm-lua https://github.com/kevinresol/hxvm-lua
+haxelib git linc_lua https://github.com/kevinresol/linc_lua
 haxelib install haxe-concurrent 5.1.4
 haxelib install hscript 2.6.0
 haxelib install rulescript 0.2.0
+haxelib install uuid
 
 # Install HXCPP
 mkdir -p ~/haxelib/hxcpp
