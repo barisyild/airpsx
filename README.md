@@ -47,6 +47,8 @@ haxe release.hxml --cmd "mv out/HxWell out/airpsx.elf"
 * [hxcpp fork](https://github.com/barisyild/hxcpp/tree/ps5-payload)
 * [hxwell](https://github.com/barisyild/hxwell)
 * [rulescript](https://github.com/Kriptel/RuleScript)
+* [linc_lua](https://github.com/kevinresol/linc_lua)
+* [hxvm-lua](https://github.com/kevinresol/hxvm-lua)
 
 ---
 
@@ -56,7 +58,6 @@ haxe release.hxml --cmd "mv out/HxWell out/airpsx.elf"
 * [LightningMods](https://github.com/LightningMods) — [PS4-daemon-writeup](https://github.com/LightningMods/PS4-daemon-writeup)
 * [Hugh Sanderson](https://github.com/hughsando) — [hxcpp](https://github.com/HaxeFoundation/hxcpp)
 * [m0rkeulv](https://github.com/m0rkeulv) — [intellij-haxe](https://github.com/HaxeFoundation/intellij-haxe)
-
 ---
 
 ## 🧪 Testers
