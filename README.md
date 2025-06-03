@@ -49,6 +49,9 @@ haxe release.hxml --cmd "mv out/HxWell out/airpsx.elf"
 * [rulescript](https://github.com/Kriptel/RuleScript)
 * [linc_lua](https://github.com/kevinresol/linc_lua)
 * [hxvm-lua](https://github.com/kevinresol/hxvm-lua)
+* [uuid](https://github.com/flashultra/uuid)
+* [haxe-crypto fork](https://github.com/barisyild/haxe-crypto)
+* [haxe-concurrent](https://github.com/vegardit/haxe-concurrent)
 
 ---
 
