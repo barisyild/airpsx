@@ -28,7 +28,7 @@ class ZipUtils {
         for(file in FileSystem.readDirectory(dir)) {
             var path = Path.join([dir, file]);
             if (FileSystem.isDirectory(path)) {
-                getEntries(path, entries, inDir);
+                getEntries(path, entries, inDir, entryHandler);
             } else {
                 var bytes:Bytes = Bytes.ofData(File.getBytes(path).getData());
                 var entry:Entry = {
