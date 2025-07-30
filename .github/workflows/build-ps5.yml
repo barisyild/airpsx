@@ -76,7 +76,7 @@ jobs:
       - name: Build Payload
         run: |
           export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk
-          haxe release.hxml
+          haxelib run hxwell build cpp
       - name: Create websrv zip
         run: |
           mv websrv_template airpsx
