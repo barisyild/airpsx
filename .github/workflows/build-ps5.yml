@@ -40,7 +40,7 @@ jobs:
       - name: Checkout HxWell
         uses: actions/checkout@v4
         with:
-          repository: barisyild/hxwell
+          repository: hxwell/hxwell
           token: ${{ secrets.HXWELL_TOKEN }}
           path: hxwell
       - name: Install Haxe Dependencies
