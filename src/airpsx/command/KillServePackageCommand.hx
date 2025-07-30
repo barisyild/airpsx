@@ -4,7 +4,7 @@ import hx.well.console.AbstractCommand;
 import airpsx.pkg.PackageVo;
 import sys.FileSystem;
 
-class KillServePackageCommand extends AbstractCommand {
+class KillServePackageCommand extends AbstractCommand<Bool> {
     public override function group():String {
         return "package";
     }
@@ -17,7 +17,7 @@ class KillServePackageCommand extends AbstractCommand {
         return "Serve package";
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         var acquired = ServePackageCommand.packageMutex.tryAcquire();
         if(!acquired)
             return cast false;

@@ -6,11 +6,12 @@ import sys.net.Socket;
 import hx.concurrent.collection.SynchronizedArray;
 import haxe.io.Bytes;
 import sys.FileSystem;
+import hx.well.http.driver.IDriverContext;
 class PackageVo {
     // UUID
     public var sessionKey:String;
 
-    public var sourceSocket:Socket;
+    public var sourceContext:IDriverContext;
 
     public var requests:SynchronizedArray<Request> = new SynchronizedArray([]);
 
@@ -43,8 +44,8 @@ class PackageVo {
     public function dispose():Void {
 
         try {
-            if(this.sourceSocket != null) {
-                this.sourceSocket.close();
+            if(this.sourceContext != null) {
+                this.sourceContext.close();
             }
         } catch (e) {
             trace(e);
@@ -55,7 +56,7 @@ class PackageVo {
 
         for(request in requests) {
             try {
-                request.socket.close();
+                request.context.close();
             } catch (e) {
                 trace(e);
             }

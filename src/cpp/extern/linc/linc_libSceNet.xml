@@ -6,7 +6,7 @@
 
         <!-- add files and flags to the haxe c++ build -->
 
-        <compilerflag value='-I../src/cpp/extern/linc/'/>
+        <compilerflag value='-I${this_dir}'/>
     </files>
 
     <target id="haxe">

@@ -4,15 +4,14 @@ import airpsx.pkg.PackageVo;
 import hx.well.http.Request;
 import haxe.Int64;
 import sys.thread.Mutex;
-import hx.well.http.ResponseStatic.response;
 import haxe.io.PartialInput;
-import hx.well.WebServer;
 import haxe.Exception;
 import haxe.CallStack;
 import hx.well.http.ResponseStatic;
+import hx.well.http.ResponseBuilder;
 using airpsx.tools.InputTools;
 using airpsx.tools.ArrayTools;
-class ServePackageCommand extends AbstractCommand {
+class ServePackageCommand extends AbstractCommand<Bool> {
     public static var packageVo:Null<PackageVo> = null;
     public static var packageMutex:Mutex = new Mutex();
 
@@ -28,7 +27,7 @@ class ServePackageCommand extends AbstractCommand {
         return "Serve package";
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         var acquired = packageMutex.tryAcquire();
         if(!acquired)
             return cast false;
@@ -57,8 +56,9 @@ class ServePackageCommand extends AbstractCommand {
         if(!acquired)
             return;
 
+        var request = null;
         try {
-            var request = this.findSmallestRequest(packageVo);
+            request = this.findSmallestRequest(packageVo);
             if(request == null)
                 return;
 
@@ -70,7 +70,7 @@ class ServePackageCommand extends AbstractCommand {
             if(rangeStart < packageVo.pos) {
                 while (packageVo.pos < rangeStart) {
                     var count = Std.int(Math.min(cast rangeStart - packageVo.pos, 65535));
-                    packageVo.sourceSocket.input.read(count);
+                    packageVo.sourceContext.input.read(count);
                     packageVo.pos += count;
                 }
             }
@@ -78,8 +78,8 @@ class ServePackageCommand extends AbstractCommand {
             packageVo.pos += contentLength;
             packageVo.lastAccessTime = Sys.time();
 
-            var response = response()
-                .asInput(new PartialInput(packageVo.sourceSocket.input.asUncloseable(), contentLength), contentLength)
+            var response = ResponseBuilder
+                .asInput(new PartialInput(packageVo.sourceContext.input.asUncloseable(), contentLength), contentLength)
                 .status(206)
                 .header("Content-Range", 'bytes ${rangeStart}-${rangeEnd}/${fileSize}')
                 .header("Content-Type", "application/octet-stream")
@@ -92,20 +92,16 @@ class ServePackageCommand extends AbstractCommand {
                         // Remove session
                         ServePackageCommand.packageVo = null;
 
-                        WebServer.writeResponse(
-                            packageVo.sourceSocket,
-                            response().asJson({
-                                status: "success"
-                            })
-                        );
+                        packageVo.sourceContext.writeResponse(ResponseBuilder.asJson({status: "success"}));
 
                         packageVo.dispose();
                     }
                 }
             );
 
-            WebServer.writeResponse(request.socket, response);
+            request.context.writeResponse(response);
         } catch (e) {
+            packageVo.requests.remove(request);
             packageVo.mutex.release();
             throw e;
         }

@@ -6,7 +6,7 @@ import cpp.lib.LibKernel;
 import cpp.lib.Process;
 #end
 
-class TemperatureLogCommand extends AbstractCommand {
+class TemperatureLogCommand extends AbstractCommand<Bool> {
     public override function group():String {
         return "temperature";
     }
@@ -19,7 +19,7 @@ class TemperatureLogCommand extends AbstractCommand {
         return "log temperature";
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         #if orbis
         var socSensorTemperature:Int = LibKernel.getSocSensorTemperature();
         var temperature:Int = LibKernel.cpuTemperature;

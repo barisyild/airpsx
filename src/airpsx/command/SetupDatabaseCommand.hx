@@ -5,7 +5,7 @@ import airpsx.type.TaskStatus;
 import airpsx.Config;
 import hx.well.console.AbstractCommand;
 
-class SetupDatabaseCommand extends AbstractCommand {
+class SetupDatabaseCommand extends AbstractCommand<Bool> {
     public function new() {
         super();
     }
@@ -18,7 +18,7 @@ class SetupDatabaseCommand extends AbstractCommand {
         return null;
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         var db = sys.db.Sqlite.open(Config.DB_PATH);
 
         // Create stats table if not exists

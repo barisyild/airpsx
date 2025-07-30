@@ -7,7 +7,7 @@ import airpsx.utils.FileSystemUtils;
 import airpsx.utils.ExtractZipUtils;
 import airpsx.Config;
 import hx.well.console.AbstractCommand;
-class SetupPublicCommand extends AbstractCommand {
+class SetupPublicCommand extends AbstractCommand<Bool> {
     public function new() {
         super();
     }
@@ -20,7 +20,7 @@ class SetupPublicCommand extends AbstractCommand {
         return null;
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         if(!FileSystem.exists(Config.DATA_PATH))
             FileSystem.createDirectory(Config.DATA_PATH);
 

@@ -4,7 +4,7 @@ import airpsx.utils.NTPUtils;
 import cpp.lib.LibKernel;
 import cpp.lib.sys.LibSysTime;
 import hx.well.facades.Schedule;
-class TimestampUpdateCommand extends AbstractCommand {
+class TimestampUpdateCommand extends AbstractCommand<Bool> {
     public override function group():String {
         return "timestamp";
     }
@@ -17,7 +17,7 @@ class TimestampUpdateCommand extends AbstractCommand {
         return "Update console timestamp";
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         var ntpSeconds = NTPUtils.readTime().seconds;
         var systemSeconds = Sys.time();
 

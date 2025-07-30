@@ -40,7 +40,7 @@ class ZipResourceMacro {
         var zipEntries:List<Entry> = new List();
         for(folder in pathArray)
         {
-            var folderEntries:List<Entry> = ZipUtils.getEntries(folder, entry -> {
+            var folderEntries:List<Entry> = ZipUtils.getEntries(folder, null, null, entry -> {
                 entry.data = haxe.zip.Compress.run(entry.data, 9);
                 entry.compressed = true;
             });

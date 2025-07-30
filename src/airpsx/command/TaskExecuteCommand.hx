@@ -12,7 +12,7 @@ import haxe.io.Output;
 import airpsx.type.DatabaseType;
 import airpsx.type.ScriptType;
 import airpsx.utils.ScriptUtils;
-class TaskExecuteCommand extends AbstractCommand {
+class TaskExecuteCommand extends AbstractCommand<Bool> {
     public static var taskMutex:Mutex = new Mutex();
 
     public override function group():String {
@@ -27,7 +27,7 @@ class TaskExecuteCommand extends AbstractCommand {
         return "execute scheduled tasks";
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         if(!taskMutex.tryAcquire())
         {
             trace("Task already running.");

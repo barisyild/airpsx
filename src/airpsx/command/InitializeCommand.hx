@@ -7,7 +7,7 @@ import hx.well.console.AbstractCommand;
 import cpp.lib.LibSceAppInstUtil;
 import cpp.lib.LibSceRemoteplay;
 
-class InitializeCommand extends AbstractCommand {
+class InitializeCommand extends AbstractCommand<Bool> {
     public function new() {
         super();
     }
@@ -20,7 +20,7 @@ class InitializeCommand extends AbstractCommand {
         return null;
     }
 
-    public function handle<T>():T {
+    public function handle():Bool {
         #if orbis
         if(!LibSceUserService.initialize())
         {

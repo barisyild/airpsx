@@ -7,11 +7,7 @@
 -D hscriptPos
 -D disable_cli
 -D analyzer-optimize
-
 -cp src
-
-#-D windows
---macro addGlobalMetadata('Boot', '@:keep')
 --macro include('cpp.lib')
 --macro addGlobalMetadata('cpp.lib', '@:keep')
 --macro include("protocols.http.services.http")
@@ -19,18 +15,16 @@
 --macro addGlobalMetadata('Math', '@:keep')
 --macro addGlobalMetadata('haxe.io.Bytes', '@:keep')
 --macro addGlobalMetadata('airpsx.hscript.HScriptDataGenerated', '@:keep')
-
 #--macro addGlobalMetadata('airpsx.hscript', '@:build(airpsx.macro.DebugTraceMacro.build())')
 -lib hscript
 -lib rulescript
 -lib hxwell
 -lib linc_lua
 -lib hxvm-lua
+-lib haxe-crypto
 --macro airpsx.macro.HScriptVariableMacro.run()
-#-dce no
-#-lib hxcpp-debug-server
-
--main hx.well.HxWell
 -dce std
-#-D no-compilation
-#-debug
+-D orbis
+-D toolchain=prospero
+-D release
+--cmd haxe -cp src -main AfterBuild --interp
