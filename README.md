@@ -45,7 +45,7 @@ haxe release.hxml --cmd "mv out/HxWell out/airpsx.elf"
 ## 📦 Dependencies
 
 * [hxcpp fork](https://github.com/barisyild/hxcpp/tree/ps5-payload)
-* [hxwell](https://github.com/barisyild/hxwell)
+* [hxwell](https://github.com/hxwell/hxwell)
 * [rulescript](https://github.com/Kriptel/RuleScript)
 * [linc_lua](https://github.com/kevinresol/linc_lua)
 * [hxvm-lua](https://github.com/kevinresol/hxvm-lua)
@@ -72,7 +72,7 @@ haxe release.hxml --cmd "mv out/HxWell out/airpsx.elf"
 
 ## ⚙️ How It Works
 
-This project uses [hxwell](https://github.com/barisyild/hxwell), a web framework written in Haxe. The Haxe code is transpiled to C++ and compiled using the PS5 Payload SDK.
+This project uses [hxwell](https://github.com/hxwell/hxwell), a web framework written in Haxe. The Haxe code is transpiled to C++ and compiled using the PS5 Payload SDK.
 
 ---
 
