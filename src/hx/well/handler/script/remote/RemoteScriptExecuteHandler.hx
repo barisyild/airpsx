@@ -15,7 +15,7 @@ import haxe.Exception;
 import haxe.crypto.Md5;
 import sys.io.File;
 import airpsx.utils.ScriptUtils;
-import airpsx.Config;
+import airpsx.Const;
 import hx.well.http.driver.IDriverContext;
 
 class RemoteScriptExecuteHandler extends AbstractHandler {
@@ -27,7 +27,7 @@ class RemoteScriptExecuteHandler extends AbstractHandler {
         var key:String = request.post("key");
 
         // 0.00 is debug build or github actions artifacts
-        var versionQuery:String = (Config.VERSION == "0.00") ? "" : ' and version <= "${Config.VERSION}"';
+        var versionQuery:String = (Const.VERSION == "0.00") ? "" : ' and version <= "${Const.VERSION}"';
         var data:Array<Dynamic> = DBStatic.connection(DatabaseType.SCRIPT_DB).select('SELECT key, scriptHash, type FROM scripts WHERE minFirmware <= ? AND maxFirmware >= ? and key = ?' + versionQuery, Systemctl.kernelSdkVersion, Systemctl.kernelSdkVersion, key);
         if(data.length == 0)
             abort(404, "Script not found");
@@ -37,7 +37,7 @@ class RemoteScriptExecuteHandler extends AbstractHandler {
 
         var scriptType:ScriptType = cast first.type;
         var scriptHash:String = first.scriptHash;
-        var scriptFile:String = '${Config.SCRIPT_PATH}/${scriptHash}';
+        var scriptFile:String = '${Const.SCRIPT_PATH}/${scriptHash}';
 
         var extra:Map<String, Any> = ["checkHeartbeat" => checkHeartbeat];
 
@@ -92,8 +92,8 @@ class RemoteScriptExecuteHandler extends AbstractHandler {
         if(Md5.encode(content) != hash)
             throw "Hash mismatch";
 
-        var scriptFile:String = '${Config.SCRIPT_PATH}/${hash}';
-        var tempScriptFile:String = '${Config.TEMP_PATH}/${hash}';
+        var scriptFile:String = '${Const.SCRIPT_PATH}/${hash}';
+        var tempScriptFile:String = '${Const.TEMP_PATH}/${hash}';
         File.saveContent(tempScriptFile, content);
         FileSystem.rename(tempScriptFile, scriptFile);
 

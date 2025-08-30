@@ -9,7 +9,7 @@ import hx.well.http.AbstractResponse;
 using airpsx.tools.ResultSetTools;
 import hx.well.http.RequestStatic.request;
 import hx.well.validator.ValidatorRule;
-import airpsx.Config;
+import airpsx.Const;
 
 class TaskLogHandler extends AbstractHandler {
     public override function validate():Bool {
@@ -20,7 +20,7 @@ class TaskLogHandler extends AbstractHandler {
 
     public function execute(request:Request):AbstractResponse {
         var id:Int = request.input("id");
-        var logPath:String = '${Config.DATA_PATH}/task/${id}.log';
+        var logPath:String = '${Const.DATA_PATH}/task/${id}.log';
         if(!FileSystem.exists(logPath))
             return "";
 

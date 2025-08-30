@@ -2,7 +2,7 @@ package airpsx.command;
 
 import cpp.lib.LibKernel;
 import airpsx.type.TaskStatus;
-import airpsx.Config;
+import airpsx.Const;
 import hx.well.console.AbstractCommand;
 
 class SetupDatabaseCommand extends AbstractCommand<Bool> {
@@ -19,7 +19,7 @@ class SetupDatabaseCommand extends AbstractCommand<Bool> {
     }
 
     public function handle():Bool {
-        var db = sys.db.Sqlite.open(Config.DB_PATH);
+        var db = sys.db.Sqlite.open(Const.DB_PATH);
 
         // Create stats table if not exists
         db.request("CREATE TABLE IF NOT EXISTS stats (id INTEGER PRIMARY KEY AUTOINCREMENT, socSensorTemperature INTEGER, temperature INTEGER, frequency REAL, titleID TEXT, timestamp DATE DEFAULT (datetime('now','localtime')));");
@@ -33,7 +33,7 @@ class SetupDatabaseCommand extends AbstractCommand<Bool> {
         db.close();
 
 
-        db = sys.db.Sqlite.open(Config.TASK_DB_PATH);
+        db = sys.db.Sqlite.open(Const.TASK_DB_PATH);
 
         // Create schedules table if not exists
         db.request('CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, script TEXT DEFAULT "", logs BOOL DEFAULT TRUE, frequency INT DEFAULT 3600, status INTEGER DEFAULT 0, lastRun DATE, enabled BOOL DEFAULT TRUE, success INTEGER DEFAULT 0, failed INTEGER DEFAULT 0, createdAt DATE DEFAULT (datetime(\'now\',\'localtime\')));');

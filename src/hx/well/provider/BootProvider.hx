@@ -14,7 +14,7 @@ import hx.well.database.Connection;
 import cpp.lib.LibKernel;
 import airpsx.type.DatabaseType;
 import airpsx.command.SetupDatabaseCommand;
-import airpsx.Config;
+import airpsx.Const;
 import sys.ssl.Socket;
 import sys.thread.Thread;
 import hx.well.route.ApiRoute;
@@ -68,7 +68,7 @@ class BootProvider extends AbstractProvider {
         // Kill old process
         try
         {
-            var h = new haxe.Http('http://127.0.0.1:${Config.HTTP_PORT}/api/server/kill');
+            var h = new haxe.Http('http://127.0.0.1:${Const.HTTP_PORT}/api/server/kill');
             var r = null;
             h.onData = function(d) {
                 r = d;
@@ -92,7 +92,7 @@ class BootProvider extends AbstractProvider {
 
         }
 
-        Config.init();
+        Const.init();
 
         #if cpp
         trace("Current PID: " + cpp.NativeSys.sys_get_pid());
@@ -107,11 +107,11 @@ class BootProvider extends AbstractProvider {
         //commandExecutor.addCommand(new SchedulerCommand());
         commandExecutor.execute();
 
-        Connection.create(DatabaseType.DEFAULT, {path: Config.DB_PATH});
-        Connection.create(DatabaseType.TASK, {path: Config.TASK_DB_PATH});
-        Connection.create(DatabaseType.APP, {path: Config.SYSTEM_APP_DB_PATH});
-        Connection.create(DatabaseType.APP_INFO, {path: Config.SYSTEM_APP_INFO_DB_PATH});
-        Connection.create(DatabaseType.SCRIPT_DB, {path: Config.SCRIPT_DB_PATH});
+        Connection.create(DatabaseType.DEFAULT, {path: Const.DB_PATH});
+        Connection.create(DatabaseType.TASK, {path: Const.TASK_DB_PATH});
+        Connection.create(DatabaseType.APP, {path: Const.SYSTEM_APP_DB_PATH});
+        Connection.create(DatabaseType.APP_INFO, {path: Const.SYSTEM_APP_INFO_DB_PATH});
+        Connection.create(DatabaseType.SCRIPT_DB, {path: Const.SCRIPT_DB_PATH});
 
         // api group
         Route.path("/api")
@@ -119,9 +119,9 @@ class BootProvider extends AbstractProvider {
 
         // Always use framework instead of 404 page.
         Route.status(404)
-            .file('${Config.DATA_PATH}/public/index.html', 200);
+            .file('${Const.DATA_PATH}/public/index.html', 200);
 
-        LibKernel.sendNotificationRequest('AirPSX listening at ${Config.HTTP_PORT}');
+        LibKernel.sendNotificationRequest('AirPSX listening at ${Const.HTTP_PORT}');
 
         Schedule.get().fixedRate("timestamp:update", 60000);
     }

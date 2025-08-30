@@ -29,7 +29,7 @@ class PackageVo {
 
     public var preDataDirectoryPath(get, never):String;
     private function get_preDataDirectoryPath():String {
-        return '${Config.TEMP_PATH}/pkg';
+        return '${Const.TEMP_PATH}/pkg';
     }
 
     public var predataFilePath(get, never):String;

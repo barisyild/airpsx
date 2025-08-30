@@ -5,7 +5,7 @@ import airpsx.macro.EnvironmentMacro;
 
 using StringTools;
 
-class Config {
+class Const {
     public static inline var APP_NAME:String = "AirPSX";
     public static var VERSION:String = EnvironmentMacro.get("VERSION", "0.00");
     public static #if orbis inline #end var DATA_PATH:String = #if !orbis Sys.programPath().substring(0, Sys.programPath().replace("\\", "/").lastIndexOf("/")) + #end "/data/airpsx";

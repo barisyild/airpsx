@@ -9,7 +9,7 @@ import haxe.io.Bytes;
 import hx.well.handler.filesystem.AbstractHttpFileStreamHandler;
 import sys.io.File;
 import sys.FileSystem;
-import airpsx.Config;
+import airpsx.Const;
 
 class RemoteScriptImageHandler extends AbstractHttpFileStreamHandler {
 
@@ -24,6 +24,7 @@ class RemoteScriptImageHandler extends AbstractHttpFileStreamHandler {
 
         var path:String = '${Config.SCRIPT_PATH}/${hash}';
         request.attributes.set("filePath", path);
+        var path:String = '${Const.SCRIPT_PATH}/${hash}';
         if(FileSystem.exists(path))
             return super.execute(request);
 
@@ -73,8 +74,8 @@ class RemoteScriptImageHandler extends AbstractHttpFileStreamHandler {
         if(Md5.make(bytes).toHex() != hash)
             abort(500, "Hash mismatch");
 
-        var imageFile:String = '${Config.SCRIPT_PATH}/${hash}';
-        var tempImageFile:String = '${Config.TEMP_PATH}/${hash}';
+        var imageFile:String = '${Const.SCRIPT_PATH}/${hash}';
+        var tempImageFile:String = '${Const.TEMP_PATH}/${hash}';
         File.saveBytes(tempImageFile, bytes);
         FileSystem.rename(tempImageFile, imageFile);
     }

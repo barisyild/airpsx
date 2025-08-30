@@ -5,7 +5,7 @@ import sys.FileSystem;
 import sys.io.File;
 import airpsx.utils.FileSystemUtils;
 import airpsx.utils.ExtractZipUtils;
-import airpsx.Config;
+import airpsx.Const;
 import hx.well.console.AbstractCommand;
 class SetupPublicCommand extends AbstractCommand<Bool> {
     public function new() {
@@ -21,26 +21,26 @@ class SetupPublicCommand extends AbstractCommand<Bool> {
     }
 
     public function handle():Bool {
-        if(!FileSystem.exists(Config.DATA_PATH))
-            FileSystem.createDirectory(Config.DATA_PATH);
+        if(!FileSystem.exists(Const.DATA_PATH))
+            FileSystem.createDirectory(Const.DATA_PATH);
 
-        if(!FileSystem.exists(Config.SCRIPT_PATH))
-            FileSystem.createDirectory(Config.SCRIPT_PATH);
+        if(!FileSystem.exists(Const.SCRIPT_PATH))
+            FileSystem.createDirectory(Const.SCRIPT_PATH);
 
         // Cleanup temp directory
-        FileSystemUtils.deleteDirectoryRecursively(Config.TEMP_PATH);
+        FileSystemUtils.deleteDirectoryRecursively(Const.TEMP_PATH);
 
-        if(!FileSystem.exists(Config.TEMP_PATH))
-            FileSystem.createDirectory(Config.TEMP_PATH);
+        if(!FileSystem.exists(Const.TEMP_PATH))
+            FileSystem.createDirectory(Const.TEMP_PATH);
 
         if(checkUpdateAvailable())
         {
-            FileSystemUtils.deleteDirectoryRecursively('${Config.DATA_PATH}/public');
-            FileSystem.createDirectory('${Config.DATA_PATH}/public');
+            FileSystemUtils.deleteDirectoryRecursively('${Const.DATA_PATH}/public');
+            FileSystem.createDirectory('${Const.DATA_PATH}/public');
 
             var bytes:Bytes = ZipPublicResource.toBytes();
-            ExtractZipUtils.extractZip(bytes, '${Config.DATA_PATH}/public');
-            File.saveContent('${Config.DATA_PATH}/public.version.txt', ZipPublicResource.hash);
+            ExtractZipUtils.extractZip(bytes, '${Const.DATA_PATH}/public');
+            File.saveContent('${Const.DATA_PATH}/public.version.txt', ZipPublicResource.hash);
         }else{
             trace("No update available");
         }
@@ -53,7 +53,7 @@ class SetupPublicCommand extends AbstractCommand<Bool> {
 
     private function checkUpdateAvailable():Bool
     {
-        var versionFilePath:String = '${Config.DATA_PATH}/public.version.txt';
+        var versionFilePath:String = '${Const.DATA_PATH}/public.version.txt';
         if(!FileSystem.exists(versionFilePath))
             return true;
 

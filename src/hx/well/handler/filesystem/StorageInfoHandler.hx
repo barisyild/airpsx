@@ -7,7 +7,7 @@ import sys.FileSystem;
 import hx.well.handler.AbstractHandler;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
-import airpsx.Config;
+import airpsx.Const;
 using airpsx.tools.StringTools;
 
 class StorageInfoHandler extends AbstractHandler {
@@ -15,9 +15,9 @@ class StorageInfoHandler extends AbstractHandler {
     public function execute(request:Request):AbstractResponse {
         var data = [];
 
-        for(directory in Config.storageDirectories.keys())
+        for(directory in Const.storageDirectories.keys())
         {
-            var storageDirectoryName = Config.storageDirectories.get(directory);
+            var storageDirectoryName = Const.storageDirectories.get(directory);
             if(FileSystem.stat(directory).dev < 0)
                 continue;
 

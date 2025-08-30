@@ -24,7 +24,7 @@ import com.hurlant.util.der.PEM;
 import sys.io.FileInput;
 import haxe.CallStack;
 import hx.well.http.ResponseBuilder;
-import airpsx.Config;
+import airpsx.Const;
 
 class RemoteScriptListHandler extends AbstractHandler {
     public function new() {
@@ -45,7 +45,7 @@ class RemoteScriptListHandler extends AbstractHandler {
             }
         }
 
-        if(!FileSystem.exists(Config.SCRIPT_DB_PATH)) {
+        if(!FileSystem.exists(Const.SCRIPT_DB_PATH)) {
             return {success: false, message: "Problem occurred while downloading database"};
         }
 
@@ -53,9 +53,9 @@ class RemoteScriptListHandler extends AbstractHandler {
         var query:String = 'SELECT key, name, description, scriptHash, type, authorName, authorSrc FROM scripts WHERE minFirmware <= ? AND maxFirmware >= ?';
 
         // 0.00 is debug build or github actions artifacts
-        if(Config.VERSION != "0.00") {
+        if(Const.VERSION != "0.00") {
             query += ' and version <= ?';
-            parameters.push(Config.VERSION);
+            parameters.push(Const.VERSION);
         }
 
         if(search != null) {
@@ -71,16 +71,16 @@ class RemoteScriptListHandler extends AbstractHandler {
         // [{"version":"0.15","authorSrc":"https://github.com/barisyild","type":"rulescript","name":"Clear Browser Cache","minFirmware":"00.00","hash":"794e3f6d63865e23317505d85d535c2b","authorName":"barisyild","key":"clearBrowserCache","maxFirmware":"99.99"}]
         return ResponseBuilder.asResultSet(resultSet, null, (data) -> {
             var scriptHash:String = data.scriptHash;
-            var scriptFile:String = '${Config.SCRIPT_PATH}/${scriptHash}';
+            var scriptFile:String = '${Const.SCRIPT_PATH}/${scriptHash}';
             data.hasCache = FileSystem.exists(scriptFile);
         });
     }
 
     private function downloadDB(?url:String):Void {
-        if(!FileSystem.exists('${Config.TEMP_PATH}/scripts'))
-            FileSystem.createDirectory('${Config.TEMP_PATH}/scripts');
+        if(!FileSystem.exists('${Const.TEMP_PATH}/scripts'))
+            FileSystem.createDirectory('${Const.TEMP_PATH}/scripts');
 
-        var randomFilePath:String = '${Config.TEMP_PATH}/scripts/${Uuid.v4()}.db';
+        var randomFilePath:String = '${Const.TEMP_PATH}/scripts/${Uuid.v4()}.db';
         var fileOutput:FileOutput = File.write(randomFilePath, true);
 
         var console:String = "ps5";
@@ -113,7 +113,7 @@ DGFoIV182km9IcwvAyOzPm5GX+s4m99zHwIDAQAB
 -----END RSA PUBLIC KEY-----
 ");
 
-        var newRandomFilePath:String = '${Config.TEMP_PATH}/scripts/${Uuid.v4()}.db';
+        var newRandomFilePath:String = '${Const.TEMP_PATH}/scripts/${Uuid.v4()}.db';
         var fileInput:FileInput = File.read(randomFilePath, true);
         var fileSize:Int32 = FileSystem.stat(randomFilePath).size;
         var fileOutput:FileOutput = File.write(newRandomFilePath, true);
@@ -124,11 +124,11 @@ DGFoIV182km9IcwvAyOzPm5GX+s4m99zHwIDAQAB
 
         FileSystem.deleteFile(randomFilePath);
 
-        if(FileSystem.exists(Config.SCRIPT_DB_PATH))
-            FileSystem.deleteFile(Config.SCRIPT_DB_PATH);
+        if(FileSystem.exists(Const.SCRIPT_DB_PATH))
+            FileSystem.deleteFile(Const.SCRIPT_DB_PATH);
 
         // Rename new database
-        FileSystem.rename(newRandomFilePath, Config.SCRIPT_DB_PATH);
+        FileSystem.rename(newRandomFilePath, Const.SCRIPT_DB_PATH);
     }
 
     public function bufferedVerify(key:RSAKey, src:FileInput, dst:Output, length:Int32, pad:BigInteger -> Int32 -> Int32 -> ByteArray = null):Void {

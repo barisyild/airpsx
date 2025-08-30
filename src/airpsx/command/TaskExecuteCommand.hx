@@ -57,7 +57,7 @@ class TaskExecuteCommand extends AbstractCommand<Bool> {
                     var script:String = result.script;
                     var type:ScriptType = result.type;
 
-                    var filePath:String = '${Config.DATA_PATH}/task/';
+                    var filePath:String = '${Const.DATA_PATH}/task/';
                     if(!FileSystem.exists(filePath))
                         FileSystem.createDirectory(filePath);
 

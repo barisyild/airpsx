@@ -15,7 +15,7 @@ import hx.well.handler.AbstractHandler;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
 using StringTools;
-import airpsx.Config;
+import airpsx.Const;
 import hx.well.http.ResponseBuilder;
 import hx.well.http.encoding.DeflateEncodingOptions;
 
@@ -27,7 +27,7 @@ class SaveBackupHandler extends AbstractHandler {
     }
 
     public function execute(request:Request):AbstractResponse {
-        var path:String = Config.USER_HOME_PATH;
+        var path:String = Const.USER_HOME_PATH;
         var profileId:String = request.route("profileId");
 
         var profileIds:Array<String>;
@@ -41,10 +41,10 @@ class SaveBackupHandler extends AbstractHandler {
         var userSavePaths:Array<String> = [];
         for(profileId in profileIds)
         {
-            userSavePaths.push('${Config.USER_HOME_PATH}/${profileId}/savedata');
-            userSavePaths.push('${Config.USER_HOME_PATH}/${profileId}/savedata_meta');
-            userSavePaths.push('${Config.USER_HOME_PATH}/${profileId}/savedata_prospero');
-            userSavePaths.push('${Config.USER_HOME_PATH}/${profileId}/savedata_prospero_meta');
+            userSavePaths.push('${Const.USER_HOME_PATH}/${profileId}/savedata');
+            userSavePaths.push('${Const.USER_HOME_PATH}/${profileId}/savedata_meta');
+            userSavePaths.push('${Const.USER_HOME_PATH}/${profileId}/savedata_prospero');
+            userSavePaths.push('${Const.USER_HOME_PATH}/${profileId}/savedata_prospero_meta');
         }
 
         // Remove non-available folders
