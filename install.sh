@@ -43,6 +43,7 @@ if [[ "$installSDK" == "true" ]]; then
 fi
 
 # Install Haxe Libraries
+haxelib git crypto https://github.com/HaxeFoundation/crypto
 haxelib git haxe-crypto https://github.com/barisyild/haxe-crypto
 haxelib git hxvm-lua https://github.com/kevinresol/hxvm-lua
 haxelib git linc_lua https://github.com/kevinresol/linc_lua
