@@ -107,12 +107,6 @@ class BootProvider extends AbstractProvider {
         //commandExecutor.addCommand(new SchedulerCommand());
         commandExecutor.execute();
 
-        Connection.create(DatabaseType.DEFAULT, {path: Const.DB_PATH});
-        Connection.create(DatabaseType.TASK, {path: Const.TASK_DB_PATH});
-        Connection.create(DatabaseType.APP, {path: Const.SYSTEM_APP_DB_PATH});
-        Connection.create(DatabaseType.APP_INFO, {path: Const.SYSTEM_APP_INFO_DB_PATH});
-        Connection.create(DatabaseType.SCRIPT_DB, {path: Const.SCRIPT_DB_PATH});
-
         // api group
         Route.path("/api")
             .group(ApiRoute);
