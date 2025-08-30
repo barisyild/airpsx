@@ -44,8 +44,8 @@ class ReceivePackageHandler extends AbstractHandler {
                 rangeEnd = rangeStart + (1024 * 1024 * 5);
 
             // Set attributes for accessing with serve package thread
-            request.attributes.set("start", rangeStart);
-            request.attributes.set("end", rangeEnd);
+            request.setAttribute("start", rangeStart);
+            request.setAttribute("end", rangeEnd);
 
             // Set headers
             ResponseStatic.header("Content-Type", "application/octet-stream");

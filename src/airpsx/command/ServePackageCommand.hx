@@ -62,8 +62,8 @@ class ServePackageCommand extends AbstractCommand<Bool> {
             if(request == null)
                 return;
 
-            var rangeStart:Int64 = request.attributes.get("start");
-            var rangeEnd:Null<Int64> = request.attributes.get("end");
+            var rangeStart:Int64 = request.getAttribute("start");
+            var rangeEnd:Null<Int64> = request.getAttribute("end");
             var fileSize:Int64 = packageVo.fileSize;
             var contentLength:Int64 = rangeEnd - rangeStart + 1;
 
@@ -114,7 +114,7 @@ class ServePackageCommand extends AbstractCommand<Bool> {
 
         var smallestKey:Null<Int64> = null;
         for(packageVoRequest in packageVo.requests) {
-            var key:Null<Int64> = packageVoRequest.attributes.get("start");
+            var key:Null<Int64> = packageVoRequest.getAttribute("start");
 
             if(smallestKey == null)
             {

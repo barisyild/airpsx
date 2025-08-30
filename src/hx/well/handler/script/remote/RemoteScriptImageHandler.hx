@@ -22,9 +22,8 @@ class RemoteScriptImageHandler extends AbstractHttpFileStreamHandler {
         var first:Dynamic = data[0];
         var hash:String = first.imageHash;
 
-        var path:String = '${Config.SCRIPT_PATH}/${hash}';
-        request.attributes.set("filePath", path);
         var path:String = '${Const.SCRIPT_PATH}/${hash}';
+        request.setAttribute("filePath", path);
         if(FileSystem.exists(path))
             return super.execute(request);
 
@@ -33,7 +32,7 @@ class RemoteScriptImageHandler extends AbstractHttpFileStreamHandler {
     }
 
     public function filePath(request:Request):String {
-        return request.attributes.get("filePath");
+        return request.getAttribute("filePath");
     }
 
     public function basePath():Null<String> {

@@ -59,9 +59,9 @@ class BootProvider extends AbstractProvider {
         #end
 
         // set config
-        HxWellConfig.set("cache.path", '${Config.DATA_PATH}/cache');
-        HxWellConfig.set("session.path", '${Config.DATA_PATH}/session');
-        HxWellConfig.set("public.path", '${Config.DATA_PATH}/public');
+        HxWellConfig.set("http.cache_path", '${Const.DATA_PATH}/cache');
+        HxWellConfig.set("session.path", '${Const.DATA_PATH}/session');
+        HxWellConfig.set("http.public_path", '${Const.DATA_PATH}/public');
 
         HScriptData.init();
 
