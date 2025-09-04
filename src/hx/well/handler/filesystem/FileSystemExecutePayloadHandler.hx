@@ -45,7 +45,7 @@ class FileSystemExecutePayloadHandler extends AbstractHandler {
 
         // Send elf file
         var socket:Socket = null;
-        for(port in [9020, 9021, 9022]) {
+        for(port in [9020, 9021, 9022, 9090]) {
             var tempSocket:Socket = new Socket();
             try {
                 tempSocket.connect(new Host("127.0.0.1"), port);
