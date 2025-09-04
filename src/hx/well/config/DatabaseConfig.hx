@@ -19,10 +19,6 @@ class DatabaseConfig implements IConfig {
             "driver": "sqlite",
             "path": Const.SYSTEM_APP_DB_PATH
         },
-        DatabaseType.APP_INFO => {
-            "driver": "sqlite",
-            "path": Const.SYSTEM_APP_INFO_DB_PATH
-        },
         DatabaseType.SCRIPT_DB => {
             "driver": "sqlite",
             "path": Const.SCRIPT_DB_PATH
