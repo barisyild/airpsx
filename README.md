@@ -6,6 +6,8 @@
 
 ---
 
+# The development of this project has been suspended indefinitely.
+
 # AirPSX
 
 **AirPSX** is a payload similar to AirDroid. It enables you to manage many operations related to your PlayStation 5 console through a web-based desktop environment.
