@@ -7,8 +7,6 @@ import cpp.AbstractArrayPointer;
 
 @:keep
 @:include('libSceRegMgr.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libSceRegMgr'))
 extern class ExternLibSceRegMgr {
     @:native('sceRegMgrGetInt')
     public static function sceRegMgrGetInt(key:Int64, val:AbstractPointer<Int32>):Int32;

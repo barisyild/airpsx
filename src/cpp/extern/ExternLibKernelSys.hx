@@ -6,8 +6,6 @@ import cpp.ConstCharStar;
 
 @:keep
 @:include('libkernel_sys.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libkernel_sys'))
 extern class ExternLibKernelSys {
     @:native('sceKernelGetHwModelName')
     public static function sceKernelGetHwModelName(char:CastCharStar):ConstCharStar;

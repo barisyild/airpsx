@@ -8,8 +8,6 @@ import cpp.SizeT;
 
 @:keep
 @:include('libSceRemoteplay.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libSceRemoteplay'))
 extern class ExternLibSceRemoteplay {
     @:native('sceRemoteplayInitialize')
     public static function sceRemoteplayInitialize(param:Int32, size:SizeT):Int32;

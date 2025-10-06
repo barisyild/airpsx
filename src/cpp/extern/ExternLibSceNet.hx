@@ -9,8 +9,6 @@ import cpp.SizeT;
 
 @:keep
 @:include('libSceNet.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libSceNet'))
 extern class ExternLibSceNet {
     @:native("sceNetInit")
     public static function sceNetInit():Int32;

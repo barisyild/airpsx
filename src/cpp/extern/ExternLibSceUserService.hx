@@ -11,8 +11,6 @@ import cpp.AbstractPointer;
 
 @:keep
 @:include('libSceUserService.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libSceUserService'))
 extern class ExternLibSceUserService {
     @:native('sceUserServiceGetLoginUserIdList')
     public static function sceUserServiceGetLoginUserIdList(struct:AbstractPointer<SceUserServiceLoginStruct>):Int32;

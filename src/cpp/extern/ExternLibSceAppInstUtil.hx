@@ -3,8 +3,6 @@ package cpp.extern;
 #if orbis
 @:keep
 @:include('libSceAppInstUtil.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libSceAppInstUtil'))
 extern class ExternLibSceAppInstUtil {
     @:native('sceAppInstUtilInitialize')
     public static function sceAppInstUtilInitialize():Int32;

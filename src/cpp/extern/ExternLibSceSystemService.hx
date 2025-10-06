@@ -15,8 +15,6 @@ import cpp.lib.LncAppErrorType;
 
 @:keep
 @:include('libSceSystemService.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libSceSystemService'))
 extern class ExternLibSceSystemService {
     // extern "C" int sceLncUtilLaunchApp(const char* tid, const char* argv[], LncAppParam* param);
     @:native('sceLncUtilLaunchApp')

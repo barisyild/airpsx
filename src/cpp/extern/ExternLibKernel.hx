@@ -15,8 +15,6 @@ import cpp.AbstractPointer;
 
 @:keep
 @:include('libkernel.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libkernel'))
 extern class ExternLibKernel {
     @:native('sceKernelGetCpuFrequency')
     public static function sceKernelGetCpuFrequency():Float;

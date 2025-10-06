@@ -9,6 +9,25 @@ using StringTools;
 using airpsx.tools.IntegerTools;
 using airpsx.tools.Integer64Tools;
 
+@:buildXml('
+    <files id="haxe">
+        <compilerflag value="-I${this_dir}/../../include"/>
+    </files>
+
+    <target id="haxe">
+        <flag value="-lkernel" />
+        <flag value="-lkernel_sys" />
+        <!-- <flag value="-lSceIpmi" /> --> <!-- Required because including SceAppInstUtil Library without SceIpmi Library will break the sdk. -->
+        <!-- <flag value="-lSceAppInstUtil" /> -->
+        <flag value="-lSceNet" />
+        <flag value="-lSceRandom" />
+        <flag value="-lSceRegMgr" />
+        <flag value="-lSceRemoteplay" />
+        <flag value="-lSceSystemService" />
+        <flag value="-lSceUserService" />
+    </target>
+')
+
 class AirPSX {
 	public static var isExiting:Bool = false;
 	public static var socket:Socket;

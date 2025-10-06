@@ -7,8 +7,6 @@ import cpp.AbstractArrayPointer;
 
 @:keep
 @:include('libSceRandom.h')
-@:build(Linc.touch())
-@:build(Linc.xml('libSceRandom'))
 extern class ExternLibSceRandom {
     @:native('sceRandomGetRandomNumber')
     public static function sceRandomGetRandomNumber(buf:AbstractArrayPointer<cpp.UInt8>, size:SizeT):Int32;
