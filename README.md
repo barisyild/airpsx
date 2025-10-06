@@ -6,6 +6,10 @@
 
 ---
 
+# The project is in maintenance mode.
+> The project will be in maintenance mode until an alternative SDK to ps5-payload-sdk or ps4-payload-sdk is available.
+> No official release will be created.
+
 # AirPSX
 
 **AirPSX** is a payload similar to AirDroid. It enables you to manage many operations related to your PlayStation 5 console through a web-based desktop environment.
@@ -30,16 +34,6 @@
 - Unzip the contents to the /data/homebrew/ directory in a folder named airpsx (final path should be: /data/homebrew/airpsx/).
 - Start websrv from PlayStation 5 and select the airpsx application
 
-## 🛠️ Build Instructions
-
-1. Run the `install.sh` script to install dependencies.
-2. Build the project:
-
-```sh
-export PS5_PAYLOAD_SDK=/opt/ps5-payload-sdk
-haxelib run hxwell build cpp
-```
-
 ---
 
 ## 📦 Dependencies
@@ -57,7 +51,6 @@ haxelib run hxwell build cpp
 
 ## 🙏 Special Thanks
 
-* [John Törnblom](https://github.com/john-tornblom) — [PS5 SDK](https://github.com/ps5-payload-dev/sdk) & [ELF Loader](https://github.com/ps5-payload-dev/elfldr)
 * [LightningMods](https://github.com/LightningMods) — [PS4-daemon-writeup](https://github.com/LightningMods/PS4-daemon-writeup)
 * [Hugh Sanderson](https://github.com/hughsando) — [hxcpp](https://github.com/HaxeFoundation/hxcpp)
 * [m0rkeulv](https://github.com/m0rkeulv) — [intellij-haxe](https://github.com/HaxeFoundation/intellij-haxe)
@@ -72,7 +65,7 @@ haxelib run hxwell build cpp
 
 ## ⚙️ How It Works
 
-This project uses [hxwell](https://github.com/hxwell/hxwell), a web framework written in Haxe. The Haxe code is transpiled to C++ and compiled using the PS5 Payload SDK.
+This project uses [hxwell](https://github.com/hxwell/hxwell), a web framework written in Haxe. The Haxe code is transpiled to C++.
 
 ---
 
