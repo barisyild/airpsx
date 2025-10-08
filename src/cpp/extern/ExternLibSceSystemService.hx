@@ -16,9 +16,8 @@ import cpp.lib.LncAppErrorType;
 @:keep
 @:include('libSceSystemService.h')
 extern class ExternLibSceSystemService {
-    // extern "C" int sceLncUtilLaunchApp(const char* tid, const char* argv[], LncAppParam* param);
-    @:native('sceLncUtilLaunchApp')
-    public static function sceLncUtilLaunchApp(tid:CastCharStar, argv:ConstCharStar, param:AbstractPointer<LncAppParamStruct>):LncAppErrorType;
+    @:native("sceSystemServiceLaunchApp")
+    public static function sceSystemServiceLaunchApp(tid:CastCharStar, argv:ConstCharStar, param:AbstractPointer<LncAppParamStruct>):LncAppErrorType;
 
     // int sceSystemServiceLaunchWebApp(const char* url, const char* param, unsigned int flags);
     @:native('sceSystemServiceLaunchWebApp')
