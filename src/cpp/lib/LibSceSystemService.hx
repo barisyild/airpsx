@@ -20,7 +20,7 @@ class LibSceSystemService {
         param.crash_report = crashReport;
         param.check_flag = checkFlag; //Flag_None
 
-        return ExternLibSceSystemService.sceLncUtilLaunchApp(titleId, null, param);
+        return ExternLibSceSystemService.sceSystemServiceLaunchApp(titleId, null, param);
     }
 
     @:hscriptVariable("sceSystemServiceLaunchWebBrowser")

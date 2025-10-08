@@ -15,7 +15,11 @@ class TitleImageHandler extends AbstractHttpFileStreamHandler {
         if(!regex.match(titleId))
             return iconPath;
 
+        #if prospero
         var resultSet = DBStatic.connection(DatabaseType.APP).query('SELECT icon0Info FROM tbl_contentinfo WHERE titleId = ?', titleId);
+        #else
+        var resultSet = DBStatic.connection(DatabaseType.APP).query('SELECT val || "/icon0.png" as icon0Info FROM tbl_appinfo WHERE titleId = ? AND key = "_metadata_path"', titleId);
+        #end
         if(!resultSet.hasNext())
             return iconPath;
 

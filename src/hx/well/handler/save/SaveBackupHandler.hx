@@ -53,7 +53,7 @@ class SaveBackupHandler extends AbstractHandler {
         var files:Array<String> = FileUtils.getRecursiveFiles(...userSavePaths);
         var tarFileSize:Int64 = TarCompress.getTarFileSize(files, path);
 
-        var fileName:String = 'ps5_savebackup_${Date.now().toString()}';
+        var fileName:String = '${#if prospero "ps5" #else "ps4" #end}_savebackup_${Date.now().toString()}';
 
 
         var staticResponse = ResponseBuilder.asStatic();

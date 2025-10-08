@@ -23,7 +23,7 @@ extern "C" {
     };
 
     //returns the Systems runetime app id
-    int sceLncUtilLaunchApp(const char* tid, const char* argv[], LncAppParam* param);
+    int sceSystemServiceLaunchApp(const char* tid, const char* argv[], LncAppParam* param);
     int sceSystemServiceLaunchWebBrowser(const char *uri);
     int sceSystemServiceLaunchWebApp(const char* url);
 }

@@ -30,7 +30,11 @@ class CPUStatisticsHandler extends AbstractHandler {
             }else{
                 try
                 {
+                    #if prospero
                     var resultSet = DBStatic.connection(DatabaseType.APP).query('SELECT titleName FROM tbl_contentinfo WHERE titleId = ?', titleID);
+                    #else
+                    var resultSet = DBStatic.connection(DatabaseType.APP).query('SELECT val as titleName FROM tbl_appinfo WHERE titleId = ? AND key = "TITLE"', titleID);
+                    #end
                     titleName = resultSet.hasNext() ? resultSet.getResult(0) : null;
                     titleIDCache.set(titleID, titleName);
                 } catch (e)

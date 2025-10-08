@@ -83,7 +83,7 @@ class RemoteScriptListHandler extends AbstractHandler {
         var randomFilePath:String = '${Const.TEMP_PATH}/scripts/${Uuid.v4()}.db';
         var fileOutput:FileOutput = File.write(randomFilePath, true);
 
-        var console:String = "ps5";
+        var console:String = #if prospero "ps5" #else "ps4" #end;
         var http = new sys.Http('https://airpsx.com/db/${console}.db.signed');
         http.onStatus = status -> {
             if(status != 200)
