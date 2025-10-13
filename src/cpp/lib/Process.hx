@@ -46,7 +46,10 @@ class Process {
                 return null;
             }
 
+            trace("read");
             var appInfo:AppInfoTypedef = LibKernel.getAppInfo(kInfoProcStruct.pid);
+            trace("continue");
+            trace(appInfo);
 
             var rssize:Int = kInfoProcStruct.rssize;
             kInfoProcStructs.push({
@@ -61,11 +64,11 @@ class Process {
                 rssize: rssize,
                 start: kInfoProcStruct.ki_start.tv_sec,
                 pageSize: pageSize,
-                categoryType: LibKernel.getAppCategoryType(kInfoProcStruct.pid),
+                categoryType: #if prospero LibKernel.getAppCategoryType(kInfoProcStruct.pid) #else 0 #end,
                 //authID: ExternLibKernel.kernel_get_ucred_authid(kInfoProcStruct.pid),
                 titleID: appInfo.titleID,
                 appID: appInfo.appID,
-                appType: 0,
+                appType: 0
                 //unknown1: appInfo.unknown1,
                 //unknown2: appInfo.unknown2
             });
@@ -80,6 +83,7 @@ class Process {
     public static function getRunningApp():Null<KInfoProcTypedef>
     {
         var processList = Process.getProcessList();
+        #if prospero
         processList = processList.filter(function(proc){
             return proc.categoryType == ApplicationCategoryType.NATIVE_GAME || proc.categoryType == ApplicationCategoryType.ORBIS_GAME || proc.categoryType == ApplicationCategoryType.SYSTEM_BUILTIN_APP || proc.categoryType == ApplicationCategoryType.WEB_BASED_MEDIA_APP || proc.categoryType == ApplicationCategoryType.RNPS_MEDIA_APP;
         });
@@ -93,6 +97,9 @@ class Process {
             else
                 return 1;
         });
+        #else
+        processList = processList.filter(proc -> proc.comm == "eboot.bin" && proc.stat == "3");
+        #end
 
         return processList.length > 0 ? processList[0] : null;
     }
