@@ -74,6 +74,7 @@ class LibKernel {
         return {appID: appInfo.appID, titleID: appInfo.titleID, unknown1: appInfo.unknown1, unknown2: appInfo.unknown2};
     }
 
+    #if prospero
     @:hscriptVariable("sceKernelGetAppCategoryType")
     public static function getAppCategoryType(pid:PidT):ApplicationCategoryType
     {
@@ -81,6 +82,7 @@ class LibKernel {
         ExternLibKernel.sceKernelGetAppCategoryType(pid, categoryType);
         return categoryType;
     }
+    #end
 }
 #else
 class LibKernel {
