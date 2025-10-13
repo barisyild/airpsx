@@ -46,10 +46,7 @@ class Process {
                 return null;
             }
 
-            trace("read");
             var appInfo:AppInfoTypedef = LibKernel.getAppInfo(kInfoProcStruct.pid);
-            trace("continue");
-            trace(appInfo);
 
             var rssize:Int = kInfoProcStruct.rssize;
             kInfoProcStructs.push({
