@@ -12,6 +12,7 @@ import haxe.Exception;
 import haxe.Int64;
 using StringTools;
 using StringTools;
+import airpsx.utils.MP4Utils;
 
 class MediaListHandler extends AbstractHandler {
     public function execute(request:Request):AbstractResponse {
@@ -26,9 +27,11 @@ class MediaListHandler extends AbstractHandler {
             var file:String = files.shift();
 
             var filePath:String = null;
+            var fileExtension:String = null;
             for(extension in mediaExtensions) {
                 if(FileSystem.exists('${file}.${extension}')) {
                     filePath = '${file.replace("/user/av_contents", "")}.${extension}';
+                    fileExtension = extension;
                     break;
                 }
             }
@@ -45,10 +48,14 @@ class MediaListHandler extends AbstractHandler {
             try {
                 var fileStats = FileSystem.stat('${file}.dat');
                 var startTime = Int64.fromFloat(fileStats.ctime.getTime()); // convert to seconds
+                var duration:Int = 0;
+                if(fileExtension == "mp4") {
+                    duration = Std.int(MP4Utils.getDuration('${file}.mp4')) * 1000;
+                }
 
                 entry.meta.segmentInfo = {
                     start: startTime,
-                    mediaTime: [[startTime, startTime]]
+                    mediaTime: [[0, duration]]
                 };
 
                 var titleID = file.split("/")[file.split("/").length - 3]; // CUSA52342
