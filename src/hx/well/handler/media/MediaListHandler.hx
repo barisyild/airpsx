@@ -8,6 +8,8 @@ import sys.io.File;
 import haxe.Json;
 import hx.well.facades.DBStatic;
 import airpsx.type.DatabaseType;
+import haxe.Exception;
+import haxe.Int64;
 using StringTools;
 using StringTools;
 
@@ -34,7 +36,29 @@ class MediaListHandler extends AbstractHandler {
                 continue;
 
             var entry:Dynamic = {filePath: filePath};
+            #if prospero
             entry.meta = Json.parse(File.getContent('${file}.meta'));
+            #else
+            // TODO: implement proper meta creation for videos
+            entry.meta = {};
+
+            try {
+                var fileStats = FileSystem.stat('${file}.dat');
+                var startTime = Int64.fromFloat(fileStats.ctime.getTime()); // convert to seconds
+
+                entry.meta.segmentInfo = {
+                    start: startTime,
+                    mediaTime: [[startTime, startTime]]
+                };
+
+                var titleID = file.split("/")[file.split("/").length - 3]; // CUSA52342
+                if (~/[A-Z]{4}[0-9]{5}/.match(titleID)) {
+                    entry.meta.appVerTitleId = titleID;
+                }
+            } catch (e:Exception) {
+                // Handle exception if needed
+            }
+            #end
             entry.ext = null;
 
             var titleID:String = entry.meta.appVerTitleId;
@@ -72,8 +96,13 @@ class MediaListHandler extends AbstractHandler {
             if(FileSystem.isDirectory(path + "/" + file))
                 recursiveScan(path + "/" + file, out);
 
+            #if prospero
             if(file.endsWith(".meta"))
                 out.push(path + "/" + file.replace(".meta", ""));
+            #else
+            if(file.endsWith(".dat"))
+                out.push(path + "/" + file.replace(".dat", ""));
+            #end
         }
     }
 }
