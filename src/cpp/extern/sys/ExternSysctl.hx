@@ -13,7 +13,12 @@ import cpp.Int32ArrayPointer;
 import cpp.AbstractPointer;
 
 @:keep
+#if prospero
 @:include('sys/sysctl.h')
+#else
+// Weird SDK Fix Hack
+@:include('sys/types.h"\n#include "sys/sysctl.h')
+#end
 extern class ExternSysCtl {
     // sysctl(const int *, u_int, void *, size_t *, const void *, size_t)
     @:native('sysctl')
