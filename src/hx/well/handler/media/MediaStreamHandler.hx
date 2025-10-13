@@ -5,6 +5,7 @@ import sys.io.FileInput;
 import sys.io.File;
 import sys.io.FileSeek;
 import airpsx.utils.FileExtensionUtils;
+import haxe.io.BytesBuffer;
 class MediaStreamHandler extends AbstractHttpFileStreamHandler {
     public function new() {
         super();
@@ -20,13 +21,14 @@ class MediaStreamHandler extends AbstractHttpFileStreamHandler {
         var datFile:FileInput = File.read('/user/av_contents/${fileName}.dat', true);
         try {
             datFile.seek(0x44, FileSeek.SeekBegin);
+            var bytesBuffer:BytesBuffer = new BytesBuffer();
             while (true) {
                 var byte:Int = datFile.readByte();
                 if(byte == 0x00)
                     break;
-
-                datFileName += String.fromCharCode(byte);
+                bytesBuffer.addByte(byte);
             }
+            datFileName = bytesBuffer.getBytes().toString();
             datFile.close();
         } catch (e) {
             datFile.close();
