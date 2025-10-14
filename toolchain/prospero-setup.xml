@@ -1,0 +1,7 @@
+<xml>
+    <include name="console-setup.xml" />
+    <target id="haxe">
+        <flag value="-lSceIpmi" />
+        <flag value="-lSceAppInstUtil" />
+    </target>
+</xml>

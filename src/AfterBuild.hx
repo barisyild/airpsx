@@ -7,7 +7,8 @@ using StringTools;
 
 class AfterBuild {
     static function main():Void {
-        FileSystem.rename("Export/cpp/HxWell", "airpsx.elf");
+        var exportDir = #if prospero "Export/prospero" #else "Export/orbis" #end;
+        FileSystem.rename('${exportDir}/HxWell', "airpsx.elf");
 
         var elfFile = File.read("airpsx.elf", true);
 

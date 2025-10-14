@@ -1,0 +1,4 @@
+global.hxml
+-D toolchain=prospero
+-D prospero
+--cmd haxe -cp src -main AfterBuild --interp -D prospero

@@ -26,6 +26,4 @@
 --macro airpsx.macro.HScriptVariableMacro.run()
 -dce std
 -D orbis
--D toolchain=prospero
 -D release
---cmd haxe -cp src -main AfterBuild --interp
