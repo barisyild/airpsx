@@ -15,7 +15,6 @@ class Const {
     public static #if orbis inline #end var SCRIPT_PATH:String = '${DATA_PATH}/scripts';
     public static inline var HTTP_PORT:Int = 1214;
     public static inline var SYSTEM_APP_DB_PATH = "/system_data/priv/mms/app.db";
-    public static inline var SYSTEM_APP_INFO_DB_PATH = "/system_data/priv/mms/appinfo.db";
     public static inline var SCRIPT_DB_PATH = '${SCRIPT_PATH}/database.db';
     public static inline var USER_HOME_PATH:String = "/user/home";
 
