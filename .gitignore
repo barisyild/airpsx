@@ -4,3 +4,7 @@ out
 windows.hxml
 .DS_STORE
 websrv_template/airpsx.elf
+Export
+*.sh
+*.elf
+*.bin
