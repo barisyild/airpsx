@@ -59,8 +59,10 @@ class ServePackageCommand extends AbstractCommand<Bool> {
         var request = null;
         try {
             request = this.findSmallestRequest(packageVo);
-            if(request == null)
+            if(request == null || request.getAttribute("processing", false))
                 return;
+
+            request.setAttribute("processing", true);
 
             var rangeStart:Int64 = request.getAttribute("start");
             var rangeEnd:Null<Int64> = request.getAttribute("end");
