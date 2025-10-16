@@ -113,6 +113,7 @@ class UploadPackageHandler extends AbstractHandler {
         trace("Title ID: " + titleId);
 
         // Reset installation progress if the title is not already installed
+        #if prospero
         var contentStatusResultSet = DBStatic.connection(DatabaseType.APP).query("SELECT contentStatus FROM tbl_contentinfo WHERE titleId = ? LIMIT 1", titleId);
         if(contentStatusResultSet.length == 1) {
             var contentStatus = contentStatusResultSet.next().contentStatus;
@@ -120,6 +121,7 @@ class UploadPackageHandler extends AbstractHandler {
                 LibSceAppInstUtil.appInstUtilAppUnInstall(titleId);
             }
         }
+        #end
 
 
         // Initialize serve package session

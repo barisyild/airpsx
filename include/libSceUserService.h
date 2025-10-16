@@ -8,6 +8,7 @@ extern "C" {
     int *sceUserServiceGetLoginUserIdList(SceUserServiceLogin_struct *userIdList);
 
     int *sceUserServiceInitialize(void *);
+    int sceUserServiceTerminate();
     int sceUserServiceGetForegroundUser(int*);
 
 }

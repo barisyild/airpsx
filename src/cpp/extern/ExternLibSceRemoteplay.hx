@@ -2,7 +2,6 @@ package cpp.extern;
 
 
 #if orbis
-import cpp.AbstractArrayPointer;
 import cpp.Int32;
 import cpp.SizeT;
 
@@ -11,6 +10,9 @@ import cpp.SizeT;
 extern class ExternLibSceRemoteplay {
     @:native('sceRemoteplayInitialize')
     public static function sceRemoteplayInitialize(param:Int32, size:SizeT):Int32;
+
+    @:native('sceRemoteplayTerminate')
+    public static function sceRemoteplayTerminate():Int32;
 
     @:native('sceRemoteplayGeneratePinCode')
     public static function sceRemoteplayGeneratePinCode(pinCode:AbstractPointer<UInt32>):Int32;

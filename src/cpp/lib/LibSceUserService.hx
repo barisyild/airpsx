@@ -36,6 +36,11 @@ class LibSceUserService {
         return ExternLibSceUserService.sceUserServiceInitialize() == 0;
     }
 
+    public static function terminate():Bool
+    {
+        return ExternLibSceUserService.sceUserServiceTerminate() == 0;
+    }
+
     @:hscriptVariable("sceUserServiceGetForegroundUser")
     public static function userServiceGetForegroundUser():Int
     {

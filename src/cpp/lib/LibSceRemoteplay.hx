@@ -10,6 +10,11 @@ class LibSceRemoteplay {
         return ExternLibSceRemoteplay.sceRemoteplayInitialize(0, 0) == 0;
     }
 
+    @:hscriptVariable("sceRemoteplayTerminate")
+    public static function terminate():Bool {
+        return ExternLibSceRemoteplay.sceRemoteplayTerminate() == 0;
+    }
+
     @:hscriptVariable("sceRemoteplayGeneratePinCode")
     public static function generatePinCode():Int32 {
         var pinCode:UInt32 = -1;

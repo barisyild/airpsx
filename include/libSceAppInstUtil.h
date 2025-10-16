@@ -33,6 +33,7 @@ extern "C" {
     } PlayGoInfo;
 
     int sceAppInstUtilInitialize(void);
+    int sceAppInstUtilTerminate(void);
     int sceAppInstUtilAppInstallPkg(const char* file_path, void* reserved);
     int sceAppInstUtilCheckAppSystemVer(const char* title_id, uint64_t buf, uint64_t bufs);
     int sceAppInstUtilAppPrepareOverwritePkg(const char* pkg_path);

@@ -1,11 +1,10 @@
 package airpsx.command;
 import cpp.lib.LibKernel;
 import cpp.lib.LibSceUserService;
-import cpp.lib.Systemctl;
-import cpp.lib.LibSceSystemService;
 import hx.well.console.AbstractCommand;
 import cpp.lib.LibSceAppInstUtil;
 import cpp.lib.LibSceRemoteplay;
+import cpp.lib.LibSceBgft;
 
 class InitializeCommand extends AbstractCommand<Bool> {
     public function new() {
@@ -28,7 +27,6 @@ class InitializeCommand extends AbstractCommand<Bool> {
             return cast false;
         }
 
-        trace("hello");
         if(!LibSceAppInstUtil.initialize())
         {
             LibKernel.sendNotificationRequest('sceLibSceAppInstUtil failed');
@@ -39,6 +37,12 @@ class InitializeCommand extends AbstractCommand<Bool> {
             LibKernel.sendNotificationRequest('sceLibSceRemoteplay failed');
         }
 
+        #if !prospero
+        if(!LibSceBgft.initialize())
+        {
+            LibKernel.sendNotificationRequest('sceLibSceBgft failed');
+        }
+        #end
         #end
         return cast true;
     }

@@ -7,11 +7,18 @@ extern class ExternLibSceAppInstUtil {
     @:native('sceAppInstUtilInitialize')
     public static function sceAppInstUtilInitialize():Int32;
 
+    @:native('sceAppInstUtilTerminate')
+    public static function sceAppInstUtilTerminate():Int32;
+
     @:native('sceAppInstUtilAppUnInstall')
     public static function sceAppInstUtilAppUnInstall(titleId:ConstCharStar):Int32;
 
     @:native('sceAppInstUtilInstallByPackage')
     public static function sceAppInstUtilInstallByPackage(arg1:AbstractPointer<MetaInfo>, pkg_info:AbstractPointer<SceAppInstallPkgInfo>, arg2:AbstractPointer<PlayGoInfo>):Int32;
+
+    // int sceAppInstUtilAppInstallPkg(const char* file_path, int reserved);
+    @:native('sceAppInstUtilAppInstallPkg')
+    public static function sceAppInstUtilAppInstallPkg(file_path:ConstCharStar, reserved:Int32):Int32;
 }
 
 @:native('SceAppInstallPkgInfo')

@@ -18,6 +18,10 @@ extern class ExternLibSceUserService {
     @:native('sceUserServiceInitialize')
     public static function sceUserServiceInitialize(?param:AbstractPointer<cpp.Void>):Int32;
 
+    // int sceUserServiceTerminate();
+    @:native('sceUserServiceTerminate')
+    public static function sceUserServiceTerminate():Int32;
+
     @:native('sceUserServiceGetForegroundUser')
     public static function sceUserServiceGetForegroundUser(user_id:AbstractPointer<Int32>):Int32;
 } //Empty

@@ -23,15 +23,17 @@ class ReceivePackageHandler extends AbstractHandler {
 
         var sessionKey:String = request.route("sessionKey");
         var range:String = request.header("Range");
+
+        var packageVo:PackageVo = ServePackageCommand.packageVo;
+        if(packageVo == null || packageVo.sessionKey != sessionKey)
+            abort(500, "Session not found");
+
+        var metadata:Bytes = packageVo.metadata;
+        var fileSize:Int64 = packageVo.fileSize;
+
         if(range != null) {
             // Package Virtual Object
-            var packageVo:PackageVo = ServePackageCommand.packageVo;
-            if(packageVo == null || packageVo.sessionKey != sessionKey)
-                abort(500, "Session not found");
-
-            var metadata:Bytes = packageVo.metadata;
             var predataOffset:Int64 = packageVo.predataOffset;
-            var fileSize:Int64 = packageVo.fileSize;
 
 
             packageVo.lastAccessTime = Sys.time();
@@ -67,13 +69,16 @@ class ReceivePackageHandler extends AbstractHandler {
             }
 
             // Handle in memory data
-            if(rangeStart == 0) {
+            if(rangeStart < metadata.length) {
                 trace('read from cache: ${rangeStart}-${rangeEnd}');
+                var start:Int = cast rangeStart;
+                var end:Int = cast Math.min(cast rangeEnd, metadata.length - 1);
+                var length:Int = end - start + 1;
 
                 return ResponseBuilder
-                    .asInput(new BytesInput(metadata), metadata.length)
+                    .asInput(new BytesInput(metadata.sub(start, length)), length)
                     .status(206)
-                    .header("Content-Range", 'bytes ${rangeStart}-${rangeStart + (metadata.length - 1)}/${fileSize}');
+                    .header("Content-Range", 'bytes ${start}-${rangeEnd}/${fileSize}');
             }
 
             // Handle in socket data
@@ -83,8 +88,9 @@ class ReceivePackageHandler extends AbstractHandler {
             return ResponseBuilder.asAsync();
         }
 
-        return {
-            status: "error"
-        };
+        return ResponseBuilder
+            .asInput(new BytesInput(metadata), fileSize)
+            .header("Accept-Ranges", "bytes")
+            .header("Content-Type", "application/octet-stream");
     }
 }

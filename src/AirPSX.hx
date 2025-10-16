@@ -3,6 +3,10 @@ import cpp.lib.LibKernel;
 using airpsx.tools.ArrayFilterTools;
 using airpsx.tools.BytesTools;
 import hx.concurrent.executor.Executor;
+import cpp.lib.LibSceAppInstUtil;
+import cpp.lib.LibSceBgft;
+import cpp.lib.LibSceUserService;
+import cpp.lib.LibSceRemoteplay;
 using StringTools;
 using airpsx.tools.IntegerTools;
 using airpsx.tools.Integer64Tools;
@@ -20,6 +24,20 @@ class AirPSX {
 	public static function exit(code:Int):Void
 	{
 		isExiting = true;
+
+        if(!LibSceUserService.terminate())
+            LibKernel.sendNotificationRequest('sceUserServiceTerminate failed');
+
+        if(!LibSceAppInstUtil.terminate())
+            LibKernel.sendNotificationRequest('sceLibSceAppInstUtilTerminate failed');
+
+        if(!LibSceRemoteplay.terminate())
+            LibKernel.sendNotificationRequest('sceLibSceRemoteplayTerminate failed');
+
+        #if !prospero
+        if(!LibSceBgft.terminate())
+            LibKernel.sendNotificationRequest('sceLibSceBgftTerminate failed');
+        #end
 
 		if(socket != null)
 		{
