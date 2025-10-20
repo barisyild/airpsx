@@ -1,4 +1,5 @@
 package cpp.lib;
+#if !prospero
 import cpp.extern.ExternLibSceBgft.BgftInitParams;
 import cpp.extern.ExternLibSceBgft;
 class LibSceBgft {
@@ -34,3 +35,4 @@ class LibSceBgft {
         return false;
     }
 }
+#end
