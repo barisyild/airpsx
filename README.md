@@ -1,10 +1,16 @@
 ![GitHub stars](https://img.shields.io/github/stars/barisyild/airpsx)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
-[![Build PS5](https://github.com/barisyild/airpsx/actions/workflows/build-ps5.yml/badge.svg)](https://github.com/barisyild/airpsx/actions/workflows/build-ps5.yml)
 ![GitHub release](https://img.shields.io/github/v/release/barisyild/airpsx)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/barisyild/airpsx)
 
 ---
+
+## 💖 Support My Work
+
+> I recently purchased a PlayStation 4 to work on the **AirPSX port**.  
+Your donations help me cover these costs and continue developing projects like **AirPSX** and my **backend framework**. 
+> 
+>Thank you for supporting my open-source work!
 
 # The project is in maintenance mode.
 > The project will be in maintenance mode until an alternative SDK to ps5-payload-sdk or ps4-payload-sdk is available.
