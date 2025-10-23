@@ -12,10 +12,6 @@ Your donations help me cover these costs and continue developing projects like *
 > 
 >Thank you for supporting my open-source work!
 
-# The project is in maintenance mode.
-> The project will be in maintenance mode until an alternative SDK to ps5-payload-sdk or ps4-payload-sdk is available.
-> No official release will be created.
-
 # AirPSX
 
 **AirPSX** is a payload similar to AirDroid. It enables you to manage many operations related to your PlayStation 5 console through a web-based desktop environment.
