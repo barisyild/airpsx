@@ -3,14 +3,14 @@
 ![GitHub release](https://img.shields.io/github/v/release/barisyild/airpsx)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/barisyild/airpsx)
 
----
-
 ## 💖 Support My Work
 
 > I recently purchased a PlayStation 4 to work on the **AirPSX port**.  
 Your donations help me cover these costs and continue developing projects like **AirPSX** and my **backend framework**. 
 > 
 >Thank you for supporting my open-source work!
+
+---
 
 # AirPSX
 
