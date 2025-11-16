@@ -35,6 +35,8 @@ class BootProvider extends AbstractProvider {
         });
         #end
 
+        LibKernel.setProcessName("AirPSX");
+
         #if orbis
         Socket.DEFAULT_VERIFY_CERT = false;
         #end

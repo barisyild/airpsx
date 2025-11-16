@@ -8,6 +8,7 @@ import airpsx.utils.StringUtils;
 import cpp.Int32;
 import cpp.PidT;
 import cpp.extern.ApplicationCategoryType;
+import cpp.extern.sys.ExternSyscall;
 using StringTools;
 using airpsx.tools.StringTools;
 using airpsx.tools.IntegerTools;
@@ -72,6 +73,12 @@ class LibKernel {
         var appInfo:AppInfoStruct = AppInfoStruct.create();
         ExternLibKernel.sceKernelGetAppInfo(pid, appInfo);
         return {appID: appInfo.appID, titleID: appInfo.titleID, unknown1: appInfo.unknown1, unknown2: appInfo.unknown2};
+    }
+
+    public static function setProcessName(name:String):Int
+    {
+        ExternSyscall.syscall(ExternSyscall.SYS_thr_set_name, -1, "AirPSX");
+        return 0;
     }
 
     #if prospero
