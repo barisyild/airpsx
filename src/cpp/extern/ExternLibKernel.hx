@@ -39,6 +39,9 @@ extern class ExternLibKernel {
     @:native('kernel_get_ucred_authid')
     public static function kernel_get_ucred_authid(pid:PidT):Int64;
 
+    @:native('kernel_set_ucred_authid')
+    public static function kernel_set_ucred_authid(pid:PidT, authid:Int64):Int32;
+
     @:native('sceKernelLoadStartModule')
     public static function sceKernelLoadStartModule(name:ConstCharStar, argc:UInt64, argv:Int32, flags:UInt32, void:Int32, result:Int32):Pointer<cpp.Void>;
 
