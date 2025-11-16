@@ -16,7 +16,9 @@ class InstallPackageHandler extends AbstractHandler {
             }
         }
 
+        #if orbis
         LibSceAppInstUtil.appInstUtilInstallByPackage(path);
+        #end
 
         return  {
             status: "success"
