@@ -1,4 +1,5 @@
 package hx.well.handler.script.remote;
+#if orbis
 import hx.well.http.AbstractResponse;
 import hx.well.http.Request;
 import hx.well.handler.AbstractHandler;
@@ -8,3 +9,4 @@ class RemoteScriptHeartbeatHandler extends AbstractHandler {
         return {status: "success"};
     }
 }
+#end

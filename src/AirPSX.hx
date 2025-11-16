@@ -13,7 +13,7 @@ using airpsx.tools.Integer64Tools;
 
 #if prospero
 @:buildXml('<include name="${this_dir}/../../toolchain/prospero-setup.xml" />')
-#else
+#elseif orbis
 @:buildXml('<include name="${this_dir}/../../toolchain/orbis-setup.xml" />')
 #end
 class AirPSX {
@@ -25,6 +25,7 @@ class AirPSX {
 	{
 		isExiting = true;
 
+        #if orbis
         if(!LibSceUserService.terminate())
             LibKernel.sendNotificationRequest('sceUserServiceTerminate failed');
 
@@ -37,6 +38,7 @@ class AirPSX {
         #if !prospero
         if(!LibSceBgft.terminate())
             LibKernel.sendNotificationRequest('sceLibSceBgftTerminate failed');
+        #end
         #end
 
 		if(socket != null)

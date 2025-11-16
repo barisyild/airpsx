@@ -1,5 +1,5 @@
 package cpp.lib;
-#if !prospero
+#if (orbis && !prospero)
 import cpp.extern.ExternLibSceBgft.BgftInitParams;
 import cpp.extern.ExternLibSceBgft;
 class LibSceBgft {

@@ -1,4 +1,5 @@
 package hx.well.handler.script.remote;
+#if orbis
 import hx.well.handler.AbstractHandler;
 import hx.well.http.AbstractResponse;
 import hx.well.http.Request;
@@ -100,3 +101,4 @@ class RemoteScriptExecuteHandler extends AbstractHandler {
         return content;
     }
 }
+#end

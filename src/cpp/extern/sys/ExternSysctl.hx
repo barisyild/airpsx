@@ -1,5 +1,6 @@
 package cpp.extern.sys;
 
+#if orbis
 import cpp.Pointer;
 import cpp.RawPointer;
 import cpp.CastCharStar;
@@ -27,3 +28,4 @@ extern class ExternSysCtl {
     @:native('sysctlbyname')
     public static function sysctlbyname(name:CastCharStar, oldp:CastCharStar, oldlenp:AbstractPointer<SizeT>, newp:AbstractPointer<Void>, newlen:SizeT):Int32;
 } //Empty
+#end
