@@ -12,6 +12,7 @@ import cpp.ConstCharStar;
 import cpp.CastCharStar;
 import cpp.Int32Pointer;
 import cpp.AbstractPointer;
+import cpp.extern.sys.ExternTimeSpec.TimeSpecStruct;
 
 @:keep
 @:include('libkernel.h')
@@ -40,6 +41,9 @@ extern class ExternLibKernel {
 
     @:native('sceKernelLoadStartModule')
     public static function sceKernelLoadStartModule(name:ConstCharStar, argc:UInt64, argv:Int32, flags:UInt32, void:Int32, result:Int32):Pointer<cpp.Void>;
+
+    @:native('sceKernelClockGettime')
+    public static function sceKernelClockGettime(clock_id:ClockIdT, timeVal:AbstractPointer<TimeSpecStruct>):Int32;
 
     // char *argv[]
     @:native('getargv')

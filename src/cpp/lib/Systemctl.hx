@@ -3,6 +3,8 @@ package cpp.lib;
 #if orbis
 import haxe.io.Bytes;
 import cpp.lib.LibKernelSys;
+import cpp.extern.ExternLibKernel;
+import cpp.extern.sys.ExternTimeSpec.TimeSpecStruct;
 using StringTools;
 using airpsx.tools.StringTools;
 
@@ -65,7 +67,13 @@ class Systemctl {
     public static var kernelBootTime(get, never):Int;
     public static function get_kernelBootTime():Int
     {
+        #if prospero
         return readUInt32ByName("kern.boottime");
+        #else
+        var timeVal:TimeSpecStruct = TimeSpecStruct.create();
+        ExternLibKernel.sceKernelClockGettime(4, timeVal);
+        return Math.floor(Sys.time() - timeVal.tv_sec);
+        #end
     }
 
 

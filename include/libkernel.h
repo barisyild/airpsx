@@ -22,4 +22,5 @@ extern "C" {
     int *sceKernelLoadStartModule(const char *name, uint64_t argc, const void *argv, uint32_t flags, void *, int *result);
     void *getargv(void);
     int *getargc(void);
+    int sceKernelClockGettime(clockid_t clock_id, timespec* timeVal);
 }
