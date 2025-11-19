@@ -22,7 +22,7 @@ class ApplicationListHandler extends AbstractHandler {
             abort(500); // tableNameResultSet not found
 
         var tableName:String = tableNameResultSet.getResult(0);
-        return DBStatic.connection(DatabaseType.APP).query('SELECT titleId, titleName, CAST(contentSize AS TEXT) AS size, installDate as installTime FROM ${tableName} WHERE folderInfo = null');
+        return DBStatic.connection(DatabaseType.APP).query('SELECT titleId, titleName, CAST(contentSize AS TEXT) AS size, installDate as installTime FROM ${tableName} WHERE folderInfo IS null');
         #end
     }
 }
