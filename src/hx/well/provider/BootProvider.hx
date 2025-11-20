@@ -4,7 +4,6 @@ import hx.well.route.Route;
 import airpsx.command.TemperatureLogCommand;
 import airpsx.command.SetupPublicCommand;
 import hx.well.console.CommandExecutor;
-import airpsx.command.ServePackageCommand;
 import hx.well.facades.Validator;
 import sys.FileSystem;
 import airpsx.command.InitializeCommand;
@@ -52,11 +51,9 @@ class BootProvider extends AbstractProvider {
         CommandExecutor.register(TaskExecuteCommand);
         CommandExecutor.register(TemperatureLogCommand);
         CommandExecutor.register(TimestampUpdateCommand);
-        CommandExecutor.register(ServePackageCommand);
         CommandExecutor.register(KillServePackageCommand);
 
         #if orbis
-        Schedule.get().fixedRate("package:serve", 100);
         Schedule.get().fixedRate("package:kill-serve", 1000);
         #end
 

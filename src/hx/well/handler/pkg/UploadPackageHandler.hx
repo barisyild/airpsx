@@ -3,21 +3,15 @@ package hx.well.handler.pkg;
 import hx.well.handler.AbstractHandler;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
-import cpp.lib.LibSceAppInstUtil;
-import haxe.Int64;
 using StringTools;
-import hx.well.facades.DBStatic;
-import airpsx.type.DatabaseType;
-import uuid.Uuid;
-import airpsx.pkg.PackageVo;
-import airpsx.command.ServePackageCommand;
-import sys.io.File;
-import sys.io.FileInput;
-import sys.FileSystem;
 import hx.well.http.ResponseBuilder;
+import airpsx.pkg.PackageChunkVo;
 using airpsx.tools.OutputTools;
+using airpsx.tools.InputTools;
+import haxe.io.PartialInput;
+import hx.well.http.encoding.EmptyEncodingOptions;
+import airpsx.pkg.PackageVo;
 
-// TODO: Handle sockets with better way
 class UploadPackageHandler extends AbstractHandler {
     /**
      * Reads data from the input stream until the HTTP header delimiter '\r\n\r\n' is found.
@@ -52,85 +46,75 @@ class UploadPackageHandler extends AbstractHandler {
     }
     
     public function execute(request:Request):AbstractResponse {
-
-        var acquired = ServePackageCommand.packageMutex.tryAcquire();
-        if(!acquired) {
-            return ResponseBuilder.asJson({
-                status: "error",
-                message: "Server is busy"
-            });
-        }
-
-        try {
-            if(ServePackageCommand.packageVo != null) {
-                ServePackageCommand.packageVo.dispose();
-                ServePackageCommand.packageVo = null;
-            }
-        } catch (e) {
-            ServePackageCommand.packageMutex.release();
-            throw e;
-        }
-        ServePackageCommand.packageMutex.release();
+        trace("UploadPackageHandler: Handling package chunk upload.");
 
         // http protocol shit
         trace(readUntilDelimiter(request.context.input));
 
-        var fileSize = Int64.parseString(request.query("size"));
-        var predataOffset = Int64.parseString(request.query("offset"));
-
         // Create serve package session key
-        var sessionKey:String = Uuid.nanoId(32);
-        var packageVo:PackageVo = new PackageVo();
-        packageVo.sessionKey = sessionKey;
-        packageVo.sourceContext = request.context;
-        packageVo.fileSize = fileSize;
-        packageVo.predataOffset = predataOffset;
+        var sessionKey:String = request.query("sessionKey");
+        var chunkKey:String = request.query("chunkKey");
+        trace('UploadPackageHandler: sessionKey=${sessionKey}, chunkKey=${chunkKey}');
 
-        // Predata available
-        if(predataOffset != 0) {
-            var preDataSize:Int = cast fileSize - predataOffset;
-
-            if(!FileSystem.exists(packageVo.preDataDirectoryPath))
-                FileSystem.createDirectory(packageVo.preDataDirectoryPath);
-
-            var file = File.write(packageVo.predataFilePath, true);
-            file.writeInputSize(request.context.input, preDataSize);
-            file.close();
+        var packageVo:PackageVo = PackageVo.current;
+        if(packageVo == null || packageVo.sessionKey != sessionKey) {
+            trace("UploadPackageHandler: Invalid session key.");
+            return ResponseBuilder.asJson({
+                status: "error",
+                message: "Invalid session key."
+            }).status(404);
         }
 
-        // Read first 65536 bytes of the body
-        packageVo.metadata = request.context.input.read(65536);
-
-        var titleId:String = null;
-        if(predataOffset != 0) {
-            var fileInput:FileInput = File.read(packageVo.predataFilePath);
-            fileInput.seek(0x47, sys.io.FileSeek.SeekBegin);
-            titleId = fileInput.readString(9);
-            fileInput.close();
-        }else{
-            titleId = packageVo.metadata.getString(0x47, 9);
+        // Get chunk from key
+        var chunk:Null<PackageChunkVo> = packageVo.chunks.filter(chunk -> chunk.key == chunkKey)[0];
+        if(chunk == null) {
+            trace("UploadPackageHandler: Invalid chunk key.");
+            return ResponseBuilder.asJson({
+                status: "error",
+                message: "Invalid chunk key."
+            }).status(404);
         }
-        trace("Title ID: " + titleId);
 
-        // Reset installation progress if the title is not already installed
-        #if prospero
-        var contentStatusResultSet = DBStatic.connection(DatabaseType.APP).query("SELECT contentStatus FROM tbl_contentinfo WHERE titleId = ? LIMIT 1", titleId);
-        if(contentStatusResultSet.length == 1) {
-            var contentStatus = contentStatusResultSet.next().contentStatus;
-            if(contentStatus != 0) {
-                LibSceAppInstUtil.appInstUtilAppUnInstall(titleId);
+        chunk.sourceContext = request.context;
+
+        // Write data to chunk
+        trace("Write data to chunk: " + chunk.start + " - " + chunk.end + " - " + chunk.fileSize);
+        var response = ResponseBuilder
+            .asInput(new PartialInput(request.context.input.asUncloseable(), chunk.fileSize), chunk.fileSize)
+            .status(206)
+            .header("Content-Range", 'bytes ${chunk.start}-${chunk.end}/${packageVo.fileSize}')
+            .header("Content-Type", "application/octet-stream")
+            .header("Accept-Ranges", "bytes");
+        response.encodingOptions = new EmptyEncodingOptions();
+
+        trace("UploadPackageHandler: Chunk upload handled successfully.");
+        try {
+            chunk.context.writeResponse(response);
+        } catch (e) {
+            chunk.context.close();
+        }
+
+        packageVo.chunks.remove(chunk);
+        trace("UploadPackageHandler: Sent response for chunk upload.");
+
+        if(packageVo.chunks.length == 0) {
+            var attempts = 0;
+            while (attempts < 500 && packageVo.chunks.length == 0) {
+                Sys.sleep(0.1);
+                attempts++;
+            }
+
+            if(packageVo.chunks.length == 0) {
+                // TODO: Delete chunks
+                trace("Chunks request error.");
             }
         }
-        #end
 
-
-        // Initialize serve package session
-        ServePackageCommand.packageVo = packageVo;
-
-        // Start installation
-        LibSceAppInstUtil.appInstUtilInstallByPackage('http://localhost:1214/api/package/${sessionKey}.pkg', titleId);
-
-        // Manage the socket manually without closing it
-        return ResponseBuilder.asAsync();
+        var chunks:Array<PackageChunkVo> = packageVo.chunks.toArray();
+        return ResponseBuilder.asJson({
+            status: "success",
+            sessionKey: sessionKey,
+            chunks: chunks.map(packageChunkVo -> {key: packageChunkVo.key, start: packageChunkVo.start, end: packageChunkVo.end, createdAt: packageChunkVo.createdAt})
+        });
     }
 }

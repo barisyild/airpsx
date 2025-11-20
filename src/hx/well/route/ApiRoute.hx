@@ -40,6 +40,10 @@ import hx.well.handler.script.remote.RemoteScriptExecuteHandler;
 import hx.well.handler.script.remote.RemoteScriptHeartbeatHandler;
 import hx.well.handler.script.ScriptExecutorHandler;
 import hx.well.http.ResponseBuilder;
+import hx.well.handler.pkg.UploadInitPackageHandler;
+import hx.well.handler.pkg.UploadListPackageHandler;
+import hx.well.handler.pkg.UploadCancelPackageHandler;
+import hx.well.handler.filesystem.FileSystemTempFileHandler;
 using hx.well.tools.RouteElementTools;
 
 class ApiRoute extends RouteGroup {
@@ -54,6 +58,15 @@ class ApiRoute extends RouteGroup {
                     trace("error");
                     return ResponseBuilder.asString("", 404);
                 }).where("file", "[A-Z]{2}[0-9]{4}-[A-Z]{4}[0-9]{5}_[0-9]{2}-[A-Z0-9]{16}");
+
+            Route.post("/upload/init")
+                .handler(new UploadInitPackageHandler());
+
+            Route.post("/upload/cancel")
+                .handler(new UploadCancelPackageHandler());
+
+            Route.post("/upload/list")
+                .handler(new UploadListPackageHandler());
 
             Route.post("/upload")
                 .handler(new UploadPackageHandler())
@@ -83,6 +96,10 @@ class ApiRoute extends RouteGroup {
                 .handler(new FileSystemUploadHandler())
                 .setStream(true)
                 .where("path", ".*");
+
+            Route.post("/temp/file")
+                .handler(new FileSystemTempFileHandler())
+                .setStream(true);
 
             Route.get("/stream/{path}")
                 .handler(new FileSystemStreamHandler())
@@ -179,6 +196,7 @@ class ApiRoute extends RouteGroup {
         Route.get("/blank")
             .handler(new BlankHandler());
 
+        #if orbis
         Route.path("/script").group(() -> {
             Route.path("/remote").group(() -> {
                 Route.get("/list")
@@ -197,5 +215,6 @@ class ApiRoute extends RouteGroup {
             Route.post("execute")
                 .handler(new ScriptExecutorHandler());
         });
+        #end
     }
 }

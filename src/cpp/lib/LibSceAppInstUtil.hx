@@ -4,6 +4,7 @@ package cpp.lib;
 import cpp.extern.ExternLibSceAppInstUtil;
 import cpp.extern.ExternLibSceBgft;
 import cpp.extern.ExternLibSceBgft.BgftDownloadParamEx;
+using StringTools;
 
 @:include('libSceBgft.h')
 class LibSceAppInstUtil {
@@ -38,14 +39,24 @@ class LibSceAppInstUtil {
         downloadParams.param.id = "";
         downloadParams.param.content_url = uri;
         downloadParams.param.content_name = contentName;
-        downloadParams.param.icon_path = "";
+        downloadParams.param.icon_path = iconUrl;
         downloadParams.param.playgo_scenario_id = "0";
         downloadParams.param.option = ExternLibSceBgft.BGFT_TASK_OPTION_DISABLE_CDN_QUERY_PARAM;
         downloadParams.slot = 0;
         var taskId:Int = ExternLibSceBgft.BGFT_INVALID_TASK_ID;
-        var ret:Int = ExternLibSceBgft.sceBgftServiceIntDebugDownloadRegisterPkg(downloadParams.param, taskId);
+
+        var ret:Int = -1;
+        var method:String = "";
+        if(uri.startsWith("http://") || uri.startsWith("https://")) {
+            method = "sceBgftServiceIntDebugDownloadRegisterPkg";
+            ret = ExternLibSceBgft.sceBgftServiceIntDebugDownloadRegisterPkg(downloadParams.param, taskId);
+        } else {
+            method = "sceBgftServiceIntDownloadRegisterTaskByStorageEx";
+            ret = ExternLibSceBgft.sceBgftServiceIntDownloadRegisterTaskByStorageEx(downloadParams, taskId);
+        }
+
         if (ret != 0) {
-            trace("sceBgftServiceIntDebugDownloadRegisterPkg failed: " + ret);
+            trace('${method} failed: ${ret}');
         } else {
             trace("Task ID: 0x" + StringTools.hex(taskId, 8));
             ret = ExternLibSceBgft.sceBgftServiceIntDownloadStartTask(taskId);
