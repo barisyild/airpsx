@@ -56,6 +56,7 @@ Your donations help me cover these costs and continue developing projects like *
 * [LightningMods](https://github.com/LightningMods) — [PS4-daemon-writeup](https://github.com/LightningMods/PS4-daemon-writeup)
 * [Hugh Sanderson](https://github.com/hughsando) — [hxcpp](https://github.com/HaxeFoundation/hxcpp)
 * [m0rkeulv](https://github.com/m0rkeulv) — [intellij-haxe](https://github.com/HaxeFoundation/intellij-haxe)
+* [Feyzee61](https://github.com/Feyzee61)
 ---
 
 ## 🧪 Testers
