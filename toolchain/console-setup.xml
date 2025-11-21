@@ -7,6 +7,7 @@
         <flag value="-lkernel" />
         <flag value="-lkernel_sys" />
         <flag value="-lSceNet" />
+        <flag value="-lSceNetCtl" />
         <flag value="-lSceRandom" />
         <flag value="-lSceRegMgr" />
         <flag value="-lSceRemoteplay" />

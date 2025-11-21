@@ -40,15 +40,4 @@ extern class ExternLibSceNet {
     @:native("sceNetShowNetstatForBuffer")
     public static function sceNetShowNetstatForBuffer(buffer:CastCharStar, size:cpp.SizeT):Void;
 }
-
-@:native('SceNetIfconfigInfo')
-@:structAccess
-extern class SceNetIfconfigInfo {
-    public var size:UInt32;
-    public var ip_address:CastCharStar;
-
-    public static inline function create():SceNetIfconfigInfo {
-        return untyped __cpp__('{}');
-    }
-}
 #end

@@ -23,6 +23,7 @@ import airpsx.command.KillServePackageCommand;
 import airpsx.hscript.HScriptData;
 using hx.well.tools.RouteElementTools;
 import hx.well.facades.Config as HxWellConfig;
+import cpp.lib.LibSceNetCtl;
 
 class BootProvider extends AbstractProvider {
     public function boot():Void {
@@ -114,7 +115,7 @@ class BootProvider extends AbstractProvider {
         Route.status(404)
             .file('${Const.DATA_PATH}/public/index.html', 200);
 
-        LibKernel.sendNotificationRequest('AirPSX listening at ${Const.HTTP_PORT}');
+        LibKernel.sendNotificationRequest('AirPSX listening at ${LibSceNetCtl.getIpAddress() ?? ""}:${Const.HTTP_PORT}');
 
         Schedule.get().fixedRate("timestamp:update", 60000);
     }
