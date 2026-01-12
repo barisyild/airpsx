@@ -80,7 +80,7 @@ jobs:
       - name: Build Project
         run: |
           export OO_PS4_TOOLCHAIN=/opt/ps4-payload-sdk
-          export PS4_TOOLCHAIN_PATH=/opt/ps4-payload-sdk
+          export PS4_PAYLOAD_SDK=/opt/ps4-payload-sdk
           haxelib run hxwell build cpp -hxml orbis.hxml -export Export/orbis
 
       - name: Upload Artifact
