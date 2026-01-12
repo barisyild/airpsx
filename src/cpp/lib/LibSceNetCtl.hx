@@ -1,4 +1,5 @@
 package cpp.lib;
+#if orbis
 import cpp.extern.ExternLibSceNet;
 import cpp.extern.ExternLibSceNetCtl.SceNetCtlInfoExtern;
 import cpp.extern.ExternLibSceNetCtl;
@@ -32,3 +33,4 @@ class LibSceNetCtl {
         return ctlInfo.ip_address;
     }
 }
+#end

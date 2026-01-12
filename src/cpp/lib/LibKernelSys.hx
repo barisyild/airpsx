@@ -1,10 +1,10 @@
 package cpp.lib;
+#if orbis
 import cpp.extern.ExternLibKernel.ExternLibKernel;
 import cpp.extern.ExternLibKernelSys;
 import cpp.extern.ExternLibKernel;
 import airpsx.utils.StringUtils;
 
-#if orbis
 class LibKernelSys {
     public static function load():Void {
         var kernel_sys = ExternLibKernel.sceKernelLoadStartModule("/system/common/lib/libkernel_sys.sprx", 0, null, 0, null, null);

@@ -1,4 +1,5 @@
 package cpp.lib;
+#if orbis
 import cpp.extern.ExternLibSceNet;
 class LibSceNet {
     public static function initialize():Bool {
@@ -9,3 +10,4 @@ class LibSceNet {
         return ExternLibSceNet.sceNetTerm() == 0;
     }
 }
+#end

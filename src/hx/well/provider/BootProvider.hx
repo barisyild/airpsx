@@ -23,13 +23,15 @@ import airpsx.command.KillServePackageCommand;
 import airpsx.hscript.HScriptData;
 using hx.well.tools.RouteElementTools;
 import hx.well.facades.Config as HxWellConfig;
-import cpp.lib.LibSceNetCtl;
 import cpp.extern.ExternLibJbc;
 import airpsx.command.LoadModulesCommand;
+#if orbis
+import cpp.lib.LibSceNetCtl;
+#end
 
 class BootProvider extends AbstractProvider {
     public function boot():Void {
-        #if !prospero
+        #if (!prospero && orbis)
         // Jailbreak PS4
         var cred:JbcCredStruct = JbcCredStruct.create();
         var root_cred:JbcCredStruct;
@@ -47,7 +49,9 @@ class BootProvider extends AbstractProvider {
         });
         #end
 
+        #if orbis
         LibKernel.setProcessName("AirPSX");
+        #end
 
         #if orbis
         Socket.DEFAULT_VERIFY_CERT = false;
@@ -114,7 +118,7 @@ class BootProvider extends AbstractProvider {
         var commandExecutor = new BatchCommandExecutor();
         commandExecutor.addCommand(SetupPublicCommand);
         commandExecutor.addCommand(SetupDatabaseCommand);
-        #if !prospero
+        #if (!prospero && orbis)
         commandExecutor.addCommand(LoadModulesCommand);
         #end
         commandExecutor.addCommand(InitializeCommand);
@@ -130,7 +134,9 @@ class BootProvider extends AbstractProvider {
         Route.status(404)
             .file('${Const.DATA_PATH}/public/index.html', 200);
 
+        #if orbis
         LibKernel.sendNotificationRequest('AirPSX listening at ${LibSceNetCtl.getIpAddress() ?? ""}:${Const.HTTP_PORT}');
+        #end
 
         Schedule.get().fixedRate("timestamp:update", 60000);
     }

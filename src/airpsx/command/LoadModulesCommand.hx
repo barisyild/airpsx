@@ -1,4 +1,5 @@
 package airpsx.command;
+#if orbis
 import cpp.extern.ExternLibKernel.sceKernelLoadStartModule;
 import hx.well.console.AbstractCommand;
 import cpp.lib.LibKernelSys;
@@ -17,7 +18,6 @@ class LoadModulesCommand extends AbstractCommand<Bool> {
     }
 
     public function handle():Bool {
-        #if orbis
         var modules = [
             '/system/common/lib/libSceSystemService.sprx',
             '/system/common/lib/libSceAppInstUtil.sprx',
@@ -39,7 +39,7 @@ class LoadModulesCommand extends AbstractCommand<Bool> {
         #if !prospero
         LibKernelSys.load();
         #end
-        #end
         return cast true;
     }
 }
+#end
