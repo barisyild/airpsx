@@ -1,0 +1,91 @@
+name: Orbis Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  HAXE_VERSION: 4.3.6
+  SDK_VERSION: v0.5.2
+
+jobs:
+  build-ps4:
+    runs-on: ubuntu-latest
+
+    # Define the toolchain path as an environment variable
+    env:
+      OO_PS4_TOOLCHAIN: ${{ github.workspace }}/toolchain
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - uses: krdlab/setup-haxe@v2
+        with:
+          haxe-version: ${{ env.HAXE_VERSION }}
+
+      - name: Set env variables
+        run: |
+          echo "HAXELIB_PATH=/opt/hostedtoolcache/haxe/${{ env.HAXE_VERSION }}/x64/lib" >> $GITHUB_ENV
+          if [ "${{ github.event_name }}" == "release" ]; then
+            echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          fi
+
+      - name: Install Haxe Dependencies
+        run: |
+          mkdir -p ${{ env.HAXELIB_PATH }}/hxwell
+          echo "${{ github.workspace }}/hxwell" > ${{ env.HAXELIB_PATH }}/hxwell/.dev
+          haxelib git https://github.com/hxwell/hxwell hxwell
+          haxelib git haxe-crypto https://github.com/barisyild/haxe-crypto
+          haxelib git hxvm-lua https://github.com/kevinresol/hxvm-lua
+          haxelib git linc_lua https://github.com/kevinresol/linc_lua
+          haxelib install haxe-concurrent 5.1.4
+          haxelib install hscript 2.6.0
+          haxelib install rulescript 0.2.0
+          haxelib install uuid
+          
+          # Install HXCPP
+          cd ${{ env.HAXELIB_PATH }}
+          mkdir -p hxcpp
+          cd hxcpp
+          if [ ! -d "orbis-payload" ]; then
+            git clone https://github.com/barisyild/hxcpp/ --branch orbis-payload orbis-payload
+            echo orbis-payload > .current
+            cd orbis-payload
+          else
+            cd orbis-payload
+            git pull
+          fi
+          cd tools/hxcpp
+          haxe compile.hxml
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang lld make git libelf-dev
+
+      - name: Setup OpenOrbis PS4 Toolchain
+        run: |
+          echo "Downloading Toolchain..."
+          wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/toolchain.tar.gz -O toolchain.tar.gz
+          
+          echo "Creating directory and extracting..."
+          mkdir -p $OO_PS4_TOOLCHAIN
+          tar -xzf toolchain.tar.gz -C $OO_PS4_TOOLCHAIN --strip-components=1
+          
+          echo "Toolchain setup complete."
+
+      - name: Build Project
+        run: |
+          haxelib run hxwell build cpp -hxml orbis.hxml -export Export/orbis
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PS4-Binary
+          path: |
+            *.elf
+            *.pkg
+            eboot.bin
