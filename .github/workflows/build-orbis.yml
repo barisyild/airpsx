@@ -8,7 +8,7 @@ on:
 
 env:
   HAXE_VERSION: 4.3.6
-  SDK_VERSION: v0.5.2
+  SDK_VERSION: 0.0.1.416
   SDK_PATH: /opt/OpenOrbis/PS4Toolchain
 
 jobs:
@@ -68,7 +68,7 @@ jobs:
       - name: Setup OpenOrbis PS4 Toolchain
         run: |
           echo "Downloading Toolchain..."
-          wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/${{ env.SDK_VERSION }}.tar.gz -O toolchain.tar.gz
+          wget https://github.com/illusion0001/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/toolchain.tar.gz -O toolchain.tar.gz
           
           export OO_PS4_TOOLCHAIN=${{ env.SDK_PATH }}
           
