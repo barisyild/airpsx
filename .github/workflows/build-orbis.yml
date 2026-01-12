@@ -74,7 +74,7 @@ jobs:
           
           echo "Creating directory and extracting..."
           mkdir -p $OO_PS4_TOOLCHAIN
-          tar -xzf toolchain.tar.gz -C $OO_PS4_TOOLCHAIN --strip-components=1
+          tar -xzf toolchain.tar.gz
                     
           echo "Toolchain setup complete."
 
