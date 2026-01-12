@@ -73,7 +73,7 @@ jobs:
           export OO_PS4_TOOLCHAIN=${{ env.SDK_PATH }}
           
           echo "Creating directory and extracting..."
-          tar -xzf -C /opt toolchain.tar.gz
+          tar -xzf toolchain.tar.gz -C /opt
                     
           echo "Toolchain setup complete."
 
