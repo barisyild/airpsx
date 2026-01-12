@@ -73,12 +73,13 @@ jobs:
           export OO_PS4_TOOLCHAIN=${{ env.SDK_PATH }}
           
           echo "Creating directory and extracting..."
-          tar -xzf toolchain.tar.gz
+          tar -xzf -C /opt toolchain.tar.gz
                     
           echo "Toolchain setup complete."
 
       - name: Debug
         run: |
+          ls -la /opt
           ls -la $OO_PS4_TOOLCHAIN
           ls -la /opt/OpenOrbis/PS4Toolchain/include
 
