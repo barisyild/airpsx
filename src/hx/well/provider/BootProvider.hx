@@ -24,9 +24,21 @@ import airpsx.hscript.HScriptData;
 using hx.well.tools.RouteElementTools;
 import hx.well.facades.Config as HxWellConfig;
 import cpp.lib.LibSceNetCtl;
+import cpp.extern.ExternLibJbc;
+import airpsx.command.LoadModulesCommand;
 
 class BootProvider extends AbstractProvider {
     public function boot():Void {
+        #if !prospero
+        // Jailbreak PS4
+        var cred:JbcCredStruct = JbcCredStruct.create();
+        var root_cred:JbcCredStruct;
+        ExternLibJbc.jbc_get_cred(cred);
+        root_cred = cred;
+        ExternLibJbc.jbc_jailbreak_cred(root_cred);
+        root_cred.cdir = cred.rdir;
+        ExternLibJbc.jbc_set_cred(root_cred);
+        #end
         #if (!release)
         Thread.create(() -> {
             Sys.sleep(1000);
@@ -102,6 +114,9 @@ class BootProvider extends AbstractProvider {
         var commandExecutor = new BatchCommandExecutor();
         commandExecutor.addCommand(SetupPublicCommand);
         commandExecutor.addCommand(SetupDatabaseCommand);
+        #if !prospero
+        commandExecutor.addCommand(LoadModulesCommand);
+        #end
         commandExecutor.addCommand(InitializeCommand);
         // TODO: implement schedulers in hxwell
         //commandExecutor.addCommand(new SchedulerCommand());

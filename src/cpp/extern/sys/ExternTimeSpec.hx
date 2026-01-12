@@ -3,7 +3,11 @@ import cpp.SizeT;
 import cpp.TimeT;
 
 @:keep
+#if prospero
 @:include('sys/timespec.h')
+#else
+@:include('sys/types.h')
+#end
 @:native('timespec')
 @:structAccess
 @:unreflective

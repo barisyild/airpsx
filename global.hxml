@@ -20,8 +20,6 @@
 -lib hscript
 -lib rulescript
 -lib hxwell
--lib linc_lua
--lib hxvm-lua
 -lib haxe-crypto
 --macro airpsx.macro.HScriptVariableMacro.run()
 -dce std

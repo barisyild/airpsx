@@ -1,4 +1,7 @@
 <xml>
+    <files id="haxe">
+        <compilerflag value="-I${this_dir}/../include_prospero"/>
+    </files>
     <include name="console-setup.xml" />
     <target id="haxe">
         <flag value="-lSceIpmi" />

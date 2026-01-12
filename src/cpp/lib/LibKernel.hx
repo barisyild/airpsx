@@ -1,17 +1,14 @@
 package cpp.lib;
 
 #if orbis
-import cpp.extern.ExternLibKernelSys;
 import cpp.extern.ExternLibKernel;
 import cpp.extern.ExternLibKernel.NotifyRequestStruct;
-import airpsx.utils.StringUtils;
 import cpp.Int32;
 import cpp.PidT;
-import cpp.extern.ApplicationCategoryType;
 import cpp.extern.sys.ExternSyscall;
-using StringTools;
-using airpsx.tools.StringTools;
-using airpsx.tools.IntegerTools;
+#if prospero
+import cpp.extern.ApplicationCategoryType;
+#end
 
 class LibKernel {
     public static var cpuTemperature(get, never):Int;
@@ -41,22 +38,6 @@ class LibKernel {
         var notifyRequest:NotifyRequestStruct = NotifyRequestStruct.create();
         notifyRequest.message.copyFrom(message);
         ExternLibKernel.sceKernelSendNotificationRequest(0, notifyRequest, NotifyRequestStruct.size(), 0);
-    }
-
-    @:hscriptVariable("sceKernelGetHwModelName")
-    public static function getHwModelName():String
-    {
-        var hwModelName:String = StringUtils.allocate(20);
-        ExternLibKernelSys.sceKernelGetHwModelName(hwModelName);
-        return hwModelName.truncateAtNull();
-    }
-
-    @:hscriptVariable("sceKernelGetHwSerialNumber")
-    public static function getHwSerialNumber():String
-    {
-        var hwSerialNumber:String = StringUtils.allocate(17);
-        ExternLibKernelSys.sceKernelGetHwSerialNumber(hwSerialNumber);
-        return hwSerialNumber.truncateAtNull();
     }
 
     @:hscriptVariable("sceKernelGetSocSensorTemperature")

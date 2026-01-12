@@ -43,10 +43,13 @@ extern class ExternLibKernel {
     public static function kernel_set_ucred_authid(pid:PidT, authid:Int64):Int32;
 
     @:native('sceKernelLoadStartModule')
-    public static function sceKernelLoadStartModule(name:ConstCharStar, argc:UInt64, argv:Int32, flags:UInt32, void:Int32, result:Int32):Pointer<cpp.Void>;
+    public static function sceKernelLoadStartModule(name:ConstCharStar, argc:UInt64, argv:AbstractPointer<Int32>, flags:UInt32, void:AbstractPointer<Int32>, result:AbstractPointer<Int32>):Int32;
 
     @:native('sceKernelClockGettime')
     public static function sceKernelClockGettime(clock_id:ClockIdT, timeVal:AbstractPointer<TimeSpecStruct>):Int32;
+
+    @:native('sceKernelDlsym')
+    public static function sceKernelDlsym<T>(handle:Int32, symbol:ConstCharStar, out:AbstractPointer<T>):Int32;
 
     // char *argv[]
     @:native('getargv')

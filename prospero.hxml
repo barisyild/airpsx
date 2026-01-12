@@ -2,4 +2,6 @@ global.hxml
 -D toolchain=prospero
 -D orbis
 -D prospero
+-lib linc_lua
+-lib hxvm-lua
 --cmd haxe -cp src -main AfterBuild --interp -D prospero

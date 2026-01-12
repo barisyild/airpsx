@@ -7,6 +7,7 @@ import sys.net.Socket;
 import hx.well.handler.AbstractHandler;
 import hx.well.http.Request;
 import hx.well.http.AbstractResponse;
+import cpp.lib.LibKernelSys;
 
 // This service returns non-variable system resources.
 class SystemInfoHandler extends AbstractHandler {
@@ -17,8 +18,8 @@ class SystemInfoHandler extends AbstractHandler {
 
     public function execute(request:Request):AbstractResponse {
         return {
-            modelName: LibKernel.getHwModelName(),
-            serialNumber: #if release LibKernel.getHwSerialNumber() #else "CENSORED" #end,
+            modelName: LibKernelSys.getHwModelName(),
+            serialNumber: #if release LibKernelSys.getHwSerialNumber() #else "CENSORED" #end,
             hw_machine: Systemctl.hardwareMachine,
             hw_model: Systemctl.hardwareModel,
             ostype: Systemctl.kernelOsType,

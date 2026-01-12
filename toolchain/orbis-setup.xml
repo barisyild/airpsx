@@ -1,7 +1,13 @@
 <xml>
+    <files id="haxe">
+        <compilerflag value="-I${this_dir}/../include_orbis"/>
+        <file name="${this_dir}/../include_orbis/orbis_vfs.c"/>
+    </files>
     <include name="console-setup.xml" />
     <target id="haxe">
         <flag value="-lSceAppInstUtil" />
         <flag value="-lSceBgft" />
+        <flag value="-lSceSysmodule" />
+        <flag value="${this_dir}/jbc.o"/>
     </target>
 </xml>

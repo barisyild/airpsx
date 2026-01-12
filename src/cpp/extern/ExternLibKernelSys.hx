@@ -7,10 +7,10 @@ import cpp.ConstCharStar;
 @:keep
 @:include('libkernel_sys.h')
 extern class ExternLibKernelSys {
-    @:native('sceKernelGetHwModelName')
+    #if prospero @:native('sceKernelGetHwModelName') #else @:native('f_sceKernelGetHwModelName') #end
     public static function sceKernelGetHwModelName(char:CastCharStar):ConstCharStar;
 
-    @:native('sceKernelGetHwSerialNumber')
+    #if prospero @:native('sceKernelGetHwSerialNumber') #else @:native('f_sceKernelGetHwSerialNumber') #end
     public static function sceKernelGetHwSerialNumber(char:CastCharStar):ConstCharStar;
 } //Empty
 #end
