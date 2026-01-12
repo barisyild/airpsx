@@ -76,6 +76,11 @@ jobs:
           tar -xzf toolchain.tar.gz -C /opt
                     
           echo "Toolchain setup complete."
+      - name: Install LibSSL 1.1
+        run: |
+          sudo apt-get install -y software-properties-common
+          sudo apt-add-repository -y ppa:rael-gc/rvm
+          sudo apt-get install -y libssl-dev=1.1.1l-1ubuntu1.4
 
       - name: Debug
         run: |
