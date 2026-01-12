@@ -6,11 +6,15 @@ import haxe.io.Bytes;
 import haxe.Int64;
 import haxe.io.Input;
 import haxe.io.Output;
-import sys.FileStat;
-import sys.FileSystem;
+import sys.io.File;
+import sys.io.FileSeek;
 using airpsx.tools.IntegerTools;
 using airpsx.tools.Integer64Tools;
 using StringTools;
+#if prospero
+import sys.FileStat;
+import sys.FileSystem;
+#end
 
 class TarCompress {
     public static inline var PADDING_SIZE:Int = 512;
@@ -168,8 +172,16 @@ class TarCompress {
             var isDirectory:Bool = file.endsWith("/");
             if(!isDirectory)
             {
+                #if prospero
                 var stats:FileStat = FileSystem.stat(file);
                 var length:Int64 = stats.size;
+                #else
+                var file:FileInput = File.read(file, true);
+                file.seek(0, FileSeek.SeekEnd);
+                var length:Int64 = file.tell();
+                file.close();
+                #end
+
                 tarSize += length;
 
                 var padding:Int = cast (512 - (length % 512)) % 512;
