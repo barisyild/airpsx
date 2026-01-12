@@ -73,6 +73,8 @@ jobs:
           mkdir -p $OO_PS4_TOOLCHAIN
           tar -xzf toolchain.tar.gz -C $OO_PS4_TOOLCHAIN --strip-components=1
           
+          export PS4_PAYLOAD_SDK=$OO_PS4_TOOLCHAIN
+          
           echo "Toolchain setup complete."
 
       - name: Build Project
