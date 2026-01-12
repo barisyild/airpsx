@@ -63,7 +63,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang lld make git libelf-dev libssl-dev
+          sudo apt-get install -y clang lld make git libelf-dev
 
       - name: Setup OpenOrbis PS4 Toolchain
         run: |
