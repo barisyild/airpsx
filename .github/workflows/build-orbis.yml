@@ -64,7 +64,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang lld make git libelf-dev libssl-dev
+          sudo apt-get install -y clang lld make git libelf-dev
 
       - name: Setup OpenOrbis PS4 Toolchain
         run: |
@@ -77,6 +77,11 @@ jobs:
           tar -xzf toolchain.tar.gz -C /opt
                     
           echo "Toolchain setup complete."
+      - name: Install LibSSL 1.1
+        run: |
+          sudo apt-get install -y software-properties-common
+          sudo apt-add-repository -y ppa:rael-gc/rvm
+          sudo apt-get install -y libssl-dev=1.1.1l-1ubuntu1.4 --allow-downgrades
 
       - name: Debug
         run: |
@@ -103,3 +108,4 @@ jobs:
             *.elf
             *.pkg
             eboot.bin
+            pkgroot/IV0000-BREW00082_00-GRAPHICSEX000000.pkg
