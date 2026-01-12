@@ -69,7 +69,7 @@ jobs:
       - name: Setup OpenOrbis PS4 Toolchain
         run: |
           echo "Downloading Toolchain..."
-          wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/toolchain.tar.gz -O toolchain.tar.gz
+          wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/${{ env.SDK_VERSION }}.tar.gz -O toolchain.tar.gz
           
           echo "Creating directory and extracting..."
           mkdir -p $OO_PS4_TOOLCHAIN
