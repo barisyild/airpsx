@@ -35,8 +35,6 @@ jobs:
 
       - name: Install Haxe Dependencies
         run: |
-          mkdir -p ${{ env.HAXELIB_PATH }}/hxwell
-          echo "${{ github.workspace }}/hxwell" > ${{ env.HAXELIB_PATH }}/hxwell/.dev
           haxelib git hxwell https://github.com/hxwell/hxwell
           haxelib git haxe-crypto https://github.com/barisyild/haxe-crypto
           haxelib git hxvm-lua https://github.com/kevinresol/hxvm-lua
