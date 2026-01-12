@@ -80,7 +80,7 @@ jobs:
         run: |
           sudo apt-get install -y software-properties-common
           sudo apt-add-repository -y ppa:rael-gc/rvm
-          sudo apt-get install -y libssl-dev=1.1.1l-1ubuntu1.4
+          sudo apt-get install -y libssl-dev=1.1.1l-1ubuntu1.4 --allow-downgrades
 
       - name: Debug
         run: |
