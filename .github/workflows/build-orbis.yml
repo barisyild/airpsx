@@ -70,7 +70,6 @@ jobs:
           wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/${{ env.SDK_VERSION }}.tar.gz -O toolchain.tar.gz
           
           export OO_PS4_TOOLCHAIN=/opt/ps4-payload-sdk
-          export PS4_TOOLCHAIN_PATH=$OO_PS4_TOOLCHAIN
           
           echo "Creating directory and extracting..."
           mkdir -p $OO_PS4_TOOLCHAIN
@@ -80,6 +79,8 @@ jobs:
 
       - name: Build Project
         run: |
+          export OO_PS4_TOOLCHAIN=/opt/ps4-payload-sdk
+          export PS4_TOOLCHAIN_PATH=/opt/ps4-payload-sdk
           haxelib run hxwell build cpp -hxml orbis.hxml -export Export/orbis
 
       - name: Upload Artifact
