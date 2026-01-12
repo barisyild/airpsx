@@ -69,12 +69,13 @@ jobs:
           echo "Downloading Toolchain..."
           wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/${{ env.SDK_VERSION }}.tar.gz -O toolchain.tar.gz
           
+          export OO_PS4_TOOLCHAIN=/opt/ps4-payload-sdk
+          export PS4_TOOLCHAIN_PATH=$OO_PS4_TOOLCHAIN
+          
           echo "Creating directory and extracting..."
           mkdir -p $OO_PS4_TOOLCHAIN
           tar -xzf toolchain.tar.gz -C $OO_PS4_TOOLCHAIN --strip-components=1
-          
-          export PS4_PAYLOAD_SDK=$OO_PS4_TOOLCHAIN
-          
+                    
           echo "Toolchain setup complete."
 
       - name: Build Project
