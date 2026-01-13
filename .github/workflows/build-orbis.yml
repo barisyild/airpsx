@@ -76,7 +76,7 @@ jobs:
           export OO_PS4_TOOLCHAIN=${{ env.SDK_PATH }}
           
           echo "Creating directory and extracting..."
-          tar -xzf toolchain-llvm-18.2.tar.gz -C /opt
+          tar -xzf toolchain-llvm-18.tar.gz -C /opt
                     
           echo "Toolchain setup complete."
       - name: Install LibSSL 1.1
