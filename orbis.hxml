@@ -1,4 +1,5 @@
 global.hxml
 -D toolchain=orbis
 -D orbis
---cmd haxe -cp src -main AfterBuild --interp
+-debug
+--cmd haxe -cp src -main AfterBuild --interp -debug
