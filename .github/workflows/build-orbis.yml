@@ -9,7 +9,7 @@ on:
 
 env:
   HAXE_VERSION: 4.3.6
-  SDK_VERSION: 0.0.1.560-66f503f
+  SDK_VERSION: 0.0.1.431
   SDK_PATH: /opt/OpenOrbis/PS4Toolchain
 
 jobs:
@@ -69,15 +69,13 @@ jobs:
       - name: Setup OpenOrbis PS4 Toolchain
         run: |
           echo "Downloading Toolchain..."
-          wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/v0.5.3/toolchain-llvm-18.2.zip -O toolchain-llvm-18.2.zip
-          unzip toolchain-llvm-18.2.zip
-          
+          wget https://github.com/illusion0001/OpenOrbis-PS4-Toolchain/releases/download/${{ env.SDK_VERSION }}/toolchain.tar.gz -O toolchain.tar.gz
           
           export OO_PS4_TOOLCHAIN=${{ env.SDK_PATH }}
           
           echo "Creating directory and extracting..."
-          tar -xzf toolchain-llvm-18.tar.gz -C /opt
-                    
+          tar -xzf toolchain.tar.gz -C /opt
+          
           echo "Toolchain setup complete."
       - name: Install LibSSL 1.1
         run: |
