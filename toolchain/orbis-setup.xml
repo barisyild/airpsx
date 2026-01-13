@@ -9,5 +9,6 @@
         <flag value="-lSceBgft" />
         <flag value="-lSceSysmodule" />
         <flag value="${this_dir}/jbc.o"/>
+        <flag value="${this_dir}/libSQLite.a"/>
     </target>
 </xml>
