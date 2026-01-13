@@ -9,7 +9,7 @@ on:
 
 env:
   HAXE_VERSION: 4.3.6
-  SDK_VERSION: 0.0.1.520
+  SDK_VERSION: 0.0.1.557-330aefb
   SDK_PATH: /opt/OpenOrbis/PS4Toolchain
 
 jobs:
