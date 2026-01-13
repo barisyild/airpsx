@@ -69,8 +69,8 @@ jobs:
       - name: Setup OpenOrbis PS4 Toolchain
         run: |
           echo "Downloading Toolchain..."
-          wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/v0.5.3/toolchain-llvm-12.zip -O /toolchain-llvm-12.zip
-          unzip /toolchain-llvm-12.zip
+          wget https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/v0.5.3/toolchain-llvm-12.zip -O toolchain-llvm-12.zip
+          unzip toolchain-llvm-12.zip
           
           
           export OO_PS4_TOOLCHAIN=${{ env.SDK_PATH }}
