@@ -1,10 +1,13 @@
 <xml>
     <files id="haxe">
         <compilerflag value="-I${this_dir}/../include_orbis"/>
-
-        <compilerflag value="-DSQLITE_OS_OTHER=1" />
-        <compilerflag value="-DSQLITE_OMIT_WAL" />
     </files>
+
+    <compiler id="orbis">
+        <flag value="-DSQLITE_OS_OTHER=1" />
+        <flag value="-DSQLITE_OMIT_WAL" />
+    </compiler>
+
     <include name="console-setup.xml" />
     <target id="haxe">
         <flag value="-lSceAppInstUtil" />
